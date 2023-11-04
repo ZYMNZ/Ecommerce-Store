@@ -8,7 +8,9 @@
                 if($controllerPrefix == "login" && $action == "login") {
         ?>
                     <section>
-                        <input type="button" href="" value="Home" class="defaultButtonStyling borderNone navBarButton cursorPointer signButtons">
+                        <a href="">
+                            <input type="button" value="Home" class="defaultButtonStyling borderNone navBarButton cursorPointer signButtons">
+                        </a>
                     </section>
                     <?php
                 }
