@@ -8,13 +8,9 @@
 }
 
 /*Login section width and center*/
-#loginSection {
+.loginRegistrationSection {
     width: 37%;
 }
 
 
-/*center sign buttons*/
-.signButtons {
-    width: 205px;
 
-}

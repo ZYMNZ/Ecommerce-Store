@@ -6,14 +6,20 @@ body {
 .inputField {
     margin-top: 5px;
     border: 1px solid blue;
-    height: 40px;
+    font-size: 25px;
 }
+
 
 .hintLabel{
     margin-top: 40px;
     line-height: 40px;
 }
 
+.denseHintLabel {
+    margin-top: 15px;
+}
+
+/*default styling for website buttons (the black buttons)*/
 .defaultButtonStyling {
     height: 73px;
     border-radius: 26px;
@@ -21,6 +27,11 @@ body {
     font-size: 20px;
     background-color: black;
     color: white;
+}
+
+/*center sign buttons*/
+.signButtons {
+    width: 205px;
 }
 
 .cursorPointer:hover {
