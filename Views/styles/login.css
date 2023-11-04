@@ -1,0 +1,19 @@
+/*header padding*/
+.header {
+    padding: 28px 248px 0px;
+}
+
+.headerFont {
+    font-size: 64px;
+}
+
+/*Login section width and center*/
+#loginSection {
+    width: 37%;
+}
+
+
+/*center sign buttons*/
+.signButtons {
+    width: 205px;
+}

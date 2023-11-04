@@ -1,0 +1,44 @@
+body {
+    margin: 0px;
+}
+
+/*Input login fields styling*/
+.inputField {
+    margin-top: 5px;
+    border: 1px solid blue;
+    height: 40px;
+    /*input field width constrained to login section width*/
+    width: 100%;
+}
+
+.hintLabel{
+    margin-top: 40px;
+    display: block;
+    line-height: 40px;
+}
+
+.defaultButtonStyling {
+    height: 73px;
+    border-radius: 26px;
+    border: none;
+    margin: 22px 0px;
+    font-size: 20px;
+    background-color: black;
+    color: white;
+}
+
+.cursorPointer:hover {
+    cursor: pointer;
+}
+
+.marginAuto {
+    margin: auto;
+}
+
+.width100Percent {
+    width: 100%;
+}
+
+.height100Percent {
+    height: 100%;
+}
