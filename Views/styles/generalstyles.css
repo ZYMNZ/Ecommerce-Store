@@ -19,6 +19,7 @@ body {
     margin-top: 15px;
 }
 
+/*default styling for website buttons (the black buttons)*/
 .defaultButtonStyling {
     height: 73px;
     border-radius: 26px;
@@ -26,6 +27,11 @@ body {
     font-size: 20px;
     background-color: black;
     color: white;
+}
+
+/*center sign buttons*/
+.signButtons {
+    width: 205px;
 }
 
 .cursorPointer:hover {
