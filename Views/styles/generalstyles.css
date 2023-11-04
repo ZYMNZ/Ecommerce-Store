@@ -6,12 +6,17 @@ body {
 .inputField {
     margin-top: 5px;
     border: 1px solid blue;
-    height: 40px;
+    font-size: 25px;
 }
+
 
 .hintLabel{
     margin-top: 40px;
     line-height: 40px;
+}
+
+.denseHintLabel {
+    margin-top: 15px;
 }
 
 .defaultButtonStyling {

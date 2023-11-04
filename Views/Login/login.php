@@ -15,7 +15,7 @@
             <header class="header">
                 <label class="headerFont">Welcome</label>
             </header>
-            <section id="loginSection" class=" marginAuto">
+            <section class="loginRegistrationSection marginAuto">
                 <label class="hintLabel displayBlock">Email:</label>
                 <input type="text" name="email" class="inputField width100Percent"> <br/>
                 <label class="hintLabel displayBlock">Password:</label>
@@ -26,10 +26,8 @@
                 <input type="button" name="signUp" value="Sign up" class="defaultButtonStyling cursorPointer width100Percent borderNone">
             </section>
         </section>
-        <footer>
-            <section class="footer width100Percent">
-
-            </section>
-        </footer>
+        <?php
+            include_once "Views/General/footer.php";
+        ?>
     </body>
 </html>
