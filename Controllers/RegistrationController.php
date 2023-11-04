@@ -1,7 +1,7 @@
 <?php
     class RegistrationController {
         function route() {
-            $action = isset($_GET["action"]) ? $_GET["action"] : "registration";
+            global $action;
 
             if($action == "registration") {
                 $this->render($action);

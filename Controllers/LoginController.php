@@ -1,8 +1,8 @@
 <?php
     class LoginController {
         function route() {
-            $action = isset($_GET["action"]) ? $_GET["action"] : "login";
-
+            global $action;
+            global $controllerPrefix;
             if($action == "login") {
                 $this->render($action);
             }
