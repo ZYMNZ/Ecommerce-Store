@@ -1,2 +1,8 @@
 # Ecom_Project
-hello
+
+## Freelance web app
+
+### Contributors:
+- Yaman Alhamamy
+- Logn luo
+- Arsh 
