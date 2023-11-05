@@ -167,10 +167,19 @@ class User{
     public static function registerUser($pPostArray) : bool {
         $mySqliConnection = openDatabaseConnection();
         // TODO: finish register user
-       /* $insertNewUserQuery = "INSERT INTO `User` VALUES (first_name, last_name";
+        /*
+        $insertNewUserQuery = "INSERT INTO `User` (first_name, 
+            last_name, 
+            email, 
+            description,
+            phone_number,
+            group_id) VALUES (?, ?, ?, ?, ?, ?)";
         $prepInsertNewUserQuery = $mySqliConnection->prepare(
-
-        )*/
+            $insertNewUserQuery
+        );
+        $prepInsertNewUserQuery->bind_param();
+        */
+        return 0;
     }
 }
 
