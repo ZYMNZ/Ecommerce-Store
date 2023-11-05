@@ -1,0 +1,121 @@
+.categoryNavBar{
+    height: 48px;
+    width: 150px;
+    color: darkviolet;
+    font-size: medium;
+    border-radius: 15px;
+    margin-top: 8%;
+}
+
+.navBarEditButton{
+    height: 38px;
+    width: 98px;
+    margin-top: 10px;
+    color: white;
+    border-radius: 15px;
+    font-size: 20px;
+    background-color: chocolate;
+}
+
+.landingPageSlogan{
+    font-size: 80px;
+    padding-left: 8%;
+}
+/* paragraph part */
+.landingIntro{
+    word-wrap: break-word;
+    width: 45%;
+    padding-left: 5%;
+    font-size: 20px;
+    font-family: cursive;;
+}
+
+#heroSection{
+    display: flex;
+    align-items: center;
+}
+
+#heroSection img{
+    position: relative;
+    width: 32%;
+    right: 10%;
+    top: 20px;
+}
+/* The big header word */
+.headerParagraphSection{
+    position: relative;
+    left: 7%;
+}
+
+/* the 3 info under the img*/
+.displayFreelanceInfo{
+    margin: 8% 0;
+    display: flex;
+    justify-content: space-around;
+}
+/* the  */
+.infoDivBox{
+    background-color: #a2adcb;
+    padding: 3% 3%;
+}
+
+
+@keyframes slide {
+    from{
+        transform: translateX(0);
+    }
+    to{
+        transform: translateX(-100%);
+    }
+}
+/* parent images slider div*/
+.imagesParent{
+    overflow: hidden;
+    /*padding: ;*/
+    white-space: nowrap;
+    flex: auto;
+    position: relative;
+}
+
+.imagesParent:hover .imagesSlider{
+    animation-play-state: paused;
+}
+
+.imagesParent:before, .imagesParent:after{
+    position: absolute;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    content: "";
+    z-index: 2;
+}
+
+.imagesParent:before{
+    left: 0;
+    background: linear-gradient(to left,rgba(255,255,255,0),white);
+}
+.imagesParent:after{
+    right: 0;
+    background: linear-gradient(to right,rgba(255,255,255,0),white);
+}
+
+.imagesSlider{
+    display: inline-block;
+    animation: 20s slide infinite linear;
+}
+
+/* images inside the slider div */
+.imagesSlider img{
+    height: 30%;
+    margin: 0 40px;
+}
+
+
+/*.signUpButtonNavBar{*/
+/*    //margin-right:  ;*/
+/*}*/
+
+/*.signInButtonNavBar{*/
+/*    right: 20px;*/
+/*}*/
+
