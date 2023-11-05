@@ -218,12 +218,14 @@ class User{
         $prepInsertNewUserQuery = $mySqliConnection->prepare(
             $insertNewUserQuery
         );
+
+        $hashedPassword = md5($pPostArray["password"]);
         $prepInsertNewUserQuery->bind_param(
             "ssssssi",
             $pPostArray["firstName"],
             $pPostArray["lastName"],
             $pPostArray["email"],
-            $pPostArray["password"],
+            $hashedPassword,
             $pPostArray["description"],
             $pPostArray["phoneNumber"],
             $buyerGroupId
