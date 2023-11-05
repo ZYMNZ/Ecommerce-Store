@@ -1,4 +1,5 @@
 <?php
+    include_once "Models/User.php";
     class RegistrationController {
         function route() {
             global $action;
