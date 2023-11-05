@@ -6,6 +6,8 @@ class User{
     private string $firstName = "";
     private string $lastName = "";
     private string $email = "";
+    private string $password = "";
+
 
     private string $description = "";
     private string $phoneNumber = "";
@@ -16,6 +18,7 @@ class User{
         $pFirstName = "",
         $pLastName = "",
         $pEmail = "",
+        $pPassword = "",
         $pDescription = "",
         $pPhoneNumber = "",
         $pGroupId = -1
@@ -30,6 +33,7 @@ class User{
             && strlen($pFirstName) > 0
             && strlen($pLastName) > 0
             && strlen($pEmail) > 0
+            && strlen($pPassword) > 0
             && strlen($pDescription) > 0
             && strlen($pPhoneNumber) > 0
             && $pGroupId > 0
@@ -40,6 +44,7 @@ class User{
                 $pFirstName,
                 $pLastName,
                 $pEmail,
+                $pPassword,
                 $pDescription,
                 $pPhoneNumber,
                 $pGroupId
@@ -50,9 +55,7 @@ class User{
             // If only the user id was sent
             $mySqliConnection = openDatabaseConnection();
 
-            $getUserByIdQuery = "SELECT
-                first_name, last_name, email, description, phone_number, group_id
-                FROM `USER` WHERE `USER_ID` = ?";
+            $getUserByIdQuery = "SELECT * FROM `USER` WHERE `USER_ID` = ?;";
             $prepGetUserByIdQuery = $mySqliConnection->prepare($getUserByIdQuery);
             $prepGetUserByIdQuery->bind_param("i", $pUserId);
             $prepGetUserByIdQuery->execute();
@@ -71,6 +74,7 @@ class User{
                     $queriedUserAssocRow["first_name"],
                     $queriedUserAssocRow["last_name"],
                     $queriedUserAssocRow["email"],
+                    $queriedUserAssocRow["password"],
                     $queriedUserAssocRow["description"],
                     $queriedUserAssocRow["phone_number"],
                     $queriedUserAssocRow["group_id"]
@@ -85,14 +89,16 @@ class User{
         $pFirstName,
         $pLastName,
         $pEmail,
+        $pPassword,
         $pDescription,
         $pPhoneNumber,
         $pGroupId
-    ) {
+    ) : void{
         $this->userId = $pUserId;
         $this->firstName = $pFirstName;
         $this->lastName = $pLastName;
         $this->email = $pEmail;
+        $this->password = $pPassword;
         $this->description = $pDescription;
         $this->phoneNumber = $pPhoneNumber;
         $this->groupId = $pGroupId;
@@ -134,6 +140,16 @@ class User{
         $this->email = $pEmail;
     }
 
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $pPassword): void
+    {
+        $this->password = $pPassword;
+    }
+
     public function getDescription(): string
     {
         return $this->description;
@@ -165,21 +181,88 @@ class User{
     }
 
     public static function registerUser($pPostArray) : bool {
+        // Newly registered user
+        $insertQueryResults = self::insertUserIntoDatabase($pPostArray);
+
+        $insertUserInUserGrpIsSuccessful = false;
+        if($insertQueryResults["insertUserIsSuccessful"]) {
+            // We insert the new user in the user group associative table (user_usergroup)
+            // Because the user is related to a user group
+            $insertUserInUserGrpIsSuccessful = self::insertUserInUserGrpAssocTable($insertQueryResults["newRegisteredUserId"]);
+        }
+
+        return $insertUserInUserGrpIsSuccessful;
+    }
+
+
+    private static function insertUserIntoDatabase($pPostArray) : array {
+        // This function is used in register.php to insert the newly registered user
+        // In the database
+
+
+        // This ID is the ID for the buyer group
+        // We use this to insert the group ID in the User table for the
+        // New registered user row
+        $buyerGroupId = 3;
         $mySqliConnection = openDatabaseConnection();
-        // TODO: finish register user
-        /*
+        // Insert the user into the user table
+        // That is in the database
+
         $insertNewUserQuery = "INSERT INTO `User` (first_name, 
             last_name, 
             email, 
+            password,
             description,
             phone_number,
-            group_id) VALUES (?, ?, ?, ?, ?, ?)";
+            group_id) VALUES (?, ?, ?, ?, ?, ?, ?);";
         $prepInsertNewUserQuery = $mySqliConnection->prepare(
             $insertNewUserQuery
         );
-        $prepInsertNewUserQuery->bind_param();
+        $prepInsertNewUserQuery->bind_param(
+            "ssssssi",
+            $pPostArray["firstName"],
+            $pPostArray["lastName"],
+            $pPostArray["email"],
+            $pPostArray["password"],
+            $pPostArray["description"],
+            $pPostArray["phoneNumber"],
+            $buyerGroupId
+        );
+
+        $insertUserIsSuccessful = $prepInsertNewUserQuery->execute();
+        // Return the new registered user ID generated by auto_increment
+        // Because we need it to insert the user into the associative table
+        $newRegisteredUserId = $mySqliConnection->insert_id;
+        $insertQueryResults = array(
+            "insertUserIsSuccessful" => $insertUserIsSuccessful,
+            "newRegisteredUserId" => $newRegisteredUserId
+        );
+
+        return $insertQueryResults;
+    }
+
+
+    private static function insertUserInUserGrpAssocTable($pUserId) : bool {
+        /* Insert the user into the user_usergroup associative table
+        Because the newly registered user is in the buyer user group by default
         */
-        return 0;
+        $buyerGroupId = 3;
+        $mySqliConnection = openDatabaseConnection();
+
+        $insertNewUserInUserGrpQuery = "INSERT INTO `User_UserGroup` (group_id,
+            group_name) VALUES (?, ?);";
+        $prepInsertNewUserInUserGrpQuery = $mySqliConnection->prepare($insertNewUserInUserGrpQuery);
+        $prepInsertNewUserInUserGrpQuery->bind_param(
+            "ii",
+            $pUserId,
+            $buyerGroupId
+        );
+
+        // Return a bool if the insert query was successful or not
+        // Because the registerUser returns a bool to determine whether it was successful or not
+        $insertUserInUserGrpIsSuccessful = $prepInsertNewUserInUserGrpQuery->execute();
+
+        return $insertUserInUserGrpIsSuccessful;
     }
 }
 

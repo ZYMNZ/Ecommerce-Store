@@ -12,7 +12,7 @@
         <?php
             include_once "Views/General/navbar.php";
         ?>
-        <form action="" method="POST">
+        <form action="/?controller=registration&action=register" method="POST">
             <section class="loginRegistrationSection marginAuto">
                 <label class="hintLabel displayBlock denseHintLabel">First Name:</label>
                 <input type="text" name="firstName" class="inputField width100Percent"> <br/>

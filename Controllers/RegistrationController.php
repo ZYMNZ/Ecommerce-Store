@@ -4,11 +4,8 @@
         function route() {
             global $action;
 
-            if($action == "registration") {
+            if($action == "registration" || $action == "register") {
                 $this->render($action);
-            }
-            else {
-
             }
         }
 
