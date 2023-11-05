@@ -2,15 +2,15 @@
 #navBar {
     padding: 15px 40px;
     height: 100px;
-    background-color: lightgrey;
+    background-color: #331E6D;
     box-sizing: border-box;
     justify-content: space-between;
 }
 
 /*Logo sizing*/
-#logo {
-    width: 10px;
-    background-color: grey;
+#logo img {
+    height: 100%;
+    /*background-color: grey;*/
 }
 
 .navBarButton {

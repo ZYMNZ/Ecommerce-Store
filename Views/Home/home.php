@@ -15,10 +15,10 @@
         <div class="wrapper">
             <section id="heroSection">
                 <section class="headerParagraphSection">
-                    <label class="landingPageSlogan">Header</label>
+                    <label class="landingPageSlogan">Crafting solutions, One task at a time</label>
                     <div class="landingIntro">
                         <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                            Your Project Desires Meet Expertise! Are you in search of top-tier expertise to bring your vision to life? Look no further. Our platform simplifies the process of finding the perfect expert for your project. Explore a vast pool of skilled professionals, read reviews, and make informed choices. Your project, your way, with the right expertise. Get started today, and experience a world of quality and convenience like never before!
                         </p>
                     </div>
                 </section>

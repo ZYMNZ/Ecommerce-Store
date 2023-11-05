@@ -6,6 +6,9 @@
     border-radius: 15px;
     margin-top: 8%;
 }
+.categoryNavBar:hover{
+    border-radius: 15px;
+}
 
 .navBarEditButton{
     height: 38px;
@@ -18,8 +21,10 @@
 }
 
 .landingPageSlogan{
-    font-size: 80px;
+    font-size: 50px;
     padding-left: 8%;
+    padding-right: 30%;
+    display: table-cell;
 }
 /* paragraph part */
 .landingIntro{
