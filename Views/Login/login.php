@@ -14,6 +14,7 @@
         <section>
             <header class="header">
                 <label class="headerFont">Welcome</label>
+
             </header>
             <form action="" method="POST">
                 <section class="loginRegistrationSection marginAuto">
