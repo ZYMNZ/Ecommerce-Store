@@ -3,7 +3,7 @@ $(document).ready(
 
         setUpEventHandlers();
     }
-)
+);
 
 function doPasswordsMatch() {
     var passwordInputField = $("[name='password']");
