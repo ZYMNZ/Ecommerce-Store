@@ -6,9 +6,7 @@
             if($action == "login") {
                 $this->render($action);
             }
-            else {
 
-            }
         }
         function render($action, $dataToSend = []) {
             extract($dataToSend);

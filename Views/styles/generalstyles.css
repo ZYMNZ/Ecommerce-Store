@@ -34,6 +34,17 @@ body {
     width: 205px;
 }
 
+/*Invalid input field border color*/
+.invalidInputField {
+    border-color: red;
+}
+
+/*Invalid input label color*/
+.invalidInputLabel {
+    color: red;
+    margin-top: 5px;
+}
+
 .cursorPointer:hover {
     cursor: pointer;
 }
@@ -60,4 +71,8 @@ body {
 
 .borderNone {
     border: none;
+}
+
+.displayNone {
+    display: none;
 }

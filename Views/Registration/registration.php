@@ -6,13 +6,15 @@
         <link rel="stylesheet" type="text/css" href="Views/styles/navbar.css">
         <link rel="stylesheet" type="text/css" href="Views/styles/login.css">
         <link rel="stylesheet" type="text/css" href="Views/styles/footer.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="Views/Registration/scripts/registrationValidation.js" type="text/javascript"></script>
     </head>
 
     <body>
         <?php
             include_once "Views/General/navbar.php";
         ?>
-        <form action="/?controller=registration&action=register" method="POST">
+        <form action="/?controller=registration&action=register" method="POST" id="registrationForm">
             <section class="loginRegistrationSection marginAuto">
                 <label class="hintLabel displayBlock denseHintLabel">First Name:</label>
                 <input type="text" name="firstName" class="inputField width100Percent"> <br/>
@@ -24,8 +26,12 @@
                 <input type="text" name="password" class="inputField width100Percent"> <br/>
                 <label class="hintLabel displayBlock denseHintLabel">Confirm Password:</label>
                 <input type="text" name="confirmPassword" class="inputField width100Percent"> <br/>
+                <label class="invalidInputLabel displayBlock displayNone" name="notMatchingPasswordLabel">Passwords do not match.</label>
             </section>
 
+            <section>
+
+            </section>
             <section class="signButtons marginAuto">
                 <input type="submit" name="submit" value="Sign up" href="" class="defaultButtonStyling cursorPointer width100Percent borderNone">
                 <a href="/?controller=login&action=login">

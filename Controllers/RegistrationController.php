@@ -7,6 +7,9 @@
             if($action == "registration" || $action == "register") {
                 $this->render($action);
             }
+            else if($action = "registerFail") {
+
+            }
         }
 
         function render($action, $dataToSend = []) {
