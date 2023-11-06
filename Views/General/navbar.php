@@ -56,7 +56,7 @@
             if ($action=="home"&&$controllerPrefix="home"){
                 ?>
                 <section>
-                    <select class="categoryNavBar cursorPointer">
+                    <select name="category" class="categoryNavBar cursorPointer">
                         <?php
                             //fetching from Database
                         ?>

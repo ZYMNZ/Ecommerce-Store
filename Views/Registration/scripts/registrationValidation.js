@@ -45,3 +45,24 @@ function setUpEventHandlers() {
 }
 
 
+function checkEmailValidation(){
+    var emailInputField = $("[name='email']").val();
+
+    // var regex =
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
