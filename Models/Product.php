@@ -1,5 +1,5 @@
 <?php
-
+include_once "database.php";
 class Product{
     private int $productId;
     private int $userId;
