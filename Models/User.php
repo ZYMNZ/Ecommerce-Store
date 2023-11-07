@@ -21,13 +21,35 @@ class User{
         $pPhoneNumber = "",
         $pGroupId = -1
     ) {
+        $this->initializeProperties(
+            $pUserId,
+            $pFirstName,
+            $pLastName,
+            $pEmail,
+            $pPassword,
+            $pDescription,
+            $pPhoneNumber,
+            $pGroupId
+        );
+    }
+
+
+    private function initializeProperties(
+        $pUserId,
+        $pFirstName,
+        $pLastName,
+        $pEmail,
+        $pPassword,
+        $pDescription,
+        $pPhoneNumber,
+        $pGroupId
+    ) : void {
         if($pUserId < 0) {
             // Use default initialized variables if nothing was sent
             // Through parameters
             return;
         }
-
-        if($pUserId > 0
+        else if($pUserId > 0
             && strlen($pFirstName) > 0
             && strlen($pLastName) > 0
             && strlen($pEmail) > 0
@@ -37,23 +59,21 @@ class User{
             && $pGroupId > 0
         ) {
             // Initialize all the properties if all parameters were sent
-            $this->initializeProperties(
-                $pUserId,
-                $pFirstName,
-                $pLastName,
-                $pEmail,
-                $pPassword,
-                $pDescription,
-                $pPhoneNumber,
-                $pGroupId
-            );
+            $this->userId = $pUserId;
+            $this->firstName = $pFirstName;
+            $this->lastName = $pLastName;
+            $this->email = $pEmail;
+            $this->password = $pPassword;
+            $this->description = $pDescription;
+            $this->phoneNumber = $pPhoneNumber;
+            $this->groupId = $pPhoneNumber;
         }
         else if($pUserId > 0) {
             // Initialize the instance variables using a SQL statement
             // If only the user id was sent
             $mySqliConnection = openDatabaseConnection();
 
-            $getUserByIdQuery = "SELECT * FROM `USER` WHERE `USER_ID` = ?;";
+            $getUserByIdQuery = "SELECT * FROM `user` WHERE `user_id` = ?;";
             $prepGetUserByIdQuery = $mySqliConnection->prepare($getUserByIdQuery);
             $prepGetUserByIdQuery->bind_param("i", $pUserId);
             $prepGetUserByIdQuery->execute();
@@ -67,39 +87,17 @@ class User{
 
                 $queriedUserAssocRow = $getUserMySqliResult->fetch_assoc();
 
-                $this->initializeProperties(
-                    $pUserId,
-                    $queriedUserAssocRow["first_name"],
-                    $queriedUserAssocRow["last_name"],
-                    $queriedUserAssocRow["email"],
-                    $queriedUserAssocRow["password"],
-                    $queriedUserAssocRow["description"],
-                    $queriedUserAssocRow["phone_number"],
-                    $queriedUserAssocRow["group_id"]
-                );
+
+                $this->userId = $pUserId;
+                $this->firstName = $queriedUserAssocRow["first_name"];
+                $this->lastName = $queriedUserAssocRow["last_name"];
+                $this->email = $queriedUserAssocRow["email"];
+                $this->password = $queriedUserAssocRow["password"];
+                $this->description = $queriedUserAssocRow["description"];
+                $this->phoneNumber = $queriedUserAssocRow["phone_number"];
+                $this->groupId = $queriedUserAssocRow["group_id"];
             }
         }
-    }
-
-
-    function initializeProperties(
-        $pUserId,
-        $pFirstName,
-        $pLastName,
-        $pEmail,
-        $pPassword,
-        $pDescription,
-        $pPhoneNumber,
-        $pGroupId
-    ) : void{
-        $this->userId = $pUserId;
-        $this->firstName = $pFirstName;
-        $this->lastName = $pLastName;
-        $this->email = $pEmail;
-        $this->password = $pPassword;
-        $this->description = $pDescription;
-        $this->phoneNumber = $pPhoneNumber;
-        $this->groupId = $pGroupId;
     }
 
     public function getUserId(): int
@@ -206,8 +204,12 @@ class User{
         // Insert the user into the user table
         // That is in the database
 
+<<<<<<< HEAD
         $insertNewUserQuery = "INSERT INTO `User` (
             first_name, 
+=======
+        $insertNewUserQuery = "INSERT INTO `user` (first_name, 
+>>>>>>> 52cd1cd6be993125696067efbd17696b3061a190
             last_name, 
             email, 
             password,
@@ -253,7 +255,7 @@ class User{
         $buyerGroupId = 3;
         $mySqliConnection = openDatabaseConnection();
 
-        $insertNewUserInUserGrpQuery = "INSERT INTO `User_UserGroup` (user_id,
+        $insertNewUserInUserGrpQuery = "INSERT INTO `user_usergroup` (user_id,
         usergroup_id) VALUES (?, ?);";
         $prepInsertNewUserInUserGrpQuery = $mySqliConnection->prepare($insertNewUserInUserGrpQuery);
         $prepInsertNewUserInUserGrpQuery->bind_param(
