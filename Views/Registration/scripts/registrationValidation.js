@@ -46,7 +46,7 @@ function setUpEventHandlers() {
 }
 
 
-//Still under testing 
+//Still under testing
 function checkEmailValidation(){
     var emailInputField = $("[name='email']").val();
     var checkEmail = $("[name='emailCheck']");

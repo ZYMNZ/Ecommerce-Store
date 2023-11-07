@@ -139,8 +139,24 @@ class Product{
         return $list;
     }
 
+    public function updateProduct($post){
+        $sqlConnection = openDatabaseConnection();
+        $sqlUpdateQuery =
+            "UPDATE `product` SET user_id='" . $post[''] . "',title='" . $post[''] . "', description='" . $post[''] . "', price='" . $post[''] . "' WHERE product_id='" . $_GET[''] . "';";
+        $sqlConnection->query($sqlUpdateQuery);
 
+        $sqlConnection->close();
+    }
 
+    public function deleteProduct(){
+        $sqlConnection = openDatabaseConnection();
+        $deleteQuery = "DELETE FROM `PRODUCT` WHERE product_id='" . $_GET[''] . "';";
+        $sqlConnection->query($deleteQuery);
+        $sqlConnection->close();
+    }
 
+    public function InsertProduct(){
+        
+    }
 
 }
