@@ -22,6 +22,7 @@
                 <input type="text" name="lastName" class="inputField width100Percent"> <br/>
                 <label class="hintLabel displayBlock denseHintLabel">Email:</label>
                 <input type="text" name="email" class="inputField width100Percent"> <br/>
+                <label name="emailCheck" class="displayBlock displayNone invalidInputLabel"></label>
                 <label class="hintLabel displayBlock denseHintLabel">Password:</label>
                 <input type="text" name="password" class="inputField width100Percent"> <br/>
                 <label class="hintLabel displayBlock denseHintLabel">Confirm Password:</label>

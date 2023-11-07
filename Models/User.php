@@ -7,8 +7,6 @@ class User{
     private string $lastName = "";
     private string $email = "";
     private string $password = "";
-
-
     private string $description = "";
     private string $phoneNumber = "";
     private int $groupId = -1;
@@ -208,7 +206,8 @@ class User{
         // Insert the user into the user table
         // That is in the database
 
-        $insertNewUserQuery = "INSERT INTO `User` (first_name, 
+        $insertNewUserQuery = "INSERT INTO `User` (
+            first_name, 
             last_name, 
             email, 
             password,
@@ -218,6 +217,9 @@ class User{
         $prepInsertNewUserQuery = $mySqliConnection->prepare(
             $insertNewUserQuery
         );
+
+        // check if the email already exists
+//        $checkEmailDuplicate =
 
         $hashedPassword = md5($pPostArray["password"]);
         $prepInsertNewUserQuery->bind_param(
