@@ -156,7 +156,7 @@ class Product{
     }
 
     public function InsertProduct(){
-        
+
     }
 
 }

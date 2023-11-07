@@ -2,7 +2,7 @@ $(document).ready(
     function() {
 
         setUpEventHandlers();
-        executeEmailValidation();
+        // executeEmailValidation();
     }
 );
 
@@ -30,15 +30,15 @@ function doPasswordsMatch() {
 
 
 function setUpEventHandlers() {
-    var registrationSignUpButton = $("[name='signUp']");
+    // var registrationSignUpButton = $("[name='signUp']");
     var registrationForm = $("#registrationForm");
     registrationForm.on("submit", function(event) {
         // Prevent form submission to check if the passwords match
         event.preventDefault();
         var passwordsMatch = doPasswordsMatch();
-
+        var emailValid = checkEmailValidation();
         // If the passwords match, submit the form
-        if(passwordsMatch) {
+        if(passwordsMatch && emailValid) {
             // Remove the submit event before submitting
             $(this).off("submit").submit();
         }
@@ -54,28 +54,16 @@ function checkEmailValidation(){
 
     var regex = /^[\w\-]{2,}@[a-zA-Z]{5,}(\.com|\.ca|\.qc\.ca|\.co|\.uk|\.gov|\.org)$/;
     var emailValid = true;
-    if (emailInputField = "" | !regex){
+    if (emailInputField == ""){
         checkEmail.removeClass("displayNone");
         emailTextFieldValidation.addClass("invalidInputField");
         checkEmail.html("Invalid Email");
         emailValid = false;
         return emailValid;
+        console.log("inside if");
     }
     return emailValid;
 }
-
-function executeEmailValidation(){
-    var form = $("#registrationForm");
-    form.on("submit",function (event) {
-        event.preventDefault();
-        var validation = checkEmailValidation();
-
-        if (validation){
-            $(this).off("submit").submit();
-        }
-    })
-}
-
 
 
 
