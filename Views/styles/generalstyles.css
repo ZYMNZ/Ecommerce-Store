@@ -1,0 +1,78 @@
+body {
+    margin: 0px;
+}
+
+/*Input login fields styling*/
+.inputField {
+    margin-top: 5px;
+    border: 1px solid blue;
+    font-size: 25px;
+}
+
+
+.hintLabel{
+    margin-top: 40px;
+    line-height: 40px;
+}
+
+.denseHintLabel {
+    margin-top: 15px;
+}
+
+/*default styling for website buttons (the black buttons)*/
+.defaultButtonStyling {
+    height: 73px;
+    border-radius: 26px;
+    margin: 22px 0px;
+    font-size: 20px;
+    background-color: black;
+    color: white;
+}
+
+/*center sign buttons*/
+.signButtons {
+    width: 205px;
+}
+
+/*Invalid input field border color*/
+.invalidInputField {
+    border-color: red;
+}
+
+/*Invalid input label color*/
+.invalidInputLabel {
+    color: red;
+    margin-top: 5px;
+}
+
+.cursorPointer:hover {
+    cursor: pointer;
+}
+
+.marginAuto {
+    margin: auto;
+}
+
+.width100Percent {
+    width: 100%;
+}
+
+.height100Percent {
+    height: 100%;
+}
+
+.displayFlex {
+    display: flex;
+}
+
+.displayBlock {
+    display: block;
+}
+
+.borderNone {
+    border: none;
+}
+
+.displayNone {
+    display: none;
+}

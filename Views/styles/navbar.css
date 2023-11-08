@@ -1,0 +1,24 @@
+/*Nav bar, color and height*/
+#navBar {
+    padding: 15px 40px;
+    height: 100px;
+    background-color: #331E6D;
+    box-sizing: border-box;
+    justify-content: space-between;
+}
+
+/*Logo sizing*/
+#logo img {
+    height: 100%;
+    /*background-color: grey;*/
+}
+
+.navBarButton {
+    width: 202px;
+    height: 100%;
+    margin: 0px;
+}
+
+
+
+
