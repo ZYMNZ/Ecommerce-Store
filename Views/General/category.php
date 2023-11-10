@@ -4,7 +4,7 @@ $categories = $dataToSend;
 
 <?php
 global $action, $controllerPrefix;
-if ($action == "home" && $controllerPrefix = "home") {
+if ($action == "home" && $controllerPrefix == "home") {
 ?>
     <section>
         <form id="category" action="/?controller=product&action=product" method="post">
@@ -23,12 +23,21 @@ if ($action == "home" && $controllerPrefix = "home") {
 ?>
 
 <script>
+    /*const form = document.querySelector('form');
+    const option = document.querySelector('#optionNone');
+    form.addEventListener('submit', (e)=> {
+        e.preventDefault()
+    })
+
+    if (form) {
+        console.log('yes')
+    }*/
     // Automatically submit the form when the select value changes
     document.querySelector('select[name="category"]').addEventListener('change', function() {
         document.getElementById('category').submit();
     });
     // Work on later to prevent None from submitting
-   /* const form = document.querySelector('form');
+    /*const form = document.querySelector('form');
     const select = document.querySelector('select');
     const optionNone = document.querySelector('#optionNone');
     form.addEventListener('submit', (e)=> {
@@ -39,4 +48,5 @@ if ($action == "home" && $controllerPrefix = "home") {
         }
         e.preventDefault();
     })*/
+
 </script>

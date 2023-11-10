@@ -10,12 +10,16 @@
     <body>
         <?php
             include_once "Views/General/navbar.php";
+        if (session_status() == PHP_SESSION_ACTIVE) {
+            session_unset();
+            session_destroy();
+        }
         ?>
         <section>
             <header class="header">
                 <label class="headerFont">Welcome</label>
             </header>
-            <form action="" method="POST">
+            <form action="/?controller=login&action=validation" method="POST">
                 <section class="loginRegistrationSection marginAuto">
                     <label class="hintLabel displayBlock">Email:</label>
                     <input type="text" name="email" class="inputField width100Percent"> <br/>
@@ -23,7 +27,7 @@
                     <input type="password" name="password" class="inputField width100Percent"> <br/>
                 </section>
                 <section class="signButtons marginAuto">
-                    <input type="submit" name="submit" value="Sign in" href="" class="defaultButtonStyling cursorPointer width100Percent borderNone"> <br/>
+                    <input type="submit" name="submit" value="Sign in" class="defaultButtonStyling cursorPointer width100Percent borderNone"> <br/>
                     <a href="/?controller=registration&action=registration">
                         <input type="button" name="signUp" value="Sign up" class="defaultButtonStyling cursorPointer width100Percent borderNone">
                     </a>

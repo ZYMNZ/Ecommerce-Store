@@ -98,7 +98,7 @@ class Product{
 
             $mySqlConnection = openDatabaseConnection();
 
-            $getProductByIdQuery = "SELECT * FROM `product` WHERE 'product_id' = ?";
+            $getProductByIdQuery = "SELECT * FROM product WHERE product_id = ?";
             $prepGetProductById = $mySqlConnection->prepare($getProductByIdQuery);
             $prepGetProductById->bind_param("i",$pProductId);
             $prepGetProductById->execute();
@@ -139,24 +139,100 @@ class Product{
         return $list;
     }
 
-    public function updateProduct($post){
-        $sqlConnection = openDatabaseConnection();
-        $sqlUpdateQuery =
-            "UPDATE `product` SET user_id='" . $post[''] . "',title='" . $post[''] . "', description='" . $post[''] . "', price='" . $post[''] . "' WHERE product_id='" . $_GET[''] . "';";
-        $sqlConnection->query($sqlUpdateQuery);
-
-        $sqlConnection->close();
+    public static function listProductsByCategory($categoryId): ?array
+    {
+        $products = [];
+        $mySqliConnection = openDatabaseConnection();
+        $SQL = "SELECT * FROM product p JOIN product_category pc ON p.product_id = pc.product_id  WHERE pc.category_id = ?";
+        $stmt = $mySqliConnection->prepare($SQL);
+        $stmt->bind_param('i', $categoryId);
+        $stmt->execute();
+        $results = $stmt->get_result();
+        // Fetch user data (assuming you have a user class or similar)
+        while ($row = $results->fetch_assoc()){
+            $product = new Product();
+            $product->productId = $row['product_id'];
+            $product->userId = $row['user_id'];
+            $product->title = $row['title'];
+            $product->description = $row['description'];
+            $product->price = $row['price'];
+            $products[] = $product;
+        }
+        return $products;
     }
 
-    public function deleteProduct(){
-        $sqlConnection = openDatabaseConnection();
-        $deleteQuery = "DELETE FROM `PRODUCT` WHERE product_id='" . $_GET[''] . "';";
-        $sqlConnection->query($deleteQuery);
-        $sqlConnection->close();
+    public static function getProductsByUserId($pUserId): ?array
+    {
+        $products = [];
+        $mySqliConnection = openDatabaseConnection();
+        $sql = "SELECT * FROM product WHERE user_id = ?";
+        $stmt = $mySqliConnection->prepare($sql);
+        $stmt->bind_param('i', $pUserId);
+        $stmt->execute();
+        $results = $stmt->get_result();
+        if ($results->num_rows > 0){
+            while ($row = $results->fetch_assoc()) {
+                $product = new Product();
+                $product->productId = $row['product_id'];
+                $product->userId = $row['user_id'];
+                $product->title = $row['title'];
+                $product->description = $row['description'];
+                $product->price = $row['price'];
+                $products[] = $product;
+            }
+            return $products;
+        }
+        return null;
+    }
+    public static function getLastProductCreatedByUser($pUserId): ?Product
+    {
+        $mySqliConnection = openDatabaseConnection();
+        $sql = "SELECT * FROM product WHERE user_id = ? ORDER BY product_id DESC LIMIT 1";
+        $stmt = $mySqliConnection->prepare($sql);
+        $stmt->bind_param('i', $pUserId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0){
+            $result = $result->fetch_assoc();
+            $product = new Product();
+            $product->productId = $result['product_id'];
+            $product->userId = $pUserId;
+            $product->title = $result['title'];
+            $product->description = $result['description'];
+            $product->price = $result['price'];
+            return $product;
+        }
+        return null;
+    }
+    public static function createProduct($pUserId, $pTitle, $pDescription, $pPrice): void {
+        $mySqliConnection = openDatabaseConnection();
+        $sql = "INSERT INTO product (user_id, title, description, price) VALUES (?, ?, ?, ?)";
+        $stmt = $mySqliConnection->prepare($sql);
+        $stmt->bind_param('issd', $pUserId, $pTitle, $pDescription, $pPrice);
+        $stmt->execute();
+        $stmt->close();
+        $mySqliConnection->close();
     }
 
-    public function InsertProduct(){
-
+    public static function updateProduct($pUserId, $pTitle, $pDescription, $pPrice, $pProductId) {
+        $mySqliConnection = openDatabaseConnection();
+        $sql = "UPDATE product SET user_id = ?, title = ?, description = ?, price = ? WHERE product_id = ?";
+        $stmt = $mySqliConnection->prepare($sql);
+        $stmt->bind_param('issdi', $pUserId, $pTitle, $pDescription, $pPrice, $pProductId);
+        $stmt->execute();
+        $stmt->close();
+        $mySqliConnection->close();
     }
+
+    public static function deleteProduct($pProductId) {
+        $mySqliConnection = openDatabaseConnection();
+        $sql = "DELETE FROM product WHERE product_id = ?";
+        $stmt = $mySqliConnection->prepare($sql);
+        $stmt->bind_param('i', $pProductId);
+        $stmt->execute();
+        $stmt->close();
+        $mySqliConnection->close();
+    }
+
 
 }

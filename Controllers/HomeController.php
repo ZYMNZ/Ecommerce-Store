@@ -1,13 +1,18 @@
 <?php
+include_once 'Models/Category.php';
+include_once 'Views/General/session.php';
+notLoggedIn();
+notUser();
 class HomeController{
     function route()
     {
         global $action;
         global $controllerPrefix;
         if ($action == "home"){
-            $this->render($action);
+            $categories = Category::listCategories();
+            $this->render($action, $categories);
         }
-        else{
+        else {
 
         }
     }

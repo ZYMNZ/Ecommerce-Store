@@ -1,3 +1,10 @@
+<?php
+include_once "Views/General/session.php";
+notLoggedIn();
+notUser();
+
+?>
+
 <html>
     <head>
         <title>Home</title>
@@ -6,6 +13,7 @@
         <link rel="stylesheet" type="text/css" href="Views/styles/login.css">
         <link rel="stylesheet" type="text/css" href="Views/styles/footer.css">
         <link rel="stylesheet" type="text/css" href="Views/styles/home.css"
+        <link rel="stylesheet" type="text/css" href="Views/styles/account.css"
     </head>
 
     <body>
