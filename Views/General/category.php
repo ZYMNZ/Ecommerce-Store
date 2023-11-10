@@ -8,7 +8,7 @@ if ($action == "home" && $controllerPrefix == "home") {
 ?>
     <section>
         <form id="category" action="/?controller=product&action=product" method="post">
-            <select name="category"  class="categoryNavBar cursorPointer">
+            <select name="category"  class="categoryNavBar cursorPointer" required>
                 <option id="optionNone" value="None" selected>None</option>
                 <?php
                 foreach ($categories as $category) {
@@ -33,9 +33,23 @@ if ($action == "home" && $controllerPrefix == "home") {
         console.log('yes')
     }*/
     // Automatically submit the form when the select value changes
-    document.querySelector('select[name="category"]').addEventListener('change', function() {
-        document.getElementById('category').submit();
+
+    //IF 'NONE' IT WON'T DO ANYTHING (STILL UNDER TEST)
+    // var selectedName = txtName.options[txtName.selectedIndex].text;
+    // var selectedName = $('#category').val();
+    // console.log(txtName);
+
+    document.querySelector('select[name="category"]').addEventListener('change', function () {
+        // console.log("inside blub blub")
+
+        if(!document.getElementById("optionNone").innerHTML) {
+            document.getElementById('category').submit();
+        }
+
+        // }
     });
+
+
     // Work on later to prevent None from submitting
     /*const form = document.querySelector('form');
     const select = document.querySelector('select');

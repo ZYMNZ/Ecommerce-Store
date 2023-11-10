@@ -11,9 +11,17 @@ class ProductController {
         global $controllerPrefix;
 
         if ($action == "product") {
-            $category = Category::getByCategoryName($_POST['category']);
-            $products = Product::listProductsByCategory($category->getCategoryId());
-            $this->render($action, $products);
+//            var_dump($_POST['category']);
+            if ($_POST['category'] != "None") {
+//                var_dump("inside");
+                $category = Category::getByCategoryName($_POST['category']);
+                if ($category == "None"){
+                    header();
+                }
+                $products = Product::listProductsByCategory($category->getCategoryId());
+                $this->render($action, $products);
+            }
+
         } else if ($action == "view") {
             $product = new Product($_GET['id']);
             $this->render($action, [$product]);
