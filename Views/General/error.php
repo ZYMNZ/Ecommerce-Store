@@ -12,7 +12,7 @@
 </head>
 <body>
 <?php
-include_once "Views/General/navbar.php";
+    include_once "Views/General/navbar.php";
 ?>
 
 <section>

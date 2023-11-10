@@ -54,13 +54,13 @@ function checkEmailValidation(){
 
     var regex = /^[\w\-]{2,}@[a-zA-Z]{5,}(\.com|\.ca|\.qc\.ca|\.co|\.uk|\.gov|\.org)$/;
     var emailValid = true;
-    if (emailInputField == ""){
+    if (emailInputField == "" || !regex.test(emailInputField)){
         checkEmail.removeClass("displayNone");
         emailTextFieldValidation.addClass("invalidInputField");
         checkEmail.html("Invalid Email");
         emailValid = false;
         return emailValid;
-        console.log("inside if");
+        // console.log("inside if");
     }
     return emailValid;
 }

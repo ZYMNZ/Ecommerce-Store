@@ -110,7 +110,6 @@
                             <input type="button" value="Sign in" class=" defaultButtonStyling cursorPointer borderNone navBarButton signButtons">
                         </a>
                     </section>
-
         <?php
                 }
             }
