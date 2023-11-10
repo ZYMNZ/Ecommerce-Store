@@ -1,4 +1,4 @@
-<!doctype html>
+<!Doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,7 +12,7 @@
 </head>
 <body>
 <?php
-    include_once "Views/General/navbar.php";
+include_once "Views/General/navbar.php";
 ?>
 
 <section>

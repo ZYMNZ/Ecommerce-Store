@@ -73,7 +73,7 @@ class User {
             // If only the user id was sent
             $mySqliConnection = openDatabaseConnection();
 
-            $getUserByIdQuery = "SELECT * FROM `user` WHERE `user_id` = ?;";
+            $getUserByIdQuery = "SELECT * FROM user WHERE user_id = ?;";
             $prepGetUserByIdQuery = $mySqliConnection->prepare($getUserByIdQuery);
             $prepGetUserByIdQuery->bind_param("i", $pUserId);
             $prepGetUserByIdQuery->execute();
@@ -262,6 +262,31 @@ class User {
 
         return $insertUserInUserGrpIsSuccessful;
     }
-}
 
+    public static function getUserByEmailAndPassword($pEmail, $pPassword): ?User
+    {
+        $mySqliConnection = openDatabaseConnection();
+        $SQL = "SELECT * FROM user WHERE email = ? AND password = ?";
+        $stmt = $mySqliConnection->prepare($SQL);
+        $stmt->bind_param('ss', $pEmail, $pPassword);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $result = $result->fetch_assoc();
+            $user = new User();
+            $user->userId = $result['user_id'];
+            $user->firstName = $result['first_name'];
+            $user->lastName = $result['last_name'];
+            $user->email = $pEmail;
+            $user->password = $pPassword;
+            $user->description = $result['description'] ? $result['description'] : '';
+            $user->phoneNumber = $result['phone_number'] ? $result['phone_number'] : '';
+            return $user;
+        }
+        // Close the statement and the database connection when done
+        $stmt->close();
+        $mySqliConnection->close();
+        return null;
+    }
+}
 ?>

@@ -1,24 +1,26 @@
 <?php
 include_once 'Models/Category.php';
-include_once 'Views/General/session.php';
-notLoggedIn();
-notUser();
-class HomeController{
+//remove controller
+class GeneralController {
     function route()
     {
         global $action;
         global $controllerPrefix;
-        if ($action == "home"){
+
+        /*if ($action == "category") {
             $categories = Category::listCategories();
             $this->render($action, $categories);
-        }
-//        else {
-//
-//        }
+        } else if ($action == "navbar") {
+            $this->render($action);
+
+        }*/
+
     }
-    function render($action,$dataToSend=[])
+
+    function render($action, $dataToSend = [])
     {
         extract($dataToSend);
-        include_once "Views/Home/$action.php";
+
+        include_once "Views/General/$action.php";
     }
 }

@@ -1,3 +1,10 @@
+<?php
+include_once "Views/General/session.php";
+notLoggedIn();
+notUser();
+
+?>
+
 <html>
     <head>
         <title>Home</title>
@@ -6,6 +13,8 @@
         <link rel="stylesheet" type="text/css" href="Views/styles/login.css">
         <link rel="stylesheet" type="text/css" href="Views/styles/footer.css">
         <link rel="stylesheet" type="text/css" href="Views/styles/home.css"
+        <link rel="stylesheet" type="text/css" href="Views/styles/account.css"
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     </head>
 
     <body>

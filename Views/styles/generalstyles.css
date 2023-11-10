@@ -1,6 +1,9 @@
 body {
     margin: 0px;
+    max-width: 100%;
+    overflow-x: hidden;
 }
+
 
 /*Input login fields styling*/
 .inputField {
@@ -75,4 +78,8 @@ body {
 
 .displayNone {
     display: none;
+}
+
+.form {
+    margin: 10px;
 }
