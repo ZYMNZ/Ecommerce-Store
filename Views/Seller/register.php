@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Seller Registration</title>
+    <title>Login</title>
     <!--Keep general styles css file at the top to let sub css files override the general one-->
     <link rel="stylesheet" type="text/css" href="Views/styles/generalstyles.css">
     <link rel="stylesheet" type="text/css" href="Views/styles/navbar.css">
@@ -18,15 +18,21 @@ include_once "Views/General/navbar.php";
     </header>
 </section>
 <section>
-    <form action="/?controller=seller&action=validateRegistration" method="post">
+    <form action="/?controller=seller&action=check" method="post">
+        <label>Please enter your current password to sign up
+            <input type="password" name="password">
+        </label>
+        <input type="submit" name="submit" value="Sign up">
+    </form>
+</section>
+    <!--<form action="/?controller=seller&action=validateRegistration" method="post">
         <section class="loginRegistrationSection marginAuto">
             <label style="font-size: 30px" class="hintLabel displayBlock">Please enter your current password to sign up
                 <input type="password" name="password" class="inputField width100Percent" placeholder="password">
             </label><br>
             <input type="submit" name="submit" value="Sign up" class="defaultButtonStyling cursorPointer width100Percent borderNone">
         </section>
-    </form>
-</section>
+    </form>-->
 <?php
 include_once "Views/General/footer.php";
 ?>

@@ -111,24 +111,24 @@
         ?>
 
             <div class="dropdown">
-                <?php
-                global $controllerPrefix, $action;
-                if (session_status() == PHP_SESSION_ACTIVE) {
-                    // session_start() has not been called
-                    echo " <img id='account' src='Views/images/account.png''>";
-                }
-                ?>
+                <img id="account" src="Views/images/account.png">
                 <div class="dropdown-content">
                     <a href="#">Personal Info</a>
                     <?php
+                    if (session_status() == PHP_SESSION_NONE) {
+                        // session_start() has not been called
+                        session_start();
+                    }
                     if (isset($_SESSION['user_id']) && $_SESSION["group_id"][1] === 0) {
                         echo "<a href='/?controller=seller&action=register'>Register as a Seller</a>";
-                    } else if ($_SESSION['user_id'] && $_SESSION["group_id"][1] === 1) {
+                    } else {
                         echo "<a href='/?controller=seller&action=products'>View your products</a>";
                     }
                     ?>
-                    <a href="/?controller=login&action=login">Logout</a>
+
+                    <a href="#">Logout</a>
                 </div>
             </div>
     </section>
+
 </nav>

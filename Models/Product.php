@@ -161,49 +161,6 @@ class Product{
         return $products;
     }
 
-    public static function getProductsByUserId($pUserId): ?array
-    {
-        $products = [];
-        $mySqliConnection = openDatabaseConnection();
-        $sql = "SELECT * FROM product WHERE user_id = ?";
-        $stmt = $mySqliConnection->prepare($sql);
-        $stmt->bind_param('i', $pUserId);
-        $stmt->execute();
-        $results = $stmt->get_result();
-        if ($results->num_rows > 0){
-            while ($row = $results->fetch_assoc()) {
-                $product = new Product();
-                $product->productId = $row['product_id'];
-                $product->userId = $row['user_id'];
-                $product->title = $row['title'];
-                $product->description = $row['description'];
-                $product->price = $row['price'];
-                $products[] = $product;
-            }
-            return $products;
-        }
-        return null;
-    }
-    public static function getLastProductCreatedByUser($pUserId): ?Product
-    {
-        $mySqliConnection = openDatabaseConnection();
-        $sql = "SELECT * FROM product WHERE user_id = ? ORDER BY product_id DESC LIMIT 1";
-        $stmt = $mySqliConnection->prepare($sql);
-        $stmt->bind_param('i', $pUserId);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        if ($result->num_rows > 0){
-            $result = $result->fetch_assoc();
-            $product = new Product();
-            $product->productId = $result['product_id'];
-            $product->userId = $pUserId;
-            $product->title = $result['title'];
-            $product->description = $result['description'];
-            $product->price = $result['price'];
-            return $product;
-        }
-        return null;
-    }
     public static function createProduct($pUserId, $pTitle, $pDescription, $pPrice): void {
         $mySqliConnection = openDatabaseConnection();
         $sql = "INSERT INTO product (user_id, title, description, price) VALUES (?, ?, ?, ?)";
@@ -224,7 +181,7 @@ class Product{
         $mySqliConnection->close();
     }
 
-    public static function deleteProduct($pProductId) {
+    public function deleteProduct($pProductId) {
         $mySqliConnection = openDatabaseConnection();
         $sql = "DELETE FROM product WHERE product_id = ?";
         $stmt = $mySqliConnection->prepare($sql);
