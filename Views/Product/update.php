@@ -1,12 +1,7 @@
-<?php
-include_once "Views/General/session.php";
-notLoggedIn();
-notUser();
-?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Home</title>
+    <title>Update</title>
     <link rel="stylesheet" type="text/css" href="Views/styles/generalstyles.css">
     <link rel="stylesheet" type="text/css" href="Views/styles/navbar.css">
     <link rel="stylesheet" type="text/css" href="Views/styles/login.css">
@@ -14,17 +9,21 @@ notUser();
     <link rel="stylesheet" type="text/css" href="Views/styles/home.css">
     <link rel="stylesheet" type="text/css" href="Views/styles/product.css">
 </head>
+
 <body>
 <div class="navbar">
     <?php
     include_once "Views/General/navbar.php";
     ?>
 </div>
-<div class="product">
-    <div class="title"><?php echo $dataToSend[0]->getTitle() ?></div>
-    <div class="description"><?php echo $dataToSend[0]->getDescription() ?></div>
-    <div class="price">$<?php echo $dataToSend[0]->getPrice()?></div>
-    <button class="buy-button">Buy</button>
-</div>
+<form action="" method="post">
+    <label>Title:<input class="form" type="text" name="title"></label><br>
+    <label>Description:<textarea name="description" rows="2" cols="50"></textarea></label><br>
+    <label>Price:<input class="form" type="text" name="price"></label><br>
+    <label>Submit:<input class="form" type="submit" name="submit"></label><br>
+</form>
+<?php
+include_once "Views/General/footer.php";
+?>
 </body>
 </html>

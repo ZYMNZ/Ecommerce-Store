@@ -76,3 +76,7 @@ body {
 .displayNone {
     display: none;
 }
+
+.form {
+    margin: 10px;
+}

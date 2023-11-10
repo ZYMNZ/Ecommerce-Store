@@ -9,6 +9,9 @@ class GeneralController {
         if ($action == "category") {
             $categories = Category::listCategories();
             $this->render($action, $categories);
+        } else if ($action == "navbar") {
+            $this->render($action);
+
         }
 
     }

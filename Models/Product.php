@@ -171,20 +171,24 @@ class Product{
         $mySqliConnection->close();
     }
 
-    public function updateProduct($post){
-        $sqlConnection = openDatabaseConnection();
-        $sqlUpdateQuery =
-            "UPDATE `product` SET user_id='" . $post[''] . "',title='" . $post[''] . "', description='" . $post[''] . "', price='" . $post[''] . "' WHERE product_id='" . $_GET[''] . "';";
-        $sqlConnection->query($sqlUpdateQuery);
-
-        $sqlConnection->close();
+    public static function updateProduct($pUserId, $pTitle, $pDescription, $pPrice, $pProductId) {
+        $mySqliConnection = openDatabaseConnection();
+        $sql = "UPDATE product SET user_id = ?, title = ?, description = ?, price = ? WHERE product_id = ?";
+        $stmt = $mySqliConnection->prepare($sql);
+        $stmt->bind_param('issdi', $pUserId, $pTitle, $pDescription, $pPrice, $pProductId);
+        $stmt->execute();
+        $stmt->close();
+        $mySqliConnection->close();
     }
 
-    public function deleteProduct(){
-        $sqlConnection = openDatabaseConnection();
-        $deleteQuery = "DELETE FROM `PRODUCT` WHERE product_id='" . $_GET[''] . "';";
-        $sqlConnection->query($deleteQuery);
-        $sqlConnection->close();
+    public function deleteProduct($pProductId) {
+        $mySqliConnection = openDatabaseConnection();
+        $sql = "DELETE FROM product WHERE product_id = ?";
+        $stmt = $mySqliConnection->prepare($sql);
+        $stmt->bind_param('i', $pProductId);
+        $stmt->execute();
+        $stmt->close();
+        $mySqliConnection->close();
     }
 
 

@@ -1,3 +1,13 @@
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="Views/styles/generalstyles.css">
+    <link rel="stylesheet" type="text/css" href="Views/styles/navbar.css">
+    <link rel="stylesheet" type="text/css" href="Views/styles/login.css">
+    <link rel="stylesheet" type="text/css" href="Views/styles/footer.css">
+    <link rel="stylesheet" type="text/css" href="Views/styles/account.css"
+    <link rel="stylesheet" type="text/css" href="Views/styles/home.css"
+</head>
+
 <nav>
 
     <section id="navBar" class="width100Percent displayFlex">
@@ -49,7 +59,10 @@
 
         <!-- adding a category  -->
         <?php
-        include_once 'Views/General/category.php';
+        global $action, $controllerPrefix;
+        if ($action == "home" && $controllerPrefix = "home") {
+            include_once "Views/General/category.php";
+        }
         ?>
 
         <!-- adding sign up if it's landing page-->
@@ -84,7 +97,7 @@
                 if ($controllerPrefix="home" &&$action == "home"){
         ?>
                     <section>
-                        <a href="?controller=login&action=login">
+                        <a href="/?controller=login&action=login">
                             <input type="button" value="Sign in" class=" defaultButtonStyling cursorPointer borderNone navBarButton signButtons">
                         </a>
                     </section>
@@ -97,6 +110,26 @@
             addSignInButtonNavBar();
         ?>
 
+            <div class="dropdown">
+                <img id="account" src="Views/images/account.png">
+                <div class="dropdown-content">
+                    <a href="#">Personal Info</a>
+                    <?php
+                    if (session_status() == PHP_SESSION_NONE) {
+                        // session_start() has not been called
+                        session_start();
+                    }
+                    if (isset($_SESSION['user_id']) && $_SESSION["group_id"][1] === 0) {
+                        echo "<a href='/?controller=seller&action=register'>Register as a Seller</a>";
+                    } else {
+                        echo "<a href='/?controller=seller&action=products'>View your products</a>";
+                    }
+                    ?>
+
+
+                    <a href="#">Logout</a>
+                </div>
+            </div>
     </section>
 
 </nav>

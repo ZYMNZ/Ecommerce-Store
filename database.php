@@ -13,7 +13,3 @@
         return $conn;
 //    echo "Connection Successful";
     }
-
-
-
-?>

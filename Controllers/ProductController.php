@@ -14,11 +14,22 @@ class ProductController {
         } else if ($action == "view") {
             $product = new Product($_GET['id']);
             $this->render($action, [$product]);
-        } else if ($action == "create" & isset($_POST['ac'])) {
-            var_dump($_POST);
-            $category = Product::createProduct();
-            $this->render($action, [$product]);
         } else if ($action == "create") {
+            if (isset($_POST['submit'])) {
+                session_start();
+                Product::createProduct($_SESSION['user_id'], $_POST['title'], $_POST['description'], $_POST['price']);
+            } else {
+                $this->render($action, Category::listCategories());
+            }
+        } else if ($action == "update") {
+            if (isset($_POST['submit'])) {
+                Product::updateProduct($_SESSION['user_id'], $_POST['title'], $_POST['description'], $_POST['price'], $_GET['id']);
+            } else {
+                $this->render($action);
+            }
+        } else if ($action == "delete") {
+
+        } else {
             $this->render($action);
         }
 

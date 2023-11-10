@@ -4,8 +4,7 @@ class Category {
     private int $categoryId;
     private string $category;
 
-    public function __construct(int $pCategoryId = -1, string $pCategory = '')
-    {
+    public function __construct(int $pCategoryId = -1, string $pCategory = '') {
         self::initializeProperties($pCategoryId, $pCategory);
     }
 
@@ -46,7 +45,7 @@ class Category {
 
             $mySqlConnection = openDatabaseConnection();
 
-            $getProductByIdQuery = "SELECT * FROM `product` WHERE 'category_id' = ?";
+            $getProductByIdQuery = "SELECT * FROM product WHERE category_id = ?";
             $prepGetProductById = $mySqlConnection->prepare($getProductByIdQuery);
             $prepGetProductById->bind_param("i",$pCategoryId);
             $prepGetProductById->execute();
@@ -62,6 +61,8 @@ class Category {
         }
 
     }
+
+
     public static function listCategories() : array {
         $categories = [];
         $mySqlConnection = openDatabaseConnection();
@@ -80,8 +81,8 @@ class Category {
     public static function getByCategoryName($pCategory): ?Category
     {
         $mySqliConnection = openDatabaseConnection();
-        $SQL = "SELECT * FROM category WHERE category = ?";
-        $stmt = $mySqliConnection->prepare($SQL);
+        $sql = "SELECT * FROM category WHERE category = ?";
+        $stmt = $mySqliConnection->prepare($sql);
         $stmt->bind_param('s', $pCategory);
         $stmt->execute();
         $result = $stmt->get_result();

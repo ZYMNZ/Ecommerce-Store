@@ -1,3 +1,8 @@
+<?php
+include_once "Views/General/session.php";
+notLoggedIn();
+notUser();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +21,8 @@
     include_once "Views/General/navbar.php";
     ?>
 </div>
+<a href='/?controller=product&action=create'></a>
+
 <table>
     <?php
 /*    foreach ($dataToSend as $product) {
@@ -34,10 +41,12 @@
         echo "<div class='description'>" . $product->getDescription() . "</div>";
         echo "<div class='price'>$" . $product->getPrice() . "</div>";
         echo "<div><a href='/?controller=product&action=view&id=" . $product->getProductId() . "' class='buy-button'>View</a></div>";
+        echo "<button><a href='/?controller=product&action=update&id=" . $product->getProductId() . "' >Update</a></button>";
         echo "</div></tr>";
     }
     ?>
 </table>
+<button><a href='/?controller=product&action=create'>Create</a></button>
 <?php
 include_once "Views/General/footer.php";
 ?>
