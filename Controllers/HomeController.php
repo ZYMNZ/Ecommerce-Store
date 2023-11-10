@@ -1,5 +1,8 @@
 <?php
 include_once 'Models/Category.php';
+include_once 'Views/General/session.php';
+notLoggedIn();
+notUser();
 class HomeController{
     function route()
     {
@@ -9,9 +12,9 @@ class HomeController{
             $categories = Category::listCategories();
             $this->render($action, $categories);
         }
-        else {
-
-        }
+//        else {
+//
+//        }
     }
     function render($action,$dataToSend=[])
     {

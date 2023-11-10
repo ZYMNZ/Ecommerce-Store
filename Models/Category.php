@@ -93,7 +93,7 @@ class Category {
             $category->category = $row['category'];
             return $category;
         } else {
-            return null;
+            return null; // No user found with the given email and password
         }
         // Close the statement and the database connection when done
         $stmt->close();

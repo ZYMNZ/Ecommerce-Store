@@ -24,9 +24,9 @@ include_once "Views/General/navbar.php";
         <input type="text" name="email" class="inputField width100Percent"> <br/>
         <label name="emailCheck" class="displayBlock displayNone invalidInputLabel"></label>
         <label class="hintLabel displayBlock denseHintLabel">Password:</label>
-        <input type="text" name="password" class="inputField width100Percent"> <br/>
+        <input type="password" name="password" class="inputField width100Percent"> <br/>
         <label class="hintLabel displayBlock denseHintLabel">Confirm Password:</label>
-        <input type="text" name="confirmPassword" class="inputField width100Percent"> <br/>
+        <input type="password" name="confirmPassword" class="inputField width100Percent"> <br/>
         <label class="invalidInputLabel displayBlock displayNone" name="notMatchingPasswordLabel">Passwords do not match.</label>
     </section>
 

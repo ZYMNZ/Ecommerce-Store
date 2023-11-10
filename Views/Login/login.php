@@ -10,8 +10,10 @@
     <body>
         <?php
             include_once "Views/General/navbar.php";
-        session_unset();
-        session_destroy();
+        if (session_status() == PHP_SESSION_ACTIVE) {
+            session_unset();
+            session_destroy();
+        }
         ?>
         <section>
             <header class="header">

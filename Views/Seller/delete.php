@@ -1,5 +1,8 @@
 <?php
 include_once "Views/General/session.php";
-sellerGroup();
+//sellerGroup();
+Product::deleteProduct($_GET['id']);
+header("Location: ?controller=seller&action=products");
+
 ?>
 <?php

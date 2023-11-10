@@ -1,18 +1,19 @@
 <?php
 include_once 'Models/Category.php';
+//remove controller
 class GeneralController {
     function route()
     {
         global $action;
         global $controllerPrefix;
 
-        if ($action == "category") {
+        /*if ($action == "category") {
             $categories = Category::listCategories();
             $this->render($action, $categories);
         } else if ($action == "navbar") {
             $this->render($action);
 
-        }
+        }*/
 
     }
 
