@@ -21,7 +21,7 @@ notSeller();
     include_once "Views/General/navbar.php";
     ?>
 </div>
-<form action="" method="post">
+<form action="?controller=product&action=submitProductCreation" method="post">
     <label>Title:<input class="form" type="text" name="title"></label><br>
     <label>Description:<textarea name="description" rows="2" cols="50"></textarea></label><br>
     <label>Price:<input class="form" type="text" name="price"></label><br>

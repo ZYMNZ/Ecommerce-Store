@@ -9,7 +9,7 @@ class User {
     private string $password = "";
     private string $description = "";
     private string $phoneNumber = "";
-    private int $groupId = -1;
+
 
     function __construct(
         $pUserId = -1,
@@ -18,8 +18,8 @@ class User {
         $pEmail = "",
         $pPassword = "",
         $pDescription = "",
-        $pPhoneNumber = "",
-        $pGroupId = -1
+        $pPhoneNumber = ""
+
     ) {
         $this->initializeProperties(
             $pUserId,
@@ -29,7 +29,7 @@ class User {
             $pPassword,
             $pDescription,
             $pPhoneNumber,
-            $pGroupId
+
         );
     }
 
@@ -41,8 +41,7 @@ class User {
         $pEmail,
         $pPassword,
         $pDescription,
-        $pPhoneNumber,
-        $pGroupId
+        $pPhoneNumber
     ) : void {
         if($pUserId < 0) {
             // Use default initialized variables if nothing was sent
@@ -56,7 +55,6 @@ class User {
             && strlen($pPassword) > 0
             && strlen($pDescription) > 0
             && strlen($pPhoneNumber) > 0
-            && $pGroupId > 0
         ) {
             // Initialize all the properties if all parameters were sent
             $this->userId = $pUserId;
@@ -66,7 +64,6 @@ class User {
             $this->password = $pPassword;
             $this->description = $pDescription;
             $this->phoneNumber = $pPhoneNumber;
-            $this->groupId = $pPhoneNumber;
         }
         else if($pUserId > 0) {
             // Initialize the instance variables using a SQL statement
@@ -95,7 +92,6 @@ class User {
                 $this->password = $queriedUserAssocRow["password"];
                 $this->description = $queriedUserAssocRow["description"];
                 $this->phoneNumber = $queriedUserAssocRow["phone_number"];
-                $this->groupId = $queriedUserAssocRow["group_id"];
             }
         }
     }
@@ -166,15 +162,7 @@ class User {
         $this->phoneNumber = $pPhoneNumber;
     }
 
-    public function getGroupId(): int
-    {
-        return $this->groupId;
-    }
 
-    public function setGroupId(int $pGroupId): void
-    {
-        $this->groupId = $pGroupId;
-    }
 
     public static function registerUser($pPostArray) : bool {
         // Newly registered user
@@ -196,10 +184,6 @@ class User {
         // In the database
 
 
-        // This ID is the ID for the buyer group
-        // We use this to insert the group ID in the User table for the
-        // New registered user row
-        $buyerGroupId = 3;
         $mySqliConnection = openDatabaseConnection();
         // Insert the user into the user table
         // That is in the database
@@ -209,22 +193,20 @@ class User {
             email, 
             password,
             description,
-            phone_number,
-            group_id) VALUES (?, ?, ?, ?, ?, ?, ?);";
+            phone_number) VALUES (?, ?, ?, ?, ?, ?);";
         $prepInsertNewUserQuery = $mySqliConnection->prepare(
             $insertNewUserQuery
         );
 
         $hashedPassword = md5($pPostArray["password"]);
         $prepInsertNewUserQuery->bind_param(
-            "ssssssi",
+            "ssssss",
             $pPostArray["firstName"],
             $pPostArray["lastName"],
             $pPostArray["email"],
             $hashedPassword,
             $pPostArray["description"],
-            $pPostArray["phoneNumber"],
-            $buyerGroupId
+            $pPostArray["phoneNumber"]
         );
 
         $insertUserIsSuccessful = $prepInsertNewUserQuery->execute();

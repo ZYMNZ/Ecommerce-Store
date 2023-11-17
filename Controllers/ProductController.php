@@ -25,9 +25,41 @@ class ProductController {
         } else if ($action == "view") {
             $product = new Product($_GET['id']);
             $this->render($action, [$product]);
-        } else {
+        }
+
+        //SELLER PRODUCTS
+        else if ($action == "sellerProduct") {
+            $products = Product::getProductsByUserId($_SESSION['user_id']);
+            $this->render($action, [$products]);
+        }
+        else if ($action == "createSellerProduct") {
+
+                $categories = Category::listCategories();
+                $this->render($action, $categories);
 
         }
+        else if($action == "submitProductCreation") {
+            if(isset($_POST["submit"])) {
+                $this->render($action);
+            }
+        }
+        else if ($action == "updateSellerProduct") {
+            if (isset($_POST['submit'])) {
+                Product::updateProduct($_SESSION['user_id'], $_POST['title'], $_POST['description'], $_POST['price'], $_GET['id']);
+                ProductCategory::updateProductCategory($_GET['id'], $_POST['category_id']);
+                header("Location: /?controller=product&action=updateSellerProduct");
+            } else {
+                $product = new Product($_GET['id']);
+                $productCategory = new ProductCategory($_GET['id']);
+                $categories = Category::listCategories();
+                $this->render($action, [$product, $productCategory, $categories]);
+            }
+        }
+        else if ($action == "deleteSellerProduct") {
+            $this->render($action);
+         }
+
+
 
     }
 

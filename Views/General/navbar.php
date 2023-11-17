@@ -126,7 +126,7 @@
                     if (isset($_SESSION['user_id']) && $_SESSION["group_id"][1] === 0) {
                         echo "<a href='/?controller=seller&action=register'>Register as a Seller</a>";
                     } else if ($_SESSION['user_id'] && $_SESSION["group_id"][1] === 1) {
-                        echo "<a href='/?controller=seller&action=products'>View your products</a>";
+                        echo "<a href='/?controller=product&action=sellerProduct'>View your products</a>";
                     }
                     ?>
                     <a href="/?controller=login&action=login">Logout</a>

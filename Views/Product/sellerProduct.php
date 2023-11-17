@@ -21,7 +21,7 @@ notSeller();
     include_once "Views/General/navbar.php";
     ?>
 </div>
-<button><a href='/?controller=seller&action=create'>Create</a></button>
+<button><a href='/?controller=product&action=createSellerProduct'>Create</a></button>
 <table>
     <?php
     /*    foreach ($dataToSend as $product) {
@@ -33,6 +33,8 @@ notSeller();
             echo "</tr>";
         }
         */?>
+
+    <div>
     <?php
 //    var_dump($dataToSend);
     foreach ($dataToSend[0] as $product) {
@@ -46,6 +48,7 @@ notSeller();
         echo "</div></tr>";
     }
     ?>
+    </div>
 </table>
 <?php
 include_once "Views/General/footer.php";

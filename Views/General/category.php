@@ -9,7 +9,7 @@ if ($action == "home" && $controllerPrefix == "home") {
     <section>
         <form id="category" action="/?controller=product&action=product" method="post">
             <select name="category"  class="categoryNavBar cursorPointer" required>
-                <option id="optionNone" value="None" selected disabled>None</option>
+                <option id="optionNone" value="None" selected disabled>Choose Category</option>
                 <?php
                 foreach ($categories as $category) {
                     echo "<option value='" . $category->getCategory() . "'>" . $category->getCategory() . "</option>";
