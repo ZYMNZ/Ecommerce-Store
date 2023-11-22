@@ -1,8 +1,8 @@
 <?php
 include_once "database.php";
 class ProductCategory {
-    private int $productId;
-    private int $categoryId;
+    private int $productId = -1;
+    private int $categoryId = -1;
 
     public function __construct(int $pProductId = -1, int $pCategoryId = -1) {
         self::initializeProperties($pProductId, $pCategoryId);
@@ -28,6 +28,7 @@ class ProductCategory {
     }
     private function initializeProperties(int $pProductId, int $pCategoryId) : void
     {
+
         if ($pProductId < 0) {
             // use the default initialization if nothing was sent in the param
             return;
@@ -38,6 +39,7 @@ class ProductCategory {
             $this->productId = $pProductId;
             $this->categoryId = $pCategoryId;
         } else if ($pProductId > 0){
+
             // initialize only if the Product id was sent
             $mySqlConnection = openDatabaseConnection();
             $sql = "SELECT * FROM product_category WHERE product_id = ?";

@@ -1,7 +1,9 @@
 <?php
 include_once 'Models/Category.php';
 include_once 'Models/Product.php';
+include_once "Models/ProductCategory.php";
 include_once 'Views/General/session.php';
+
 notLoggedIn();
 notUser();
 class ProductController {
@@ -10,13 +12,14 @@ class ProductController {
         global $action;
         global $controllerPrefix;
 
+        // To list all theproducts
         if ($action == "product") {
 //            var_dump($_POST['category']);
             if ($_POST['category'] != "None") {
 //                var_dump("inside");
                 $category = Category::getByCategoryName($_POST['category']);
                 if ($category == "None"){
-                    header();
+                    header("/?controller=home&action=home");
                 }
                 $products = Product::listProductsByCategory($category->getCategoryId());
                 $this->render($action, $products);
@@ -33,10 +36,8 @@ class ProductController {
             $this->render($action, [$products]);
         }
         else if ($action == "createSellerProduct") {
-
-                $categories = Category::listCategories();
-                $this->render($action, $categories);
-
+            $categories = Category::listCategories();
+            $this->render($action, $categories);
         }
         else if($action == "submitProductCreation") {
             if(isset($_POST["submit"])) {
@@ -44,23 +45,20 @@ class ProductController {
             }
         }
         else if ($action == "updateSellerProduct") {
-            if (isset($_POST['submit'])) {
-                Product::updateProduct($_SESSION['user_id'], $_POST['title'], $_POST['description'], $_POST['price'], $_GET['id']);
-                ProductCategory::updateProductCategory($_GET['id'], $_POST['category_id']);
-                header("Location: /?controller=product&action=updateSellerProduct");
-            } else {
-                $product = new Product($_GET['id']);
-                $productCategory = new ProductCategory($_GET['id']);
-                $categories = Category::listCategories();
-                $this->render($action, [$product, $productCategory, $categories]);
+            // Get the current product and its category associated with it
+            $product = new Product($_GET['id']);
+            $productCategory = new ProductCategory($_GET['id']);
+            $categories = Category::listCategories();
+            $this->render($action, [$product, $productCategory, $categories]);
+        }
+        else if($action == "submitProductUpdate") {
+            if(isset($_POST["submit"])) {
+                $this->render($action);
             }
         }
         else if ($action == "deleteSellerProduct") {
             $this->render($action);
          }
-
-
-
     }
 
     function render($action, $dataToSend = [])
