@@ -13,6 +13,8 @@ notSeller();
     <link rel="stylesheet" type="text/css" href="Views/styles/footer.css">
     <link rel="stylesheet" type="text/css" href="Views/styles/home.css">
     <link rel="stylesheet" type="text/css" href="Views/styles/product.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="Views/Product/scripts/validateProductTextFields.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -23,8 +25,11 @@ notSeller();
 </div>
 <form action="?controller=product&action=submitProductCreation" method="post">
     <label>Title:<input class="form" type="text" name="title"></label><br>
+    <label class="invalidInputLabel displayBlock displayNone" name="titleErrorLabel"></label>
     <label>Description:<textarea name="description" rows="2" cols="50"></textarea></label><br>
     <label>Price:<input class="form" type="text" name="price"></label><br>
+    <label class="invalidInputLabel displayBlock displayNone" name="emptyPriceErrorLabel"></label>
+    <label class="invalidInputLabel displayBlock displayNone" name="notANumberPriceErrorLabel"></label>
     <label>
         <select name="category"  class="categoryNavBar cursorPointer">
             <option id="optionNone" value="None" selected>None</option>
@@ -36,6 +41,7 @@ notSeller();
             ?>
         </select>
     </label>
+    <label class="invalidInputLabel displayBlock displayNone" name="categoryErrorLabel">Please choose a category</label>
     <label><input class="form" type="submit" name="submit"></label><br>
 </form>
 <?php

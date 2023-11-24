@@ -29,11 +29,10 @@ class ProductController {
             $product = new Product($_GET['id']);
             $this->render($action, [$product]);
         }
-
         //SELLER PRODUCTS
         else if ($action == "sellerProduct") {
             $products = Product::getProductsByUserId($_SESSION['user_id']);
-            $this->render($action, [$products]);
+            $this->render($action, $products);
         }
         else if ($action == "createSellerProduct") {
             $categories = Category::listCategories();

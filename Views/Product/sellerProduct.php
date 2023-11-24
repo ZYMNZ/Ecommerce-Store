@@ -37,16 +37,22 @@ notSeller();
     <div>
     <?php
 //    var_dump($dataToSend);
-    foreach ($dataToSend[0] as $product) {
-        echo "<tr><div class='product'>";
-        echo "<div class='title'>" . $product->getTitle() . "</div>";
-        echo "<div class='description'>" . $product->getDescription() . "</div>";
-        echo "<div class='price'>$" . $product->getPrice() . "</div>";
-        echo "<div><a href='/?controller=seller&action=view&id=" . $product->getProductId() . "' class='buy-button'>View</a></div>";
-        echo "<button><a href='/?controller=product&action=updateSellerProduct&id=" . $product->getProductId() . "' >Update</a></button>";
-        echo "<button><a href='/?controller=product&action=deleteSellerProduct&id=" . $product->getProductId() . "' >Delete</a></button>";
-        echo "</div></tr>";
-    }
+
+        if(count($dataToSend) > 0) {
+            foreach ($dataToSend[0] as $product) {
+                echo "<tr><div class='product'>";
+                echo "<div class='title'>" . $product->getTitle() . "</div>";
+                echo "<div class='description'>" . $product->getDescription() . "</div>";
+                echo "<div class='price'>$" . $product->getPrice() . "</div>";
+                echo "<div><a href='/?controller=seller&action=view&id=" . $product->getProductId() . "' class='buy-button'>View</a></div>";
+                echo "<button><a href='/?controller=product&action=updateSellerProduct&id=" . $product->getProductId() . "' >Update</a></button>";
+                echo "<button><a href='/?controller=product&action=deleteSellerProduct&id=" . $product->getProductId() . "' >Delete</a></button>";
+                echo "</div></tr>";
+            }
+        }
+
+
+
     ?>
     </div>
 </table>
