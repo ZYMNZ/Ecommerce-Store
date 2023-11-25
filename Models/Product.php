@@ -234,5 +234,10 @@ class Product{
         $mySqliConnection->close();
     }
 
+    public static function getUserName(){
+        $conn = openDatabaseConnection();
+        $sql = "Select user.first_name from product join user on product.user_id";
+    }
+
 
 }
