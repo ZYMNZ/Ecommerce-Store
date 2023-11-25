@@ -99,11 +99,12 @@ function setUpEventHandlers() {
             because we need to check the validity of the values
             inside the text fields
          */
+        /*
         event.preventDefault();
         // Check values inside the text fields before you submit the form
         var titleIsEmpty = checkTitleTextFieldEmpty();
         var priceIsEmpty = checkPriceTextFieldEmpty();
-        var priceIsNotANumber = checkPriceIsNotANumber();
+        var priceIsNotANumber = checkPriceIsNotANumber();*/
     }
     );
 }
