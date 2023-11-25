@@ -46,11 +46,11 @@ function checkPriceTextFieldEmpty() {
     return priceFieldIsEmpty;
 }
 
-function checkPriceIsNotANumber() {
+function checkPriceIsANumber() {
     var priceTextField = $("[name='price']");
     var notANumberPriceErrorLabel = $("[name='notANumberPriceErrorLabel']");
 
-    var isANumberRegEx = /^\d+$/;
+    var isANumberRegEx = /^\d+(\.\d+)?$/;
     var priceTextFieldValIsANumber = isANumberRegEx.test(priceTextField.val());
     if(priceTextFieldValIsANumber) {
         // Remove the error border and the error input label if the text inside the price text
@@ -94,17 +94,19 @@ function removeErrorInputLabel(inputTextLabel) {
 
 function setUpEventHandlers() {
     $("[name='submit']").click(function(event) {
-        /*
-            Prevent the submit from happening
-            because we need to check the validity of the values
-            inside the text fields
-         */
-        /*
-        event.preventDefault();
         // Check values inside the text fields before you submit the form
         var titleIsEmpty = checkTitleTextFieldEmpty();
         var priceIsEmpty = checkPriceTextFieldEmpty();
-        var priceIsNotANumber = checkPriceIsNotANumber();*/
+        var priceIsANumber = checkPriceIsANumber();
+
+        if(titleIsEmpty || priceIsEmpty || !priceIsANumber) {
+            /*
+            Prevent the submit from happening
+            if the values are wrong
+         */
+            event.preventDefault();
+            console.log("hello");
+        }
     }
     );
 }
