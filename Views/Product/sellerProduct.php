@@ -39,7 +39,7 @@ notSeller();
 //    var_dump($dataToSend);
 
         if(count($dataToSend) > 0) {
-            foreach ($dataToSend[0] as $product) {
+            foreach ($dataToSend as $product) {
                 echo "<tr><div class='product'>";
                 echo "<div class='title'>" . $product->getTitle() . "</div>";
                 echo "<div class='description'>" . $product->getDescription() . "</div>";
