@@ -40,12 +40,14 @@ body {
 /*Invalid input field border color*/
 .invalidInputField {
     border-color: red;
+
 }
 
 /*Invalid input label color*/
 .invalidInputLabel {
     color: red;
     margin-top: 5px;
+    margin-bottom: 10px;
 }
 
 .cursorPointer:hover {

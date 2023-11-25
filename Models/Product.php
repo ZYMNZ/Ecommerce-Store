@@ -180,9 +180,8 @@ class Product{
                 $product->price = $row['price'];
                 $products[] = $product;
             }
-            return $products;
         }
-        return null;
+        return $products;
     }
     public static function getLastProductCreatedByUser($pUserId): ?Product
     {
