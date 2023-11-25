@@ -33,14 +33,15 @@ function setUpEventHandlers() {
     // var registrationSignUpButton = $("[name='signUp']");
     var registrationForm = $("#registrationForm");
     registrationForm.on("submit", function(event) {
-        // Prevent form submission to check if the passwords match
-        event.preventDefault();
+
         var passwordsMatch = doPasswordsMatch();
         var emailValid = checkEmailValidation();
         // If the passwords match, submit the form
-        if(passwordsMatch && emailValid) {
-            // Remove the submit event before submitting
-            $(this).off("submit").submit();
+        console.log(passwordsMatch);
+        console.log(emailValid);
+        if(!passwordsMatch || !emailValid) {
+            // Prevent form submission to check if the passwords match
+            event.preventDefault();
         }
     });
 }
