@@ -229,8 +229,8 @@ class User {
         $buyerGroupId = 3;
         $mySqliConnection = openDatabaseConnection();
 
-        $insertNewUserInUserGrpQuery = "INSERT INTO `user_usergroup` (user_id,
-        usergroup_id) VALUES (?, ?);";
+        $insertNewUserInUserGrpQuery = "INSERT INTO `user_role` (user_id,
+        role_id) VALUES (?, ?);";
         $prepInsertNewUserInUserGrpQuery = $mySqliConnection->prepare($insertNewUserInUserGrpQuery);
         $prepInsertNewUserInUserGrpQuery->bind_param(
             "ii",

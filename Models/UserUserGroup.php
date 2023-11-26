@@ -40,7 +40,7 @@ class UserUserGroup {
         } else if ($pUserId > 0){
             // initialize only if the Product id was sent
             $mySqlConnection = openDatabaseConnection();
-            $sql = "SELECT * FROM user_usergroup WHERE user_id = ?";
+            $sql = "SELECT * FROM user_role WHERE user_id = ?";
             $stmt = $mySqlConnection->prepare($sql);
             $stmt->bind_param("i",$pUserId);
             $stmt->execute();
@@ -48,14 +48,14 @@ class UserUserGroup {
             if ($result->num_rows > 0){
                 $result = $result->fetch_assoc();
                 $this->userId = $pUserId;
-                $this->userGroupId = $result['usergroup_id'];
+                $this->userGroupId = $result['role_id'];
             }
         }
     }
     public static function permissions($pUserId): array
     {
         $mySqlConnection = openDatabaseConnection();
-        $sql = "SELECT * FROM user_usergroup WHERE user_id = ?";
+        $sql = "SELECT * FROM user_role WHERE user_id = ?";
         $stmt = $mySqlConnection->prepare($sql);
         $stmt->bind_param("i",$pUserId);
         $stmt->execute();
@@ -65,7 +65,7 @@ class UserUserGroup {
             while ($row = $results->fetch_assoc()){
                 $userUserGroup = new UserUserGroup();
                 $userUserGroup->userId = $pUserId;
-                $userUserGroup->userGroupId = $row['usergroup_id'];
+                $userUserGroup->userGroupId = $row['role_id'];
                 $permissions[] = $userUserGroup;
             }
         }
@@ -74,7 +74,7 @@ class UserUserGroup {
 
     public static function createUserUserGroup($pUserId, $pUserGroupId): void {
         $mySqliConnection = openDatabaseConnection();
-        $sql = "INSERT INTO user_usergroup (user_id, usergroup_id) VALUES (?, ?)";
+        $sql = "INSERT INTO user_role (user_id, role_id) VALUES (?, ?)";
         $stmt = $mySqliConnection->prepare($sql);
         $stmt->bind_param('ii', $pUserId, $pUserGroupId);
         $stmt->execute();
@@ -83,7 +83,7 @@ class UserUserGroup {
     }
     public static function updateUserUserGroup($pUserId, $pUserGroupId) {
         $mySqliConnection = openDatabaseConnection();
-        $sql = "UPDATE user_usergroup SET usergroup_id = ? WHERE user_id = ?";
+        $sql = "UPDATE user_role SET role_id = ? WHERE user_id = ?";
         $stmt = $mySqliConnection->prepare($sql);
         $stmt->bind_param('ii', $pUserId, $pUserGroupId);
         $stmt->execute();
@@ -92,7 +92,7 @@ class UserUserGroup {
     }
     public static function deleteUserUserGroup($pUserId) {
         $mySqliConnection = openDatabaseConnection();
-        $sql = "DELETE FROM user_usergroup WHERE user_id = ?";
+        $sql = "DELETE FROM user_role WHERE user_id = ?";
         $stmt = $mySqliConnection->prepare($sql);
         $stmt->bind_param('i', $pUserId);
         $stmt->execute();
