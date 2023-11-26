@@ -24,7 +24,6 @@ function doPasswordsMatch() {
         confirmPasswordErrorInputLabel.removeClass("displayNone");
 
     }
-
     return passwordsMatch;
 }
 

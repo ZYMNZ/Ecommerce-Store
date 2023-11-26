@@ -85,3 +85,23 @@ body {
 .form {
     margin: 10px;
 }
+
+.fontWeightBold {
+    font-weight: bold;
+}
+
+.textAlignCenter{
+    text-align: center;
+}
+
+.displayInlineBlock {
+    display: inline-block;
+}
+
+.displayInlineFlex {
+    display: inline-flex;
+}
+
+.justifyContentEnd {
+    justify-content: end;
+}

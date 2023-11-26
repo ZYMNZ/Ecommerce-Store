@@ -1,0 +1,46 @@
+.shoppingCartHeader {
+    font-size: 32px;
+    margin: 30px 30px 15px;
+}
+
+.cartItemBlock {
+    background-color: #d9d9d9;
+    width: 55%;
+    height: 40%;
+    margin-left: 30px;
+}
+
+.firstHalfCartItemBlock {
+    width: 55%;
+    vertical-align: top;
+
+}
+
+.secondHalfCartItemBlock {
+    width: 42%;
+}
+.categoryLabel {
+    padding: 21px 25px 20px;
+    font-size: 20px;
+
+}
+
+.cartItemExpandButton {
+    background-color: #717171;
+    border-radius: 50%;
+
+}
+
+.expandButtonContainer {
+    padding: 5% 0px 0px 84%;
+    padding: 5% 0px;
+}
+.expandArrow {
+    height: 40px;
+}
+
+.priceContainer {
+    padding-top: 17%;
+}
+
+
