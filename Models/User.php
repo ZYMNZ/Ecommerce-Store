@@ -230,6 +230,7 @@ class User {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
     public static function registerUser($pPostArray) : bool {
@@ -340,4 +341,6 @@ class User {
     }
 =======
 >>>>>>> b324fd404e5ed060621975df8b34602564d001eb
+=======
+>>>>>>> refs/remotes/origin/main
 }
