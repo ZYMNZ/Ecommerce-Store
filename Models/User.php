@@ -1,6 +1,7 @@
 <?php
 include_once "database.php";
-
+include_once 'Models/Role.php';
+include_once 'Models/UserRole.php';
 class User {
     private int $userId = -1;
     private string $firstName = "";
@@ -29,7 +30,6 @@ class User {
             $pPassword,
             $pDescription,
             $pPhoneNumber,
-
         );
     }
 
@@ -43,11 +43,7 @@ class User {
         $pDescription,
         $pPhoneNumber
     ) : void {
-        if($pUserId < 0) {
-            // Use default initialized variables if nothing was sent
-            // Through parameters
-            return;
-        }
+        if($pUserId < 0) return;
         else if($pUserId > 0
             && strlen($pFirstName) > 0
             && strlen($pLastName) > 0
@@ -66,34 +62,101 @@ class User {
             $this->phoneNumber = $pPhoneNumber;
         }
         else if($pUserId > 0) {
-            // Initialize the instance variables using a SQL statement
-            // If only the user id was sent
-            $mySqliConnection = openDatabaseConnection();
+            $this->getUserById($pUserId);
+        }
+    }
 
-            $getUserByIdQuery = "SELECT * FROM user WHERE user_id = ?;";
-            $prepGetUserByIdQuery = $mySqliConnection->prepare($getUserByIdQuery);
-            $prepGetUserByIdQuery->bind_param("i", $pUserId);
-            $prepGetUserByIdQuery->execute();
-            $getUserMySqliResult = $prepGetUserByIdQuery->get_result();
+    private function getUserById($pUserId): void
+    {
+        $dBConnection = openDatabaseConnection();
+        $sql = "SELECT * FROM user WHERE user_id = ?";
+        $stmt = $dBConnection->prepare($sql);
+        $stmt->bind_param('i', $pUserId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $result = $result->fetch_assoc();
+            $this->userId = $pUserId;
+            $this->firstName = $result["first_name"];
+            $this->lastName = $result["last_name"];
+            $this->email = $result["email"];
+            $this->password = $result["password"];
+            $this->description = $result["description"];
+            $this->phoneNumber = $result["phone_number"];
+        }
+    }
+    public static function getUserByEmailAndPassword($pEmail, $pPassword): ?User
+    {
+        $dBConnection = openDatabaseConnection();
+        $SQL = "SELECT * FROM user WHERE email = ? AND password = ?";
+        $stmt = $dBConnection->prepare($SQL);
+        $stmt->bind_param('ss', $pEmail, $pPassword);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $user = new User();
+            $result = $result->fetch_assoc();
+            $user->userId = $result['user_id'];
+            $user->firstName = $result['first_name'];
+            $user->lastName = $result['last_name'];
+            $user->email = $pEmail;
+            $user->password = $pPassword;
+            $user->description = $result['description'] || null;
+            $user->phoneNumber = $result['phone_number'] || null;
+            return $user;
+        }
+        return null;
+    }
 
-            if($getUserMySqliResult->num_rows > 0) {
-                // Get the my sqli result associated with the executed
-                // Prepared statement to fetch an associative row for
-                // The first user found to initialize a user object
-                // With user id specified
+    public static function registerUser($pPostArray) : ?bool
+    {
+        $results = self::createUser($pPostArray);
+        if($results["isSuccessful"]) {
+            $role = Role::getRoleByName('buyer');
+            return UserRole::createUserRole($results["newRegisteredUserId"], $role->getRoleId());
+        }
+        return null;
+    }
 
-                $queriedUserAssocRow = $getUserMySqliResult->fetch_assoc();
+    private static function createUser(array $postArray): array
+    {
+        $dBConnection = openDatabaseConnection();
 
-
-                $this->userId = $pUserId;
-                $this->firstName = $queriedUserAssocRow["first_name"];
-                $this->lastName = $queriedUserAssocRow["last_name"];
-                $this->email = $queriedUserAssocRow["email"];
-                $this->password = $queriedUserAssocRow["password"];
-                $this->description = $queriedUserAssocRow["description"];
-                $this->phoneNumber = $queriedUserAssocRow["phone_number"];
+        foreach ($postArray as $key => $value) {
+            if ($value === '') {
+                $postArray[$key] = null;
             }
         }
+
+        $sql = "INSERT INTO user (first_name, last_name, email, password, description, phone_number) VALUES (?, ?, ?, md5(?), ?, ?)";
+        $stmt = $dBConnection->prepare($sql);
+        $stmt->bind_param('ssssss',
+            $postArray['firstName'],
+            $postArray['lastName'],
+            $postArray['email'],
+            $postArray['password'],
+            $postArray['description'],
+            $postArray['phoneNumber']);
+        $isSuccessful = $stmt->execute();
+        $userId = $dBConnection->insert_id;
+        $stmt->close();
+        $dBConnection->close();
+        return [
+            'isSuccessful' => $isSuccessful,
+            'newRegisteredUserId' => $userId
+        ];
+    }
+
+    public static function updatePersonalInfo(array $postFields): bool
+    {
+        $dBConnection = openDatabaseConnection();
+        $sql = "UPDATE user SET first_name = ?, last_name = ?, email = ?, password = md5(?), description = ?, phone_number = ? WHERE user_id = ?";
+        $stmt = $dBConnection->prepare($sql);
+        $stmt->bind_param('ssssssi', ...$postFields);
+        $isSuccessful = $stmt->execute();
+        $stmt->close();
+        $dBConnection->close();
+        return $isSuccessful;
     }
 
     public function getUserId(): int
@@ -101,15 +164,19 @@ class User {
         return $this->userId;
     }
 
+    public function setUserId(int $userId): void
+    {
+        $this->userId = $userId;
+    }
 
     public function getFirstName(): string
     {
         return $this->firstName;
     }
 
-    public function setFirstName(string $pFirstName): void
+    public function setFirstName(string $firstName): void
     {
-        $this->firstName = $pFirstName;
+        $this->firstName = $firstName;
     }
 
     public function getLastName(): string
@@ -117,9 +184,9 @@ class User {
         return $this->lastName;
     }
 
-    public function setLastName(string $pLastName): void
+    public function setLastName(string $lastName): void
     {
-        $this->lastName = $pLastName;
+        $this->lastName = $lastName;
     }
 
     public function getEmail(): string
@@ -127,9 +194,9 @@ class User {
         return $this->email;
     }
 
-    public function setEmail(string $pEmail): void
+    public function setEmail(string $email): void
     {
-        $this->email = $pEmail;
+        $this->email = $email;
     }
 
     public function getPassword(): string
@@ -137,9 +204,9 @@ class User {
         return $this->password;
     }
 
-    public function setPassword(string $pPassword): void
+    public function setPassword(string $password): void
     {
-        $this->password = $pPassword;
+        $this->password = $password;
     }
 
     public function getDescription(): string
@@ -147,9 +214,9 @@ class User {
         return $this->description;
     }
 
-    public function setDescription(string $pDescription): void
+    public function setDescription(string $description): void
     {
-        $this->description = $pDescription;
+        $this->description = $description;
     }
 
     public function getPhoneNumber(): string
@@ -157,118 +224,9 @@ class User {
         return $this->phoneNumber;
     }
 
-    public function setPhoneNumber(string $pPhoneNumber): void
+    public function setPhoneNumber(string $phoneNumber): void
     {
-        $this->phoneNumber = $pPhoneNumber;
+        $this->phoneNumber = $phoneNumber;
     }
 
-
-
-    public static function registerUser($pPostArray) : bool {
-        // Newly registered user
-        $insertQueryResults = self::insertUserIntoDatabase($pPostArray);
-
-        $insertUserInUserGrpIsSuccessful = false;
-        if($insertQueryResults["insertUserIsSuccessful"]) {
-            // We insert the new user in the user group associative table (user_usergroup)
-            // Because the user is related to a user group
-            $insertUserInUserGrpIsSuccessful = self::insertUserInUserGrpAssocTable($insertQueryResults["newRegisteredUserId"]);
-        }
-
-        return $insertUserInUserGrpIsSuccessful;
-    }
-
-
-    private static function insertUserIntoDatabase($pPostArray) : array {
-        // This function is used in register.php to insert the newly registered user
-        // In the database
-
-
-        $mySqliConnection = openDatabaseConnection();
-        // Insert the user into the user table
-        // That is in the database
-
-        $insertNewUserQuery = "INSERT INTO `user` (first_name, 
-            last_name, 
-            email, 
-            password,
-            description,
-            phone_number) VALUES (?, ?, ?, ?, ?, ?);";
-        $prepInsertNewUserQuery = $mySqliConnection->prepare(
-            $insertNewUserQuery
-        );
-
-        $hashedPassword = md5($pPostArray["password"]);
-        $prepInsertNewUserQuery->bind_param(
-            "ssssss",
-            $pPostArray["firstName"],
-            $pPostArray["lastName"],
-            $pPostArray["email"],
-            $hashedPassword,
-            $pPostArray["description"],
-            $pPostArray["phoneNumber"]
-        );
-
-        $insertUserIsSuccessful = $prepInsertNewUserQuery->execute();
-        // Return the new registered user ID generated by auto_increment
-        // Because we need it to insert the user into the associative table
-        $newRegisteredUserId = $mySqliConnection->insert_id;
-        $insertQueryResults = array(
-            "insertUserIsSuccessful" => $insertUserIsSuccessful,
-            "newRegisteredUserId" => $newRegisteredUserId
-        );
-
-        return $insertQueryResults;
-    }
-
-
-    private static function insertUserInUserGrpAssocTable($pUserId) : bool {
-        /* Insert the user into the user_usergroup associative table
-        Because the newly registered user is in the buyer user group by default
-        */
-        $buyerGroupId = 3;
-        $mySqliConnection = openDatabaseConnection();
-
-        $insertNewUserInUserGrpQuery = "INSERT INTO `user_usergroup` (user_id,
-        usergroup_id) VALUES (?, ?);";
-        $prepInsertNewUserInUserGrpQuery = $mySqliConnection->prepare($insertNewUserInUserGrpQuery);
-        $prepInsertNewUserInUserGrpQuery->bind_param(
-            "ii",
-            $pUserId,
-            $buyerGroupId
-        );
-
-        // Return a bool if the insert query was successful or not
-        // Because the registerUser returns a bool to determine whether it was successful or not
-        $insertUserInUserGrpIsSuccessful = $prepInsertNewUserInUserGrpQuery->execute();
-
-        return $insertUserInUserGrpIsSuccessful;
-    }
-
-    public static function getUserByEmailAndPassword($pEmail, $pPassword): ?User
-    {
-        $mySqliConnection = openDatabaseConnection();
-        $SQL = "SELECT * FROM user WHERE email = ? AND password = ?";
-        $stmt = $mySqliConnection->prepare($SQL);
-        $stmt->bind_param('ss', $pEmail, $pPassword);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        if ($result->num_rows > 0) {
-            $result = $result->fetch_assoc();
-            $user = new User();
-            $user->userId = $result['user_id'];
-            $user->firstName = $result['first_name'];
-            $user->lastName = $result['last_name'];
-            $user->email = $pEmail;
-            $user->password = $pPassword;
-            $user->description = $result['description'] ? $result['description'] : '';
-            $user->phoneNumber = $result['phone_number'] ? $result['phone_number'] : '';
-            return $user;
-        }
-        // Close the statement and the database connection when done
-        $stmt->close();
-        $mySqliConnection->close();
-        return null;
-    }
 }
-?>

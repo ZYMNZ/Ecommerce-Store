@@ -2,23 +2,30 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-function notLoggedIn() {
+function notLoggedIn(): void
+{
     if (!isset($_SESSION['user_id'])) {
         header("Location: /?controller=login&action=login");
     }
 }
-function notAdmin() {
-    if (isset($_SESSION["group_id"]) && $_SESSION["group_id"][0] === 0) { //admin
+
+function notAdmin(): void
+{
+    if (isset($_SESSION["userRoles"]) && !in_array('admin', $_SESSION["userRoles"], true)) { //admin
         header("Location: /?controller=login&action=login");
     }
 }
-function notSeller() {
-    if (isset($_SESSION["group_id"]) && $_SESSION["group_id"][1] === 0) { //seller
+
+function notSeller(): void
+{
+    if (isset($_SESSION["userRoles"]) && !in_array('seller', $_SESSION["userRoles"], true)) { //seller
         header("Location: /?controller=home&action=home");
     }
 }
-function notUser() {
-    if (isset($_SESSION["group_id"]) && $_SESSION["group_id"][2] === 0) { //user
+
+function notUser(): void
+{
+    if (isset($_SESSION["userRoles"]) && !in_array('buyer', $_SESSION["userRoles"], true)) { //user
         header("Location: /?controller=login&action=login");
     }
 }

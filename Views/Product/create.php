@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Create</title>
     <link rel="stylesheet" type="text/css" href="Views/styles/generalstyles.css">
