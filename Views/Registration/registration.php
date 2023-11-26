@@ -1,4 +1,4 @@
-<html>
+<html lang="en">
 <head>
     <title>Registration</title>
     <!--Keep general styles css file at the top to let sub css files override the general one-->

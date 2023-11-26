@@ -4,7 +4,7 @@ notLoggedIn();
 notUser();
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Home</title>
     <link rel="stylesheet" type="text/css" href="Views/styles/generalstyles.css">
@@ -33,7 +33,7 @@ notUser();
             <label><?php echo $dataToSend[0]-> getTitle() ?></label>
         </div>
         <div class="cart">
-            <a href="?controller=&action=">
+            <a href="?controller=product&action=cart">
                 <img src="Views/images/cart.png" class="cartImage">
             </a>
         </div>

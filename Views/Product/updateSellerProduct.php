@@ -4,7 +4,7 @@ notLoggedIn();
 notSeller();
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Update</title>
     <link rel="stylesheet" type="text/css" href="Views/styles/generalstyles.css">
