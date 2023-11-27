@@ -12,7 +12,7 @@ notUser();
     <link rel="stylesheet" type="text/css" href="Views/styles/login.css">
     <link rel="stylesheet" type="text/css" href="Views/styles/footer.css">
     <link rel="stylesheet" type="text/css" href="Views/styles/home.css">
-    <link rel="stylesheet" type="text/css" href="Views/styles/product.css">
+    <link rel="stylesheet" type="text/css" href="Views/styles/productview.css">
 </head>
 <body>
 <div class="navbar">
@@ -39,7 +39,13 @@ notUser();
         </div>
     </section>
 
-    <label><?php $dataToSend[0]->getName?></label>
+    <div class="creatorName">
+        <label><?php echo $dataToSend[0]->getUserName()?> Conan Edugawa</label>
+    </div>
+
+    <div class="productImageDIV">
+        <img src="Views/images/java.png" rel="JAVA IMAGE" class="productImage">
+    </div>
 
 </body>
 </html>
