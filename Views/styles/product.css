@@ -72,26 +72,6 @@ body {
     }
 }
 
-.TopSection{
-    justify-content: space-between;
-    display: inline-flex;
-    width: 100%;
-    margin-top: 5%;
-}
 
-.cartImage{
-    height: 30px;
-}
-
-.cart{
-    position: relative;
-    right: 7%;
-    top: 3%;
-}
-.title{
-    position: relative;
-    left: 10%;
-    top: 3%;
-}
 
 

@@ -1,0 +1,50 @@
+.navbar {
+    background-color: #331E6D;
+    color: #fff;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    top: 0;
+}
+
+.TopSection{
+    justify-content: space-between;
+    display: inline-flex;
+    width: 100%;
+    margin-top: 5%;
+    align-items: center
+}
+
+.cartImage{
+    height: 30px;
+}
+
+.cart{
+    position: relative;
+    right: 7%;
+    top: 3%;
+}
+.title{
+    position: relative;
+    left: 10%;
+    top: 3%;
+    font-size: 30px;
+    font-weight: bold;
+    background-color: #d9d9d9;
+    padding: 10px 80px;
+}
+
+.creatorName{
+    margin: 20px 12%;
+    width: fit-content;
+    font-size: large;
+}
+
+.productImageDIV{
+    /*width: fit-content;*/
+    display: contents;
+}
+
+.productImage{
+    width: 38vw;
+}
