@@ -100,4 +100,6 @@ textarea{
     height: 8%;
     background-color: black;
     border-radius: 8px;
+    border-color: royalblue;
+    border-width: 4px
 }
