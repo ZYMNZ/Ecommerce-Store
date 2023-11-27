@@ -142,13 +142,19 @@
 
                 ?>
                 <div class="dropdown-content">
-                    <a href="#">Personal Info</a>
+                    <a href='/?controller=user&action=personalDetails'>Personal Info</a>
                     <?php
-//                    var_dump($_SESSION['group_id'][1]);
-                    if (isset($_SESSION['user_id']) && $_SESSION["group_id"][1] === 0) {
+                    //                    var_dump($_SESSION['group_id'][1]);
+                    if (isset($_SESSION['user_id']) && !in_array('seller', $_SESSION["userRoles"], true)) {
                         echo "<a href='/?controller=seller&action=register'>Register as a Seller</a>";
-                    } else if ($_SESSION['user_id'] && $_SESSION["group_id"][1] === 1) {
+                    } else if ($_SESSION['user_id'] && in_array('seller', $_SESSION["userRoles"], true)) {
                         echo "<a href='/?controller=product&action=sellerProduct'>View your products</a>";
+                    }
+                    if ($_SESSION['user_id'] && in_array('admin', $_SESSION["userRoles"], true))
+                    {
+                    ?>
+                        <a href="/?controller=user&action=admin">Admin</a>
+                    <?php
                     }
                     ?>
                     <a href="/?controller=login&action=login">Logout</a>

@@ -59,6 +59,27 @@ class UserRole
         return null;
     }
 
+    public static function getUserByRoleId($pRoleId): ?array
+    {
+        $dBConnection = openDatabaseConnection();
+        $sql = "SELECT * FROM user_role WHERE role_id = ?";
+        $stmt = $dBConnection->prepare($sql);
+        $stmt->bind_param("i", $pRoleId);
+        $stmt->execute();
+        $results = $stmt->get_result();
+        $userRoles = [];
+        if ($results->num_rows > 0) {
+            while ($row = $results->fetch_assoc()) {
+                $userRole = new UserRole();
+                $userRole->userId = $row['user_id'];
+                $userRole->roleId = $pRoleId;
+                $userRoles[] = $userRole;
+            }
+            return $userRoles;
+        }
+        return null;
+    }
+
     public static function createUserRole($pUserId, $pRoleId): bool
     {
         $dBConnection = openDatabaseConnection();

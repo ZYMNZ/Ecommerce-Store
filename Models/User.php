@@ -81,8 +81,8 @@ class User {
             $this->lastName = $result["last_name"];
             $this->email = $result["email"];
             $this->password = $result["password"];
-            $this->description = $result["description"];
-            $this->phoneNumber = $result["phone_number"];
+            $this->description = strlen($result["description"]) > 0 ? $result["description"] : '';
+            $this->phoneNumber = strlen($result["phone_number"]) > 0 ? $result["phone_number"] : '';
         }
     }
     public static function getUserByEmailAndPassword($pEmail, $pPassword): ?User
@@ -147,12 +147,21 @@ class User {
         ];
     }
 
-    public static function updatePersonalInfo(array $postFields): bool
+    public static function updatePersonalInfo(?string $pFirstName, ?string $pLastName, ?string $pEmail, ?string $pPassword, ?string $pDescription, ?string $pPhoneNumber, ?string $pUserId): bool
     {
+        var_dump($pLastName, gettype($pLastName));
         $dBConnection = openDatabaseConnection();
         $sql = "UPDATE user SET first_name = ?, last_name = ?, email = ?, password = md5(?), description = ?, phone_number = ? WHERE user_id = ?";
         $stmt = $dBConnection->prepare($sql);
-        $stmt->bind_param('ssssssi', ...$postFields);
+        $stmt->bind_param('ssssssi',
+            $pFirstName,
+            $pLastName,
+            $pEmail,
+            $pPassword,
+            $pDescription,
+            $pPhoneNumber,
+            $pUserId
+        );
         $isSuccessful = $stmt->execute();
         $stmt->close();
         $dBConnection->close();
