@@ -1,3 +1,9 @@
+.wrapper{
+    display: flex;
+    height: 100vh;
+    flex-wrap: wrap;
+}
+
 .shoppingCartHeader {
     font-size: 32px;
     margin: 30px 30px 15px;
@@ -5,7 +11,7 @@
 
 .cartItemBlock {
     background-color: #d9d9d9;
-    width: 55%;
+    /*width: 100%;*/
     height: 40%;
     margin-left: 30px;
 }
@@ -43,4 +49,55 @@
     padding-top: 17%;
 }
 
+.productTitle {
+    padding-left: 23px;
+}
 
+.requestService{
+    padding-left: 23px;
+}
+
+textarea{
+    width: 487px;
+    height: 124px;
+    resize: none;
+}
+
+.textAreaDiv{
+    padding: 5px 22px;
+}
+
+/* Side Section*/
+
+.sidePriceSection{
+
+}
+
+.priceContainerBlock{
+    background-color: #d9d9d9;
+    width: 280px;
+    height: 400px;
+    right: 2%;
+    top: 15%;
+    position: fixed;
+    float: right;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.subTotal, .estimatedTax, .totalPrice{
+    position: relative;
+    justify-content: space-between;
+    display: flex;
+}
+
+.totalPrice{
+    top: 70%;
+}
+
+.confirmButton{
+    width: 100%;
+    height: 8%;
+    background-color: black;
+    border-radius: 8px;
+}
