@@ -10,9 +10,8 @@ class ProductController {
     function route()
     {
         global $action;
-        global $controllerPrefix;
 
-        // To list all theproducts
+        // To list all the products
         if ($action == "product") {
 //            var_dump($_POST['category']);
             if ($_POST['category'] != "None") {

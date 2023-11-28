@@ -7,7 +7,7 @@ class HomeController{
     function route()
     {
         global $action;
-        global $controllerPrefix;
+
         if ($action == "home"){
             $categories = Category::listCategories();
             $this->render($action, $categories);

@@ -5,7 +5,6 @@ class GeneralController {
     function route()
     {
         global $action;
-        global $controllerPrefix;
 
         /*if ($action == "category") {
             $categories = Category::listCategories();

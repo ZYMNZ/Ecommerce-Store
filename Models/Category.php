@@ -73,7 +73,6 @@ class Category {
             $category->categoryId = $row['category_id'];
             $category->category = $row['category'];
             $categories[] = $category;
-
         }
         return $categories;
     }
