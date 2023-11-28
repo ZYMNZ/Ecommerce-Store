@@ -1,10 +1,6 @@
 <?php
-include_once "Views/General/session.php";
-notLoggedIn();
-notUser();
-
+include_once 'Views/General/session.php';
 ?>
-
 <html>
     <head>
         <title>Home</title>
@@ -20,6 +16,9 @@ notUser();
     <body>
         <?php
             include_once "Views/General/navbar.php";
+           /* session_unset();
+            session_destroy();*/
+        var_dump(session_status());
         ?>
         <div class="wrapper">
             <section id="heroSection">

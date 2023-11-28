@@ -15,6 +15,8 @@
             session_unset();
             session_destroy();
         }
+        var_dump(session_status());
+
         ?>
         <section>
             <header class="header">

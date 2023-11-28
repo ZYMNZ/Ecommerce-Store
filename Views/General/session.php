@@ -5,14 +5,14 @@ if (session_status() === PHP_SESSION_NONE) {
 function notLoggedIn(): void
 {
     if (!isset($_SESSION['user_id'])) {
-        header("Location: /?controller=login&action=login");
+        header("Location: /?controller=home&action=home");
     }
 }
 
 function notAdmin(): void
 {
     if (isset($_SESSION["userRoles"]) && !in_array('admin', $_SESSION["userRoles"], true)) { //admin
-        header("Location: /?controller=login&action=login");
+        header("Location: /?controller=home&action=home");
     }
 }
 
@@ -26,6 +26,6 @@ function notSeller(): void
 function notUser(): void
 {
     if (isset($_SESSION["userRoles"]) && !in_array('buyer', $_SESSION["userRoles"], true)) { //user
-        header("Location: /?controller=login&action=login");
+        header("Location: /?controller=home&action=home");
     }
 }

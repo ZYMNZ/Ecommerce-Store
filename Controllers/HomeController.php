@@ -1,8 +1,5 @@
 <?php
 include_once 'Models/Category.php';
-include_once 'Views/General/session.php';
-notLoggedIn();
-notUser();
 class HomeController{
     function route()
     {

@@ -95,19 +95,21 @@
                 global $action;
                 global $controllerPrefix;
                 if ($controllerPrefix="home" &&$action == "home"){
-        ?><!--
+        ?>
                     <section>
                         <a href="/?controller=login&action=login">
                             <input type="button" value="Sign in" class=" defaultButtonStyling cursorPointer borderNone navBarButton signButtons">
                         </a>
                     </section>
--->
+
         <?php
                 }
             }
         ?>
         <?php
+        if (session_status() == PHP_SESSION_NONE) {
             addSignInButtonNavBar();
+        }
         ?>
 
 
@@ -129,10 +131,12 @@
 
 
         <?php
+        if ($controllerPrefix !== "home" && $action !== "home") {
             addCartButton();
+        }
         ?>
         <?php
-        if (session_status() == PHP_SESSION_ACTIVE) {
+        if (isset($_SESSION["userRoles"]) && in_array('buyer', $_SESSION["userRoles"], true)) {
         ?>
             <div class="dropdown">
                 <?php
