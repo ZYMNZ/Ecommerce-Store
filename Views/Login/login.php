@@ -9,7 +9,7 @@
     </head>
     <body>
         <?php
-        var_dump(md5('arsh'));
+//        var_dump(md5('arsh'));
             include_once "Views/General/navbar.php";
         if (session_status() == PHP_SESSION_ACTIVE) {
             session_unset();

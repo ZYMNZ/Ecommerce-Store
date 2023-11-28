@@ -67,9 +67,12 @@ class Role
 
     public static function convertRoleIdsToRoleNames(array $pRoleIds): ?array
     {
+//        var_dump("before hello");
         if (!$pRoleIds) return null;
+//        var_dump($pRoleIds);
         $roleNames = [];
         foreach ($pRoleIds as $pRoleId) {
+
             $role = new Role($pRoleId->getRoleId());
             $roleNames[] = $role->getRoleName();
         }
