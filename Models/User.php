@@ -238,7 +238,7 @@ class User {
         return $isSuccessful;
     }
 
-    public static function deleteUser ($pUserId) : ?array
+    public static function deleteUser ($pUserId) : bool
     {
         $conn = openDatabaseConnection();
         $sqlQuery = "DELETE FROM `user` WHERE user_id = ?";
@@ -247,19 +247,16 @@ class User {
         $isDeleted = $prepareStmt->execute();
 
         if ($isDeleted){
-            return [
-                "isDeleted" => $isDeleted
-            ];
+            return true;
         }
-        return null;
+        return false;
     }
 
-    public static function deleteUserFromUserRole($pUserId){
-        var_dump($pUserId);
-        $result = self::deleteUser($pUserId);
-        var_dump($result);
-//        if ($result)
-    }
+//    public static function deleteUserFromUserRole($pUserId){
+//        var_dump($pUserId);
+//        $result = self::deleteUser($pUserId);
+//        var_dump($result);
+//    }
 
 
 }
