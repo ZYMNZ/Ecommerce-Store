@@ -5,9 +5,9 @@ include_once 'Models/Role.php';
 $user = User::getUserByEmailAndPassword($_POST['email'], md5($_POST['password']));
 if (!$user) header("Location: /?controller=login&action=login");
 $permissions = UserRole::getUserRoles($user->getUserId());
-if (!$permissions) header("Location: /?controller=login&action=login");
+if (count($permissions) == 0) header("Location: /?controller=login&action=login");
 session_start();
-//$_SESSION["userRoles"] = Role::convertRoleIdsToRoleNames([$permissions]);  //it says u are sending null !!
+$_SESSION["userRoles"] = Role::convertRoleIdsToRoleNames($permissions);  //it says u are sending null !!
 var_dump($_SESSION["userRoles"]); // this already have 'buyer'
 $_SESSION["user_id"] = $user->getUserId();
 if (in_array('buyer', $_SESSION["userRoles"], true)) {

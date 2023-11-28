@@ -54,9 +54,8 @@ class UserRole
                 $userRole->roleId = $row['role_id'];
                 $permissions[] = $userRole;
             }
-            return $permissions;
         }
-        return null;
+        return $permissions;
     }
 
     public static function getUserByRoleId($pRoleId): ?array

@@ -72,7 +72,6 @@ class Role
 //        var_dump($pRoleIds);
         $roleNames = [];
         foreach ($pRoleIds as $pRoleId) {
-
             $role = new Role($pRoleId->getRoleId());
             $roleNames[] = $role->getRoleName();
         }
