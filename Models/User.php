@@ -241,11 +241,10 @@ class User {
     public static function deleteUser ($pUserId) : bool
     {
         $conn = openDatabaseConnection();
-        $sqlQuery = "DELETE FROM `user` WHERE user_id = ?";
+        $sqlQuery = "DELETE FROM user WHERE user_id = ?";
         $prepareStmt = $conn->prepare($sqlQuery);
         $prepareStmt->bind_param("i",$pUserId);
         $isDeleted = $prepareStmt->execute();
-
         if ($isDeleted){
             return true;
         }

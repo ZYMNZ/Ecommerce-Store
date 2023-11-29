@@ -9,6 +9,6 @@
 
 <?php
 include_once 'Views/General/modal.php';
-modal('deleteSeller', $id);
+modal('deleteBuyer', $id);
 include_once "Views/General/footer.php";
 ?>

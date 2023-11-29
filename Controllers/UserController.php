@@ -48,6 +48,10 @@ class UserController
         } else if ($action == "updateBuyer") {
             noAccess($_SESSION['user_id'], $_SESSION['userRoles'], 'admin');
             $this->render($action);
+
+        } else if ($action == "deleteSeller") {
+            noAccess($_SESSION['user_id'], $_SESSION['userRoles'], 'admin');
+            $this->render($action);
         }
     }
 

@@ -17,8 +17,8 @@ global $action, $controllerPrefix;
         <section id="logo" class="height100Percent"> <a href="?controller=home&action=home"><img src="Views/images/logo2.png"></a></section>
         <!-- adding categories  -->
         <?php
-        if (($controllerPrefix !== "home" && $action !== "home") ||
-            ($controllerPrefix !== "product" && $action !== "product")) {
+        if (($controllerPrefix === "home" && $action === "home") ||
+            ($controllerPrefix === "product" && $action === "product")) {
             include_once "Views/General/category.php";
         }
         if (!isset($_SESSION['user_id']) && ($controllerPrefix !== "login" && $action !== "login") && ($controllerPrefix !== "registration" && $action !== "registration"))
@@ -43,13 +43,13 @@ global $action, $controllerPrefix;
             </section>
             <?php
         }
-//        echo "<p>" . isset($_SESSION['user_id']) . "</p>";
+        //        echo "<p>" . isset($_SESSION['user_id']) . "</p>";
         if (isset($_SESSION['user_id'])) {
-        ?>
+            ?>
             <!-- adding account icon  -->
             <div class="dropdown">
                 <?php
-                    echo " <img id='account' src='Views/images/account.png''>";
+                echo " <img id='account' src='Views/images/account.png''>";
                 ?>
                 <div class="dropdown-content">
                     <a href='/?controller=user&action=personalDetails'>Personal Info</a>
@@ -61,15 +61,15 @@ global $action, $controllerPrefix;
                     }
                     if ($_SESSION['user_id'] && in_array('admin', $_SESSION["userRoles"], true))
                     {
-                    ?>
+                        ?>
                         <a href="/?controller=user&action=admin">Admin</a>
-                    <?php
+                        <?php
                     }
                     ?>
                     <a href="/?controller=login&action=login">Logout</a>
                 </div>
             </div>
-        <?php
+            <?php
         }
         ?>
     </section>

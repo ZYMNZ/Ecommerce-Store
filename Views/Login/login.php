@@ -15,7 +15,6 @@ session_destroy();
     <body>
     <?php
     include_once 'Views/General/navbar.php';
-    var_dump($_SESSION);
     ?>
         <section>
             <header class="header">

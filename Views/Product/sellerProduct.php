@@ -1,7 +1,5 @@
 <?php
 include_once "Views/General/session.php";
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,8 +34,6 @@ include_once "Views/General/session.php";
 
     <div>
     <?php
-//    var_dump($dataToSend);
-
         if(count($dataToSend) > 0) {
             foreach ($dataToSend as $product) {
                 echo "<tr><div class='product'>";
@@ -50,9 +46,6 @@ include_once "Views/General/session.php";
                 echo "</div></tr>";
             }
         }
-
-
-
     ?>
     </div>
 </table>
