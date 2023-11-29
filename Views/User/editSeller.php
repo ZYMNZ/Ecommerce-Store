@@ -17,37 +17,37 @@
 </head>
 <body>
 
-    <label>Admin</label>
+<label>Admin</label>
+<br>
+<br>
+<form action="/?controller=user&action=updateSeller&id= <?php $_GET['id'] ?>" method="POST">
+    <label>FirstName
+        <input type="text" name="firstName" value="<?php echo data['user']->getFirstName() ?>">
+    </label>
     <br>
+    <label>LastName
+        <input type="text" name="lasttName" value="<?php echo data['user']->getLastName() ?>">
+    </label>
     <br>
-    <form action="/?controller=user&action=updateSeller&id= <?php $_GET['id'] ?>" method="POST">
-        <label>FirstName
-            <input type="text" name="firstName" value="<?php echo data['user']->getFirstName() ?>">
-        </label>
-        <br>
-        <label>LastName
-            <input type="text" name="lasttName" value="<?php echo data['user']->getLastName() ?>">
-        </label>
-        <br>
-        <label>Email
-            <input type="text" name="email" value="<?php echo data['user']->getEmail() ?>">
-        </label>
-        <br>
-        <label>Description
-            <input type="text" name="description" value="<?php echo data['user']->getDescription() ?>">
-        </label>
-        <br>
-        <label>PhoneNumber
-            <input type="text" name="phoneNumber" value="<?php echo data['user']->getPhoneNumber() ?>">
-        </label>
-        <br>
+    <label>Email
+        <input type="text" name="email" value="<?php echo data['user']->getEmail() ?>">
+    </label>
+    <br>
+    <label>Description
+        <input type="text" name="description" value="<?php echo data['user']->getDescription() ?>">
+    </label>
+    <br>
+    <label>PhoneNumber
+        <input type="text" name="phoneNumber" value="<?php echo data['user']->getPhoneNumber() ?>">
+    </label>
+    <br>
 
-        <input name="submit" type="submit" value="Update">
-    </form>
+    <input name="submit" type="submit" value="Update">
+</form>
 
-    <?php
-    include_once "Views/General/footer.php";
-    ?>
+<?php
+include_once "Views/General/footer.php";
+?>
 </body>
 </html>
 

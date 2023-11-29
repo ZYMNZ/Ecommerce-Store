@@ -1,3 +1,4 @@
+
 <?php
 $userInfo = new User($_GET['id']);
 $isSuccessful = User::updatePersonalInfo(
@@ -10,3 +11,4 @@ $isSuccessful = User::updatePersonalInfo(
     $_GET['id']
 );
 header('Location: /?controller=user&action=viewSellers');
+
