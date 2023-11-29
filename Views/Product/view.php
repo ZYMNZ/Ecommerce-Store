@@ -1,7 +1,5 @@
 <?php
 include_once "Views/General/session.php";
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
