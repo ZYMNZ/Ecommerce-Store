@@ -4,24 +4,19 @@ include_once "database.php";
         private int $reviewId;
         private int $productId;
         private int $userId;
-
-
         private string $review;
-        private int $numStars;
 
         function __construct(
             $pReviewId = -1,
             $pProductId = -1,
             $pUserId = -1,
-            $pReview = "",
-            $pNumStars = -1
+            $pReview = ""
         ) {
             $this->initializeProperties(
                 $pReviewId,
                 $pProductId,
                 $pUserId,
-                $pReview,
-                $pNumStars
+                $pReview
             );
         }
 
@@ -29,8 +24,7 @@ include_once "database.php";
             $pReviewId,
             $pProductId,
             $pUserId,
-            $pReview,
-            $pNumStars
+            $pReview
         ) {
             if($pReviewId < 0) {
                 // If the review id is -1
@@ -41,13 +35,11 @@ include_once "database.php";
                 && $pProductId > 0
                 && $pUserId > 0
                 && strlen($pReview) > 0
-                && $pNumStars > 0
             ) {
                 $this->reviewId = $pReviewId;
                 $this->productId = $pProductId;
                 $this->userId = $pUserId;
                 $this->review = $pReview;
-                $this->numStars = $pNumStars;
             }
             else if($pReviewId > 0) {
                 $mySqliConnection = openDatabaseConnection();
@@ -64,7 +56,6 @@ include_once "database.php";
                     $this->productId = $queriedReviewAssocRow["product_id"];
                     $this->userId = $queriedReviewAssocRow["user_id"];
                     $this->review = $queriedReviewAssocRow["review"];
-                    $this->numStars = $queriedReviewAssocRow["numStars"];
                 }
             }
         }
@@ -109,14 +100,43 @@ include_once "database.php";
             $this->review = $pReview;
         }
 
-        public function getNumStars(): int
-        {
-            return $this->numStars;
+        public static function insertReview(array $postArray) : array {
+            $dbConnection = openDatabaseConnection();
+            $sqlQuery = "INSERT INTO REVIEW (product_id, user_id, review) VALUES
+                (?, ?, ?);";
+            $sqlStatement = $dbConnection->prepare($sqlQuery);
+            $sqlStatement->bind_param("iis", $_GET["productId"], $_SESSION["user_id"], $postArray["review"]);
+            $isSuccessful = $sqlStatement->execute();
+            $newReviewId = $dbConnection->insert_id;
+            $sqlStatement->close();
+            $dbConnection->close();
+
+            return [
+                "isSuccessful" => $isSuccessful,
+                "newReviewId" => $newReviewId
+            ];
         }
 
-        public function setNumStars(int $pNumStars): void
-        {
-            $this->numStars = $pNumStars;
+        public static function listReviewsByProductId(int $pProductId) : array {
+            $dbConnection = openDatabaseConnection();
+            $sqlQuery = "SELECT * FROM REVIEW WHERE product_id = ?;";
+
+            $sqlStatement = $dbConnection->prepare($sqlQuery);
+            $sqlStatement->bind_param("i", $pProductId);
+            $sqlStatement->execute();
+            $sqliResult = $sqlStatement->get_result();
+            $reviews = [];
+            if($sqliResult->num_rows > 0) {
+                while($reviewRow = $sqliResult->fetch_assoc()) {
+                    $review = new Review();
+                    $review->reviewId = $reviewRow["review_id"];
+                    $review->productId = $reviewRow["product_id"];
+                    $review->userId = $reviewRow["user_id"];
+                    $review->review = $reviewRow["review"];
+                    $reviews[] = $review;
+                }
+            }
+            return $reviews;
         }
     }
 
