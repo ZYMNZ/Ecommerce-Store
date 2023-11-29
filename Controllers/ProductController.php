@@ -3,6 +3,7 @@ include_once 'Models/Category.php';
 include_once 'Models/Product.php';
 include_once "Models/ProductCategory.php";
 include_once 'Views/General/session.php';
+include_once 'Models/Review.php';
 
 class ProductController {
     function route()
@@ -19,8 +20,8 @@ class ProductController {
                     header("/?controller=home&action=home");
                 }
                 $products = Product::listProductsByCategory($category->getCategoryId());
-
                 $categories = Category::listCategories();
+
 
                 $dataToSend = [
                     "products" => $products,
@@ -32,9 +33,12 @@ class ProductController {
         } else if ($action == "view") {
             $product = new Product($_GET['id']);
             $categories = Category::listCategories();
+            $reviewsAndUsers = Review::listReviewsAndUsersByProductId($product->getProductId());
+
             $dataToSend = [
                 "product" => $product,
-                "categories" => $categories
+                "categories" => $categories,
+                "reviewsAndUsers" => $reviewsAndUsers
             ];
             $this->render($action, $dataToSend);
         }

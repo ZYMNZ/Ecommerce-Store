@@ -75,7 +75,10 @@ include_once "Views/General/session.php";
         </div>
 
         <div class="reviewsDiv">
-            <form action="" method="POST">
+            <form action="/?controller=review&action=postReview&id=<?php
+                    echo $dataToSend["product"]->getProductId();
+                ?>"
+            method="POST">
                 <div class="postReviewDiv">
                     <textarea name="review" cols="100" rows="4" class="reviewTextArea displayBlock"></textarea>
                     <div class="postReviewButtonDiv displayFlex">
@@ -84,8 +87,21 @@ include_once "Views/General/session.php";
                 </div>
             </form>
 
+            <?php
+                foreach($dataToSend["reviewsAndUsers"] as $review) {
+                    echo "<div class='review backgroundColorD9D9D9'>"
+                        . "<div class='reviewPoster'>"
+                        . "<label class='fontWeightBold'>" . $review["user"]->getFirstName()
+                        . " " . $review["user"]->getLastName() . "</label>"
+                        . "</div>"
+                        . "<div class='reviewParagraph'>"
+                        . "<label>" . $review["review"]->getReview() . "</label>"
+                        . "</div>"
+                        . "</div>";
 
-            <div class="review backgroundColorD9D9D9">
+                }
+            ?>
+            <!--<div class="review backgroundColorD9D9D9">
                 <div class="reviewPoster">
                     <label class="fontWeightBold">Review Poster's Full Name</label>
                 </div>
@@ -101,7 +117,7 @@ include_once "Views/General/session.php";
                         essentially unchanged.
                     </label>
                 </div>
-            </div>
+            </div>-->
 
         </div>
     </section>
