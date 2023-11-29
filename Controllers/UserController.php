@@ -31,7 +31,13 @@ class UserController
             }
             $this->render($action, ['users' => $users]);
         } else if ($action == "viewSellers") {
-            $this->render($action);
+            $role = Role::getRoleByName('seller');
+            $userRoles = UserRole::getUserByRoleId($role->getRoleId());
+            $users = [];
+            foreach ($userRoles as $userRole) {
+                $users[] = new User($userRole->getUserId());
+            }
+            $this->render($action, ['users' => $users]);
         } else if ($action == "editBuyer") {
             $this->render($action, ['user' => new User($_GET['id'])]);
         } else if ($action == "deleteBuyer") {

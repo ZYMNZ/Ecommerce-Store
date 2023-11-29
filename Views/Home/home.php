@@ -16,8 +16,8 @@ include_once 'Views/General/session.php';
     <body>
         <?php
             include_once "Views/General/navbar.php";
-           /* session_unset();
-            session_destroy();*/
+//            session_unset();
+//            session_destroy();
         var_dump(session_status());
         ?>
         <div class="wrapper">

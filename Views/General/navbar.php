@@ -13,51 +13,8 @@
     <section id="navBar" class="width100Percent displayFlex">
         <section id="logo" class="height100Percent"> <a href="?controller=home&action=home"><img src="Views/images/logo2.png"></a></section>
 
-<!--         adding home button if it's login page-->
-<!--        --><?php
-//            function addHomeButtonNavBar() {
-//                global $controllerPrefix;
-//                global $action;
-//                if($controllerPrefix == "login" && $action == "login") {
-//        ?>
-<!--                    <section>-->
-<!--                        <a href="?controller=home&action=home">-->
-<!--                            <input type="button" value="Home" class="defaultButtonStyling borderNone navBarButton cursorPointer signButtons">-->
-<!--                        </a>-->
-<!--                    </section>-->
-<!--                    --><?php
-//                }
-//            }
-//                    ?>
-<!---->
-<!--        --><?php
-//            addHomeButtonNavBar();
-//        ?>
 
-
-<!--        --><?php
-//            function addEditButtonNavBar()
-//            {
-//                global $action,$controllerPrefix;
-//
-//                if ($action=="home"&&$controllerPrefix="home"){
-//        ?>
-<!--                    <section>-->
-<!--                        <a href="">-->
-<!--                            <input type="button" value="Edit" class="borderNone cursorPointer navBarLanding navBarEditButton">-->
-<!--                        </a>-->
-<!--                    </section>-->
-<!---->
-<!--        --><?php
-//                }
-//            }
-//        ?>
-<!---->
-<!--        --><?php
-//            addEditButtonNavBar();
-//        ?>
-
-        <!-- adding a category  -->
+     <!-- adding a category  -->
         <?php
         global $action, $controllerPrefix;
         if ($action == "home" && $controllerPrefix = "home") {

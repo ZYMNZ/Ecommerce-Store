@@ -22,7 +22,7 @@ notUser();
 include_once "Views/General/navbar.php";
 ?>
 
-S<h1>Admin</h1>
+<h1>Admin</h1>
 <br>
 <br>
 <table>
@@ -37,8 +37,8 @@ S<h1>Admin</h1>
     <?php
     foreach ($data['users'] as $user)
     {
-        $user->getDSescription() === 'NULL' && $user->setDescription('None');
-        $user->getPhoneNumber() === 'NULL' && $user->setPhoneNumber('None');
+//        if ($user->getDescription() === 'NULL')  $user->setDescription('None');
+//        if ($user->getPhoneNumber() === 'NULL')  $user->setPhoneNumber('None');
         $id = $user->getUserId();
         echo "<tr>";
         echo "<input type='hidden' name='userId' id='userId' value='$id'>";
@@ -52,13 +52,13 @@ S<h1>Admin</h1>
     }
     ?>
 </table>
+
 <script>
     // Use the PHP value directly in the JavaScript code
     document.querySelector('button[data-toggle="modal"]').addEventListener('click', () => {
         var currentId = this.closest('tr').querySelector('#userId').value;
         console.log(currentId);
     });
-
 
 </script>
 <?php
