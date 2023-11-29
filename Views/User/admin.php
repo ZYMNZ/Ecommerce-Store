@@ -1,7 +1,6 @@
 <?php
 include_once "Views/General/session.php";
-notLoggedIn();
-notUser();
+noAccess($_SESSION['user_id'], $_SESSION['userRoles'], 'admin');
 ?>
 
 <html lang="en">

@@ -1,8 +1,3 @@
-<?php
-include_once "Views/General/session.php";
-notLoggedIn();
-notUser();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +13,10 @@ notUser();
 <body>
 <div class="navbar">
     <?php
+    include_once "Views/General/session.php";
+    var_dump(isset($_SESSION['user_id']));
     include_once "Views/General/navbar.php";
+    var_dump(isset($_SESSION['user_id']));
     ?>
 </div>
 <table>

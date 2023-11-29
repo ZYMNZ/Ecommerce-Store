@@ -1,11 +1,6 @@
 <?php
 $categories = $dataToSend;
 ?>
-
-<?php
-global $action, $controllerPrefix;
-if ($action == "home" && $controllerPrefix == "home") {
-?>
     <section>
         <form id="category" action="/?controller=product&action=product" method="post">
             <select name="category"  class="categoryNavBar cursorPointer" required>
@@ -18,10 +13,6 @@ if ($action == "home" && $controllerPrefix == "home") {
             </select>
         </form>
     </section>
-<?php
-}
-?>
-
 <script>
     /*const form = document.querySelector('form');
     const option = document.querySelector('#optionNone');

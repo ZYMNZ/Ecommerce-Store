@@ -8,147 +8,52 @@
     <link rel="stylesheet" type="text/css" href="Views/styles/home.css"
 </head>
 
+<?php
+global $action, $controllerPrefix;
+?>
 <nav>
-
     <section id="navBar" class="width100Percent displayFlex">
+        <!-- adding logo  -->
         <section id="logo" class="height100Percent"> <a href="?controller=home&action=home"><img src="Views/images/logo2.png"></a></section>
-
-<!--         adding home button if it's login page-->
-<!--        --><?php
-//            function addHomeButtonNavBar() {
-//                global $controllerPrefix;
-//                global $action;
-//                if($controllerPrefix == "login" && $action == "login") {
-//        ?>
-<!--                    <section>-->
-<!--                        <a href="?controller=home&action=home">-->
-<!--                            <input type="button" value="Home" class="defaultButtonStyling borderNone navBarButton cursorPointer signButtons">-->
-<!--                        </a>-->
-<!--                    </section>-->
-<!--                    --><?php
-//                }
-//            }
-//                    ?>
-<!---->
-<!--        --><?php
-//            addHomeButtonNavBar();
-//        ?>
-
-
-<!--        --><?php
-//            function addEditButtonNavBar()
-//            {
-//                global $action,$controllerPrefix;
-//
-//                if ($action=="home"&&$controllerPrefix="home"){
-//        ?>
-<!--                    <section>-->
-<!--                        <a href="">-->
-<!--                            <input type="button" value="Edit" class="borderNone cursorPointer navBarLanding navBarEditButton">-->
-<!--                        </a>-->
-<!--                    </section>-->
-<!---->
-<!--        --><?php
-//                }
-//            }
-//        ?>
-<!---->
-<!--        --><?php
-//            addEditButtonNavBar();
-//        ?>
-
-        <!-- adding a category  -->
+        <!-- adding categories  -->
         <?php
-        global $action, $controllerPrefix;
-        if ($action == "home" && $controllerPrefix = "home") {
+        if (($controllerPrefix !== "home" && $action !== "home") ||
+            ($controllerPrefix !== "product" && $action !== "product")) {
             include_once "Views/General/category.php";
         }
-        ?>
-
-        <!-- adding sign up if it's landing page-->
-
-        <?php
-            function addSignUpButtonNavBar()
-            {
-                global $action;
-                global $controllerPrefix;
-                if ($controllerPrefix="home" &&$action == "home"){
-        ?><!--
-                    <section class="navBarLanding">
-                        <a href="?controller=registration&action=registration">
-                            <input type="button" value="Sign up" class="signUpButtonNavBar defaultButtonStyling navBarLanding cursorPointer borderNone navBarButton signButtons">
-                        </a>
-                    </section>
--->
-        <?php
-                }
-            }
-        ?>
-        <?php
-            addSignUpButtonNavBar();
-        ?>
-
-<!--        adding sign in if it's landing page-->
-        <?php
-            function addSignInButtonNavBar()
-            {
-                global $action;
-                global $controllerPrefix;
-                if ($controllerPrefix="home" &&$action == "home"){
-        ?>
-                    <section>
-                        <a href="/?controller=login&action=login">
-                            <input type="button" value="Sign in" class=" defaultButtonStyling cursorPointer borderNone navBarButton signButtons">
-                        </a>
-                    </section>
-
-        <?php
-                }
-            }
-        ?>
-        <?php
-        if (session_status() == PHP_SESSION_NONE) {
-            addSignInButtonNavBar();
+        if (!isset($_SESSION['user_id']) && ($controllerPrefix !== "login" && $action !== "login") && ($controllerPrefix !== "registration" && $action !== "registration"))
+        {
+            ?>
+            <!-- adding sign in  -->
+            <section>
+                <a href="/?controller=login&action=login">
+                    <input type="button" value="Sign in" class=" defaultButtonStyling cursorPointer borderNone navBarButton signButtons">
+                </a>
+            </section>
+            <?php
         }
-        ?>
-
-
-        <?php
-            function addCartButton() {
-                global $action;
-                global $controllerPrefix;
-
-                if($controllerPrefix == "home" && $action == "home") {?>
-                    <section class="height100Percent">
-                        <a href="/?controller=cart&action=cart">
-                            <img src="Views/images/cart.png" class="height100Percent">
-                        </a>
-                    </section>
-        <?php
-                }
-            }
-        ?>
-
-
-        <?php
-        if ($controllerPrefix !== "home" && $action !== "home") {
-            addCartButton();
+        if (isset($_SESSION['user_id']))
+        {
+            ?>
+            <!-- adding cart  -->
+            <section class="height100Percent">
+                <a href="/?controller=cart&action=cart">
+                    <img src="Views/images/cart.png" class="height100Percent">
+                </a>
+            </section>
+            <?php
         }
+//        echo "<p>" . isset($_SESSION['user_id']) . "</p>";
+        if (isset($_SESSION['user_id'])) {
         ?>
-        <?php
-        if (isset($_SESSION["userRoles"]) && in_array('buyer', $_SESSION["userRoles"], true)) {
-        ?>
+            <!-- adding account icon  -->
             <div class="dropdown">
                 <?php
-                global $controllerPrefix, $action;
-                    // session_start() has not been called
                     echo " <img id='account' src='Views/images/account.png''>";
-
                 ?>
                 <div class="dropdown-content">
                     <a href='/?controller=user&action=personalDetails'>Personal Info</a>
                     <?php
-                    //                    var_dump($_SESSION['group_id'][1]);
                     if (isset($_SESSION['user_id']) && !in_array('seller', $_SESSION["userRoles"], true)) {
                         echo "<a href='/?controller=seller&action=register'>Register as a Seller</a>";
                     } else if ($_SESSION['user_id'] && in_array('seller', $_SESSION["userRoles"], true)) {

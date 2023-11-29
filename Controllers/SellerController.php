@@ -3,7 +3,7 @@ include_once 'Models/Product.php';
 include_once 'Models/ProductCategory.php';
 include_once 'Models/Category.php';
 include_once 'Views/General/session.php';
-notLoggedIn();
+
 
 class SellerController {
     function route()

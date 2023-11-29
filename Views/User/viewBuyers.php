@@ -1,7 +1,7 @@
 <?php
 include_once "Views/General/session.php";
-notLoggedIn();
-notUser();
+
+
 ?>
 
 <html lang="en">

@@ -1,3 +1,8 @@
+<?php
+include_once 'Views/General/session.php';
+session_unset();
+session_destroy();
+?>
 <html>
     <head>
         <title>Login</title>
@@ -8,16 +13,10 @@
         <link rel="stylesheet" type="text/css" href="Views/styles/footer.css">
     </head>
     <body>
-        <?php
-//        var_dump(md5('arsh'));
-            include_once "Views/General/navbar.php";
-        if (session_status() == PHP_SESSION_ACTIVE) {
-            session_unset();
-            session_destroy();
-        }
-        var_dump(session_status());
-
-        ?>
+    <?php
+    include_once 'Views/General/navbar.php';
+    var_dump($_SESSION);
+    ?>
         <section>
             <header class="header">
                 <label class="headerFont">Welcome</label>
