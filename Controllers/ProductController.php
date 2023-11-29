@@ -19,12 +19,24 @@ class ProductController {
                     header("/?controller=home&action=home");
                 }
                 $products = Product::listProductsByCategory($category->getCategoryId());
-                $this->render($action, $products);
+
+                $categories = Category::listCategories();
+
+                $dataToSend = [
+                    "products" => $products,
+                    "categories" => $categories
+                ];
+                $this->render($action, $dataToSend);
             }
 
         } else if ($action == "view") {
             $product = new Product($_GET['id']);
-            $this->render($action, [$product]);
+            $categories = Category::listCategories();
+            $dataToSend = [
+                "product" => $product,
+                "categories" => $categories
+            ];
+            $this->render($action, $dataToSend);
         }
         //SELLER PRODUCTS
         else if ($action == "sellerProduct") {

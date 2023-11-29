@@ -17,10 +17,13 @@ global $action, $controllerPrefix;
         <section id="logo" class="height100Percent"> <a href="?controller=home&action=home"><img src="Views/images/logo2.png"></a></section>
         <!-- adding categories  -->
         <?php
-        if (($controllerPrefix === "home" && $action === "home") ||
-            ($controllerPrefix === "product" && $action === "product")) {
+        if (($controllerPrefix === "home" && $action === "home")
+            || ($controllerPrefix === "product" && $action === "product")
+            || ($controllerPrefix === "product" && $action === "view")
+        ) {
             include_once "Views/General/category.php";
         }
+
         if (!isset($_SESSION['user_id']) && ($controllerPrefix !== "login" && $action !== "login") && ($controllerPrefix !== "registration" && $action !== "registration"))
         {
             ?>
@@ -44,6 +47,7 @@ global $action, $controllerPrefix;
             <?php
         }
         //        echo "<p>" . isset($_SESSION['user_id']) . "</p>";
+
         if (isset($_SESSION['user_id'])) {
             ?>
             <!-- adding account icon  -->

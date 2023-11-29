@@ -15,6 +15,7 @@ include_once "Views/General/session.php";
 <body>
 <div class="navbar">
     <?php
+
     include_once "Views/General/navbar.php";
     ?>
 </div>
@@ -28,7 +29,7 @@ include_once "Views/General/session.php";
 
     <section class="TopSection">
         <div class="title backgroundColorD9D9D9">
-            <label><?php echo $dataToSend[0]-> getTitle() ?></label>
+            <label><?php echo $dataToSend["product"]-> getTitle() ?></label>
         </div>
         <div class="cart">
             <a href="?controller=cart&action=cart">
@@ -38,7 +39,7 @@ include_once "Views/General/session.php";
     </section>
 
     <div class="creatorName">
-        <label><?php echo $dataToSend[0]->getUserName()?> Conan Edugawa</label>
+        <label><?php echo $dataToSend["product"]->getUserName()?> Conan Edugawa</label>
     </div>
 
     <section class="productBodySection marginAuto displayFlex">
@@ -49,7 +50,7 @@ include_once "Views/General/session.php";
                 <div class="productPriceDiv">
                     <label>
                         <?php
-                            echo "$" . number_format($dataToSend[0]->getPrice(), 2, '.', ',');
+                            echo "$" . number_format($dataToSend["product"]->getPrice(), 2, '.', ',');
                         ?>
                     </label>
                 </div>
@@ -62,7 +63,7 @@ include_once "Views/General/session.php";
     <div class="productDescriptionDiv backgroundColorD9D9D9">
         <p>
             <?php
-                echo $dataToSend[0]->getDescription();
+                echo $dataToSend["product"]->getDescription();
             ?>
         </p>
     </div>

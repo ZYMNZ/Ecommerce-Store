@@ -1,5 +1,9 @@
 <?php
-$categories = $dataToSend;
+// If the data that was sent contains an array key (assoc array "categories)
+// Use the data in that array key to list the categories in the dropdown
+// This is because when clicking on a category on the select dropdown,
+// It needs to send the products as well as the categories, so it uses an assoc array
+$categories = $dataToSend["categories"] ?? $dataToSend;
 ?>
     <section>
         <form id="category" action="/?controller=product&action=product" method="post">
