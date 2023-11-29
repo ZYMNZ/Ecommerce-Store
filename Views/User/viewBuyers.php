@@ -6,7 +6,7 @@ notUser();
 
 <html lang="en">
 <head>
-    <title>Personal Details</title>
+    <title>Buyers List</title>
     <link rel="stylesheet" type="text/css" href="Views/styles/generalstyles.css">
     <link rel="stylesheet" type="text/css" href="Views/styles/navbar.css">
     <link rel="stylesheet" type="text/css" href="Views/styles/login.css">
@@ -22,7 +22,7 @@ notUser();
 include_once "Views/General/navbar.php";
 ?>
 
-<h1>Admin</h1>
+S<h1>Admin</h1>
 <br>
 <br>
 <table>
@@ -37,7 +37,7 @@ include_once "Views/General/navbar.php";
     <?php
     foreach ($data['users'] as $user)
     {
-        $user->getDescription() === 'NULL' && $user->setDescription('None');
+        $user->getDSescription() === 'NULL' && $user->setDescription('None');
         $user->getPhoneNumber() === 'NULL' && $user->setPhoneNumber('None');
         $id = $user->getUserId();
         echo "<tr>";
