@@ -6,7 +6,7 @@ include_once "Views/General/session.php";
 
 <html lang="en">
 <head>
-    <title>Personal Details</title>
+    <title>Buyers List</title>
     <link rel="stylesheet" type="text/css" href="Views/styles/generalstyles.css">
     <link rel="stylesheet" type="text/css" href="Views/styles/navbar.css">
     <link rel="stylesheet" type="text/css" href="Views/styles/login.css">
@@ -37,8 +37,8 @@ include_once "Views/General/navbar.php";
     <?php
     foreach ($data['users'] as $user)
     {
-        $user->getDescription() === 'NULL' && $user->setDescription('None');
-        $user->getPhoneNumber() === 'NULL' && $user->setPhoneNumber('None');
+//        if ($user->getDescription() === 'NULL')  $user->setDescription('None');
+//        if ($user->getPhoneNumber() === 'NULL')  $user->setPhoneNumber('None');
         $id = $user->getUserId();
         echo "<tr>";
         echo "<input type='hidden' name='userId' id='userId' value='$id'>";
@@ -52,19 +52,22 @@ include_once "Views/General/navbar.php";
     }
     ?>
 </table>
-<script>
-    // Use the PHP value directly in the JavaScript code
-    document.querySelector('button[data-toggle="modal"]').addEventListener('click', () => {
-        var currentId = this.closest('tr').querySelector('#userId').value;
-        console.log(currentId);
-    });
 
-
-</script>
+<!--<script>-->
+<!--    // Use the PHP value directly in the JavaScript code-->
+<!--    document.querySelector('button[data-toggle="modal"]').addEventListener('click', () => {-->
+<!--        var currentId = this.closest('tr').querySelector('#userId').value;-->
+<!--        console.log(currentId);-->
+<!--    });-->
+<!---->
+<!--</script>-->
 <?php
-include_once 'Views/General/modal.php';
-modal('deleteBuyer', $id);
-include_once "Views/General/footer.php";
-?>
+//include_once 'Views/General/modal.php';
+//modal('deleteBuyer', $id);
+//include_once "Views/General/footer.php";
+//?>
+
+    <?php include_once "Views/General/adminFooter.php"?>
+
 </body>
 </html>

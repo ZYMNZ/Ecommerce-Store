@@ -252,11 +252,7 @@ class User {
         return false;
     }
 
-//    public static function deleteUserFromUserRole($pUserId){
-//        var_dump($pUserId);
-//        $result = self::deleteUser($pUserId);
-//        var_dump($result);
-//    }
+
 
 
 }

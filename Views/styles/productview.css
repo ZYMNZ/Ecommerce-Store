@@ -30,7 +30,6 @@
     top: 3%;
     font-size: 30px;
     font-weight: bold;
-    background-color: #d9d9d9;
     padding: 10px 80px;
 }
 
@@ -40,11 +39,102 @@
     font-size: large;
 }
 
-.productImageDIV{
-    /*width: fit-content;*/
-    display: contents;
-}
-
+/*Product body*/
 .productImage{
     width: 38vw;
+}
+
+.productImageDiv {
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.productPriceDiv {
+    border: 1px solid black;
+    padding: 10px 15px;
+    height: max-content;
+}
+
+.productPaddingDiv {
+    padding-left: 10%;
+}
+
+
+/*Image + buy button + price div container*/
+.productBodySection {
+    text-align: center;
+    justify-content: space-evenly;
+}
+
+.productPriceBuySection {
+    justify-content: center;
+    flex-direction: column;
+}
+
+.productDescriptionDiv {
+    margin: 3% auto;
+    width: 60%;
+    font-size: 18px;
+    padding: 1%;
+}
+
+.buyButtonAnchor {
+    margin-top: 75%;
+    border: 1px solid black;
+    text-decoration: unset;
+    padding: 10px 15px;
+    color: black;
+}
+
+
+/*Comments*/
+.commentsHeaderDiv {
+    margin: 5% auto 2%;
+    width: 80%;
+}
+
+.reviewHeader {
+    font-size: 32px;
+}
+
+.review {
+    padding: 1%;
+    width: 70%;
+    margin: 0 auto 3%;
+}
+
+.reviewParagraph {
+    font-size: 20px;
+}
+
+.reviewPoster {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.postReviewDiv {
+    width: max-content;
+    margin: 0 auto 1%;
+}
+
+
+.postReviewButtonDiv {
+    justify-content: end;
+    margin-bottom: 5%;
+}
+
+.postReviewButton {
+    padding: 10px 20px;
+    background-color: #331E6D;
+    border: none;
+    border-radius: 5px;
+    margin-top: 1%;
+    font-size: 20px;
+    color: white;
+}
+
+.reviewTextArea {
+    font-size: 20px;
+    resize: none;
 }
