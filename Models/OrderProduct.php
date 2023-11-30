@@ -75,18 +75,25 @@ class OrderProduct
 
     public static function createOrderProduct($pUserId, $pProductId): array
     {
-        $mySqliConnection = openDatabaseConnection();
-        $sql = "INSERT INTO order_product (order_id, product_Id) VALUES (?, ?)";
-        $stmt = $mySqliConnection->prepare($sql);
-        $stmt->bind_param('ii', $pUserId, $pProductId);
-        $isSuccessful = $stmt->execute();
-        $orderId = $mySqliConnection->insert_id;
-        $stmt->close();
-        $mySqliConnection->close();
-        return [
-            'isSuccessful' => $isSuccessful,
-            'orderId' => $orderId
-        ];
+        try {
+            $mySqliConnection = openDatabaseConnection();
+            $sql = "INSERT INTO order_product (order_id, product_Id) VALUES (?, ?)";
+            $stmt = $mySqliConnection->prepare($sql);
+            $stmt->bind_param('ii', $pUserId, $pProductId);
+            $isSuccessful = $stmt->execute();
+            $orderId = $mySqliConnection->insert_id;
+            $stmt->close();
+            $mySqliConnection->close();
+            return [
+                'isSuccessful' => $isSuccessful,
+                'orderId' => $orderId
+            ];
+        } catch (mysqli_sql_exception $e) {
+            return [
+                'isSuccessful' => false,
+                'message' => $e
+            ];
+        }
     }
 
     public static function updateOrderProduct($pOrderId, $pProductId)
