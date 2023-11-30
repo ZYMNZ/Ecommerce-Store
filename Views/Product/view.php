@@ -39,7 +39,12 @@ include_once "Views/General/session.php";
     </section>
 
     <div class="creatorName">
-        <label><?php echo ucfirst($dataToSend["product"]->getUserName($_GET['id']))?></label>
+
+        <label><?php
+            $sellerName = $dataToSend["product"]->getUserName($_GET['id']);
+            $name = explode(" ", $sellerName);
+            echo ucfirst($name[0]) ." ". ucfirst($name[1]);
+            ?></label>
     </div>
 
     <section class="productBodySection marginAuto displayFlex">
