@@ -16,11 +16,11 @@ function checkTitleTextFieldEmpty() {
         because the title column inside the database is not null
          */
         titleFieldIsEmpty = true;
-        addErrorTextFieldBorder(titleTextField);
+        addErrorInputBorder(titleTextField);
         addErrorInputLabel(titleErrorLabel, "Title is empty");
     }
     else {
-        removeErrorTextFieldBorder(titleTextField);
+        removeErrorInputBorder(titleTextField);
         removeErrorInputLabel(titleErrorLabel);
     }
     return titleFieldIsEmpty;
@@ -36,11 +36,11 @@ function checkPriceTextFieldEmpty() {
         // Reject the input because the price column in the database is
         // not null
         priceFieldIsEmpty = true;
-        addErrorTextFieldBorder(priceTextField);
+        addErrorInputBorder(priceTextField);
         addErrorInputLabel(emptyPriceErrorLabel, "Price is empty");
     }
     else {
-        removeErrorTextFieldBorder(priceTextField);
+        removeErrorInputBorder(priceTextField);
         removeErrorInputLabel(emptyPriceErrorLabel);
     }
     return priceFieldIsEmpty;
@@ -55,37 +55,53 @@ function checkPriceIsANumber() {
     if(priceTextFieldValIsANumber) {
         // Remove the error border and the error input label if the text inside the price text
         // Field is a number
-       removeErrorTextFieldBorder(priceTextField);
+       removeErrorInputBorder(priceTextField);
        removeErrorInputLabel(notANumberPriceErrorLabel);
     }
     else {
         // Add an error input border to the price text field and
         // An error text label if the text inside the price is not a number
         // Because we want to reject values that are not numbers
-        addErrorTextFieldBorder(priceTextField);
+        addErrorInputBorder(priceTextField);
         addErrorInputLabel(notANumberPriceErrorLabel, "Price must be a number");
     }
     return priceTextFieldValIsANumber;
 }
 
-function checkCategoryIsNotNone() {
-    
+function checkCategoryIsNone() {
+    var categoryDropdown = $("select[name='category']");
+    var categorySelectedValue = categoryDropdown.find(":selected").val();
+    var categorySelectedIsNone = false;
+    var categoryErrorLabel = $("label[name='categoryErrorLabel']");
+
+    if(categorySelectedValue === "None") {
+        categorySelectedIsNone = true;
+        addErrorInputBorder(categoryDropdown);
+        addErrorInputLabel(categoryErrorLabel, "Please choose a category");
+    }
+    else {
+        removeErrorInputBorder(categoryDropdown);
+        removeErrorInputLabel(categoryErrorLabel);
+    }
+    return categorySelectedIsNone;
 }
-function addErrorTextFieldBorder(inputErrorField) {
+
+
+function addErrorInputBorder(inputErrorElement) {
     // Add the red border around the input field
-    inputErrorField.addClass("invalidInputField");
+    inputErrorElement.addClass("invalidInput");
 }
 
 function addErrorInputLabel(inputErrorLabel, errorLabelText = "") {
     inputErrorLabel.removeClass("displayNone");
 
-    if(errorLabelText != "") {
+    if(errorLabelText !== "") {
         inputErrorLabel.html(errorLabelText);
     }
 }
 
-function removeErrorTextFieldBorder(inputErrorField) {
-    inputErrorField.removeClass("invalidInputField");
+function removeErrorInputBorder(inputErrorField) {
+    inputErrorField.removeClass("invalidInput");
 }
 
 function removeErrorInputLabel(inputTextLabel) {
@@ -94,18 +110,23 @@ function removeErrorInputLabel(inputTextLabel) {
 
 function setUpEventHandlers() {
     $("[name='submit']").click(function(event) {
+
+
         // Check values inside the text fields before you submit the form
         var titleIsEmpty = checkTitleTextFieldEmpty();
         var priceIsEmpty = checkPriceTextFieldEmpty();
         var priceIsANumber = checkPriceIsANumber();
-
-        if(titleIsEmpty || priceIsEmpty || !priceIsANumber) {
+        var categorySelectedIsNone = checkCategoryIsNone();
+        console.log(titleIsEmpty);
+        console.log(priceIsEmpty);
+        console.log(priceIsANumber);
+        console.log(categorySelectedIsNone);
+        if(titleIsEmpty || priceIsEmpty || !priceIsANumber || categorySelectedIsNone) {
             /*
             Prevent the submit from happening
             if the values are wrong
          */
             event.preventDefault();
-            console.log("hello");
         }
     }
     );

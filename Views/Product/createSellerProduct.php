@@ -28,19 +28,18 @@ include_once "Views/General/session.php";
     <label>Price:<input class="form" type="text" name="price"></label><br>
     <label class="invalidInputLabel displayBlock displayNone" name="emptyPriceErrorLabel"></label>
     <label class="invalidInputLabel displayBlock displayNone" name="notANumberPriceErrorLabel"></label>
-    <label>
-        <select name="category"  class="categoryNavBar cursorPointer">
-            <option id="optionNone" value="None" selected>None</option>
-            <?php
-            $categories = $dataToSend;
-            foreach ($categories as $category) {
-                echo "<option value='" . $category->getCategory() . "'>" . $category->getCategory() . "</option>";
-            }
-            ?>
-        </select>
-    </label>
-    <label class="invalidInputLabel displayBlock displayNone" name="categoryErrorLabel">Please choose a category</label>
+
+    <select name="category"  class="categoryNavBar cursorPointer displayInlineBlock">
+        <option id="optionNone" value="None" selected>None</option>
+        <?php
+        $categories = $dataToSend;
+        foreach ($categories as $category) {
+            echo "<option value='" . $category->getCategory() . "'>" . $category->getCategory() . "</option>";
+        }
+        ?>
+    </select>
     <label><input class="form" type="submit" name="submit"></label><br>
+    <label class="invalidInputLabel displayBlock displayNone" name="categoryErrorLabel">Please choose a category</label>
 </form>
 <?php
 include_once "Views/General/footer.php";
