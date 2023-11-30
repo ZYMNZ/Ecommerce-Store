@@ -234,11 +234,34 @@ class Product{
     }
 
     //to be continued
-    public static function getUserName(){
+    public static function getUserName($pProductId)
+    {
         $conn = openDatabaseConnection();
-        $sql = "Select user.first_name, user.last_name from product INNER JOIN user on user.user_id = ?";
+        $sql = "Select * from product 
+                JOIN user on user.user_id = product.user_id WHERE product_id = ?";
         $query = $conn->prepare($sql);
-        $query->bind_param("i",$_GET['id']);
+        $query->bind_param("i",$pProductId);
+        $query->execute();
+        $result = $query->get_result();
+
+        if ($result->num_rows > 0){
+            $fetchAssoc = $result->fetch_assoc();
+//            var_dump($fetchAssoc);
+            $user = new User();
+            $user->initializeProperties(
+                $fetchAssoc["user_id"],
+                $fetchAssoc["first_name"],
+                $fetchAssoc["last_name"],
+                $fetchAssoc["email"],
+                $fetchAssoc["password"],
+                $fetchAssoc["description"],
+                $fetchAssoc["phone_number"]
+            );
+            return
+                "{$user->getFirstName()} {$user->getLastName()}"
+            ;
+        }
+        return null;
     }
 
 
