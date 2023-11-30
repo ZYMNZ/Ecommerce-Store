@@ -24,9 +24,9 @@ session_destroy();
             <form action="/?controller=login&action=validation" method="POST">
                 <section class="loginRegistrationSection marginAuto">
                     <label class="hintLabel displayBlock">Email:</label>
-                    <input type="text" name="email" class="inputField width100Percent"> <br/>
+                    <input type="text" name="email" class="inputField width100Percent" required> <br/>
                     <label class="hintLabel displayBlock">Password:</label>
-                    <input type="password" name="password" class="inputField width100Percent"> <br/>
+                    <input type="password" name="password" class="inputField width100Percent" required> <br/>
                 </section>
                 <section class="signButtons marginAuto">
                     <input type="submit" name="submit" value="Sign in" class="defaultButtonStyling cursorPointer width100Percent borderNone"> <br/>

@@ -5,47 +5,6 @@ $(document).ready(
     }
 );
 
-function checkTitleTextFieldEmpty() {
-    var titleTextField = $("[name='title']");
-    var titleErrorLabel = $("[name='titleErrorLabel']");
-    var titleFieldIsEmpty = false;
-
-    if(titleTextField.val().trim().length === 0) {
-        /*
-        Check if the value inside the title text field is empty
-        because the title column inside the database is not null
-         */
-        titleFieldIsEmpty = true;
-        addErrorInputBorder(titleTextField);
-        addErrorInputLabel(titleErrorLabel, "Title is empty");
-    }
-    else {
-        removeErrorInputBorder(titleTextField);
-        removeErrorInputLabel(titleErrorLabel);
-    }
-    return titleFieldIsEmpty;
-}
-
-function checkPriceTextFieldEmpty() {
-    var priceTextField = $("[name='price']");
-    var emptyPriceErrorLabel = $("[name='emptyPriceErrorLabel']");
-    var priceFieldIsEmpty = false;
-
-    if(priceTextField.val().trim().length === 0) {
-        // If the text inside the price text field is empty
-        // Reject the input because the price column in the database is
-        // not null
-        priceFieldIsEmpty = true;
-        addErrorInputBorder(priceTextField);
-        addErrorInputLabel(emptyPriceErrorLabel, "Price is empty");
-    }
-    else {
-        removeErrorInputBorder(priceTextField);
-        removeErrorInputLabel(emptyPriceErrorLabel);
-    }
-    return priceFieldIsEmpty;
-}
-
 function checkPriceIsANumber() {
     var priceTextField = $("[name='price']");
     var notANumberPriceErrorLabel = $("[name='notANumberPriceErrorLabel']");
@@ -87,40 +46,22 @@ function checkCategoryIsNone() {
 }
 
 
-function addErrorInputBorder(inputErrorElement) {
-    // Add the red border around the input field
-    inputErrorElement.addClass("invalidInput");
-}
 
-function addErrorInputLabel(inputErrorLabel, errorLabelText = "") {
-    inputErrorLabel.removeClass("displayNone");
-
-    if(errorLabelText !== "") {
-        inputErrorLabel.html(errorLabelText);
-    }
-}
-
-function removeErrorInputBorder(inputErrorField) {
-    inputErrorField.removeClass("invalidInput");
-}
-
-function removeErrorInputLabel(inputTextLabel) {
-    inputTextLabel.addClass("displayNone");
-}
 
 function setUpEventHandlers() {
     $("[name='submit']").click(function(event) {
 
-
         // Check values inside the text fields before you submit the form
-        var titleIsEmpty = checkTitleTextFieldEmpty();
-        var priceIsEmpty = checkPriceTextFieldEmpty();
+        var titleTextField = $("[name='title']");
+        var titleErrorLabel = $("[name='titleErrorLabel']");
+        var titleIsEmpty = checkTextFieldEmpty(titleTextField, titleErrorLabel, "Title is empty");
+
+        var priceTextField = $("[name='price']");
+        var emptyPriceErrorLabel = $("[name='emptyPriceErrorLabel']");
+        var priceIsEmpty = checkTextFieldEmpty(priceTextField, emptyPriceErrorLabel, "Price is empty");
         var priceIsANumber = checkPriceIsANumber();
         var categorySelectedIsNone = checkCategoryIsNone();
-        console.log(titleIsEmpty);
-        console.log(priceIsEmpty);
-        console.log(priceIsANumber);
-        console.log(categorySelectedIsNone);
+
         if(titleIsEmpty || priceIsEmpty || !priceIsANumber || categorySelectedIsNone) {
             /*
             Prevent the submit from happening

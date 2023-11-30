@@ -14,21 +14,19 @@ function doPasswordsMatch() {
 
     var passwordsMatch = false;
     // if (passwordInputField.val() == "" || confirmPasswordErrorInputLabel.val() == "") {
-        if (passwordInputField.val() == confirmPasswordInputField.val()) {
-            confirmPasswordInputField.removeClass("invalidInputField");
-            confirmPasswordErrorInputLabel.addClass("displayNone");
-
-
+        if (passwordInputField.val() === confirmPasswordInputField.val()) {
+            removeErrorInputBorder(confirmPasswordInputField);
+            removeErrorInputLabel(confirmPasswordErrorInputLabel);
             passwordsMatch = true;
         }
     // }
     else {
-        confirmPasswordInputField.addClass("invalidInputField");
-        confirmPasswordErrorInputLabel.removeClass("displayNone");
-
+        addErrorInputBorder(confirmPasswordInputField);
+        addErrorInputLabel(confirmPasswordErrorInputLabel, "Passwords do not match");
     }
     return passwordsMatch;
 }
+
 
 
 function setUpEventHandlers() {
@@ -38,9 +36,8 @@ function setUpEventHandlers() {
 
         var passwordsMatch = doPasswordsMatch();
         var emailValid = checkEmailValidation();
+
         // If the passwords match, submit the form
-        console.log("passs " + passwordsMatch);
-        console.log( "email " + emailValid);
         if(!passwordsMatch || !emailValid) {
             // Prevent form submission to check if the passwords match
             event.preventDefault();
@@ -62,7 +59,6 @@ function checkEmailValidation(){
         emailTextFieldValidation.addClass("invalidInputField");
         checkEmail.html("Invalid Email");
         emailValid = false;
-        console.log("inside if");
         return emailValid;
     }
     return emailValid;

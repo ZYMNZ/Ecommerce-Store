@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="Views/styles/footer.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="Views/Registration/scripts/registrationValidation.js" type="text/javascript"></script>
+    <script src="Views/General/scripts/errorValidation.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -24,11 +25,11 @@ include_once "Views/General/navbar.php";
         <input type="text" name="email" class="inputField width100Percent" required> <br/>
         <label name="emailCheck" class="displayBlock displayNone invalidInputLabel"></label>
         <label class="hintLabel displayBlock denseHintLabel">Password:</label>
-        <label class="invalidInputLabel displayBlock displayNone" name="emptyPasswordLabel">Input a password please!</label>
+        <label class="invalidInputLabel displayBlock displayNone" name="emptyPasswordLabel"></label>
         <input type="password" name="password" class="inputField width100Percent" required> <br/>
         <label class="hintLabel displayBlock denseHintLabel">Confirm Password:</label>
         <input type="password" name="confirmPassword" class="inputField width100Percent" required> <br/>
-        <label class="invalidInputLabel displayBlock displayNone" name="notMatchingPasswordLabel">Passwords do not match.</label>
+        <label class="invalidInputLabel displayBlock displayNone" name="notMatchingPasswordLabel"></label>
     </section>
 
     <section>
