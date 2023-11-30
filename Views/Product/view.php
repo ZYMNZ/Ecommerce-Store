@@ -31,11 +31,18 @@ include_once "Views/General/session.php";
         <div class="title backgroundColorD9D9D9">
             <label><?php echo $dataToSend["product"]-> getTitle() ?></label>
         </div>
+        <?php
+        if (isset($_SESSION['user_id']))
+        {
+        ?>
         <div class="cart">
             <a href="?controller=cart&action=cart">
                 <img src="Views/images/cart.png" class="cartImage">
             </a>
         </div>
+        <?php
+        }
+        ?>
     </section>
 
     <div class="creatorName">
@@ -59,7 +66,7 @@ include_once "Views/General/session.php";
                         ?>
                     </label>
                 </div>
-                <a href='<?php echo "/?controller=product&action=addToCart&id=" . $dataToSend["product"]-> getProductId() ?>' class="buyButtonAnchor backgroundColorD9D9D9">
+                <a href='<?php echo "/?controller=cart&action=addToCart&id=" . $dataToSend["product"]-> getProductId() ?>' class="buyButtonAnchor backgroundColorD9D9D9">
                     Add to Cart
                 </a>
         </section>

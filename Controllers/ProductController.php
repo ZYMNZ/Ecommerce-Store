@@ -69,9 +69,7 @@ class ProductController {
         else if ($action == "deleteSellerProduct") {
             noAccess($_SESSION['user_id'], $_SESSION['userRoles'], 'seller');
             $this->render($action);
-         } else if ($action == "addToCart") {
-            $this->render($action);
-        }
+         }
     }
 
     function render($action, $dataToSend = [])

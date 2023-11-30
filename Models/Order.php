@@ -54,18 +54,18 @@ class Order {
             $result = $result->fetch_assoc();
             $this->orderId = $pOrderId;
             $this->userId = $result['user_id'];
-            $this->orderDate = $this->convertDate($result['$order_date']);
-            $this->orderComment = $result['$order_comment'];
-            $this->isPaid = $result['$isPaid'];
+            $this->orderDate = $this->convertDate($result['order_date']);
+            $this->orderComment = $result['order_comment'];
+            $this->isPaid = $result['isPaid'];
         }
     }
 
-    public static function createOrder($pUserId, $pOrderComment, $pIsPaid): array
+    public static function createOrder($pUserId): array
     {
         $mySqliConnection = openDatabaseConnection();
-        $sql = "INSERT INTO order (user_id, orderComment, isPaid) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO order (user_id, isPaid) VALUES (?, FALSE)";
         $stmt = $mySqliConnection->prepare($sql);
-        $stmt->bind_param('isi', $pUserId, $pOrderComment, $pIsPaid);
+        $stmt->bind_param('isi', $pUserId, $pIsPaid);
         $isSuccessful = $stmt->execute();
         $orderId = $mySqliConnection->insert_id;
         $stmt->close();
@@ -84,6 +84,26 @@ class Order {
         $stmt->close();
         $dBConnection->close();
     }
+
+    public static function cartExists($pUserId): ?Order
+    {
+        $mySqliConnection = openDatabaseConnection();
+        $sql = "SELECT * FROM `order` WHERE user_id = ? AND isPaid = FALSE";
+        $stmt = $mySqliConnection->prepare($sql);
+        $stmt->bind_param('i', $pUserId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $cart = new Order();
+            $result = $result->fetch_assoc();
+            $cart->orderId = $result['order_id'];
+            $cart->userId = $result['user_id'];
+            $cart->isPaid = $result['isPaid'];
+            return $cart;
+        }
+        return null;
+    }
+
     private function convertDate($date): string
     {
         $timestamp = strtotime($date);

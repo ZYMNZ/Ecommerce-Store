@@ -73,12 +73,12 @@ class OrderProduct
     }
 
 
-    public static function createOrderProduct($pUserId, $pOrderComment, $pIsPaid): array
+    public static function createOrderProduct($pUserId, $pProductId): array
     {
         $mySqliConnection = openDatabaseConnection();
-        $sql = "INSERT INTO order_product (order_id, product_Id, comment) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO order_product (order_id, product_Id) VALUES (?, ?)";
         $stmt = $mySqliConnection->prepare($sql);
-        $stmt->bind_param('isi', $pUserId, $pOrderComment, $pIsPaid);
+        $stmt->bind_param('ii', $pUserId, $pProductId);
         $isSuccessful = $stmt->execute();
         $orderId = $mySqliConnection->insert_id;
         $stmt->close();
@@ -110,4 +110,25 @@ class OrderProduct
         $prepareStmt->close();
         $conn->close();
     }
+
+    public function getOrderId(): int
+    {
+        return $this->orderId;
+    }
+
+    public function setOrderId(int $orderId): void
+    {
+        $this->orderId = $orderId;
+    }
+
+    public function getProductId(): int
+    {
+        return $this->productId;
+    }
+
+    public function setProductId(int $productId): void
+    {
+        $this->productId = $productId;
+    }
+
 }
