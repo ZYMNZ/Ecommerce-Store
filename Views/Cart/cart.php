@@ -113,7 +113,7 @@ include_once "Views/General/session.php";
                 <label>CAD $232.98 <?php ?></label>
             </div>
             <div style="padding: 310px 0 0;">
-                <button class="confirmButton"></button>
+                <a href="/?controller=order&action=orderConfirmed"><button class="confirmButton"></button></a>
             </div>
         </div>
 

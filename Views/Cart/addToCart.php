@@ -1,9 +1,11 @@
 <?php
 $product = new Product($_GET['id']);
 $cart = Order::cartExists($_SESSION['user_id']);
-if ($cart->getOrderId() === null) {
+var_dump($cart);
+if ($cart === null) {
     $cart = Order::createOrder($_SESSION['user_id']);
 }
+
 $orderProduct = OrderProduct::createOrderProduct($cart->getOrderId(), $_GET['id']);
 var_dump($orderProduct);
 if ($orderProduct['isSuccessful'] === true) {

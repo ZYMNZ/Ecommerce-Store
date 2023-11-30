@@ -63,9 +63,9 @@ class Order {
     public static function createOrder($pUserId): array
     {
         $mySqliConnection = openDatabaseConnection();
-        $sql = "INSERT INTO order (user_id, isPaid) VALUES (?, FALSE)";
+        $sql = "INSERT INTO `order` (user_id, isPaid) VALUES (?, FALSE)";
         $stmt = $mySqliConnection->prepare($sql);
-        $stmt->bind_param('isi', $pUserId, $pIsPaid);
+        $stmt->bind_param('i', $pUserId);
         $isSuccessful = $stmt->execute();
         $orderId = $mySqliConnection->insert_id;
         $stmt->close();
@@ -78,9 +78,10 @@ class Order {
     public static function orderConfirm($pOrderId): void
     {
         $dBConnection = openDatabaseConnection();
-        $sql = "UPDATE order SET order_date = current_timestamp(), isPaid = TRUE WHERE order_id = ?";
+        $sql = "UPDATE `order` SET order_date = current_timestamp(), isPaid = TRUE WHERE order_id = ?";
         $stmt = $dBConnection->prepare($sql);
         $stmt->bind_param('i', $pOrderId);
+        $stmt->execute();
         $stmt->close();
         $dBConnection->close();
     }

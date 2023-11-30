@@ -1,13 +1,18 @@
 <?php
-
+include_once 'Views/General/session.php';
+include_once 'Models/Order.php';
 class OrderController{
-    function route()
+    function route(): void
     {
-
+        global $action;
+        if ($action == "orderConfirmed") {
+            $this->render($action);
+        }
     }
 
-    function render()
+    function render($action, $dataToSend = []): void
     {
-
+        extract($dataToSend);
+        include_once "Views/Order/$action.php";
     }
 }
