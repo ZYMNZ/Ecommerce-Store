@@ -17,16 +17,17 @@ include_once "Views/General/navbar.php";
 <form action="/?controller=registration&action=register" method="POST" id="registrationForm">
     <section class="loginRegistrationSection marginAuto">
         <label class="hintLabel displayBlock denseHintLabel">First Name:</label>
-        <input type="text" name="firstName" class="inputField width100Percent"> <br/>
+        <input type="text" name="firstName" class="inputField width100Percent" required> <br/>
         <label class="hintLabel displayBlock denseHintLabel">Last Name:</label>
-        <input type="text" name="lastName" class="inputField width100Percent"> <br/>
+        <input type="text" name="lastName" class="inputField width100Percent" required> <br/>
         <label class="hintLabel displayBlock denseHintLabel">Email:</label>
-        <input type="text" name="email" class="inputField width100Percent"> <br/>
+        <input type="text" name="email" class="inputField width100Percent" required> <br/>
         <label name="emailCheck" class="displayBlock displayNone invalidInputLabel"></label>
         <label class="hintLabel displayBlock denseHintLabel">Password:</label>
-        <input type="password" name="password" class="inputField width100Percent"> <br/>
+        <label class="invalidInputLabel displayBlock displayNone" name="emptyPasswordLabel">Input a password please!</label>
+        <input type="password" name="password" class="inputField width100Percent" required> <br/>
         <label class="hintLabel displayBlock denseHintLabel">Confirm Password:</label>
-        <input type="password" name="confirmPassword" class="inputField width100Percent"> <br/>
+        <input type="password" name="confirmPassword" class="inputField width100Percent" required> <br/>
         <label class="invalidInputLabel displayBlock displayNone" name="notMatchingPasswordLabel">Passwords do not match.</label>
     </section>
 

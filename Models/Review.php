@@ -1,5 +1,6 @@
 <?php
 include_once "database.php";
+include_once "Models/User.php";
     class Review {
         private int $reviewId;
         private int $productId;
@@ -105,7 +106,7 @@ include_once "database.php";
             $sqlQuery = "INSERT INTO REVIEW (product_id, user_id, review) VALUES
                 (?, ?, ?);";
             $sqlStatement = $dbConnection->prepare($sqlQuery);
-            $sqlStatement->bind_param("iis", $_GET["productId"], $_SESSION["user_id"], $postArray["review"]);
+            $sqlStatement->bind_param("iis", $_GET["id"], $_SESSION["user_id"], $postArray["review"]);
             $isSuccessful = $sqlStatement->execute();
             $newReviewId = $dbConnection->insert_id;
             $sqlStatement->close();
@@ -117,26 +118,47 @@ include_once "database.php";
             ];
         }
 
-        public static function listReviewsByProductId(int $pProductId) : array {
+        public static function listReviewsAndUsersByProductId(int $pProductId) : array {
             $dbConnection = openDatabaseConnection();
-            $sqlQuery = "SELECT * FROM REVIEW WHERE product_id = ?;";
+            $sqlQuery = "SELECT * FROM REVIEW JOIN user 
+            ON review.user_id = user.user_id 
+            WHERE review.product_id = ?";
 
             $sqlStatement = $dbConnection->prepare($sqlQuery);
             $sqlStatement->bind_param("i", $pProductId);
             $sqlStatement->execute();
             $sqliResult = $sqlStatement->get_result();
-            $reviews = [];
+            $reviewsAndUsers = [];
+            $sqlStatement->close();
+            $dbConnection->close();
             if($sqliResult->num_rows > 0) {
                 while($reviewRow = $sqliResult->fetch_assoc()) {
                     $review = new Review();
-                    $review->reviewId = $reviewRow["review_id"];
-                    $review->productId = $reviewRow["product_id"];
-                    $review->userId = $reviewRow["user_id"];
-                    $review->review = $reviewRow["review"];
-                    $reviews[] = $review;
+                    $review->initializeProperties(
+                        $reviewRow["review_id"],
+                        $reviewRow["product_id"],
+                        $reviewRow["user_id"],
+                        $reviewRow["review"]
+                    );
+
+                    $user = new User();
+                    $user->initializeProperties(
+                        $reviewRow["user_id"],
+                        $reviewRow["first_name"],
+                        $reviewRow["last_name"],
+                        $reviewRow["email"],
+                        $reviewRow["password"],
+                        $reviewRow["description"],
+                        $reviewRow["phone_number"]
+                    );
+
+                    $reviewsAndUsers[] = [
+                      "review" => $review,
+                      "user" => $user
+                    ];
                 }
             }
-            return $reviews;
+            return $reviewsAndUsers;
         }
     }
 

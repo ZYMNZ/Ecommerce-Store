@@ -16,6 +16,7 @@ session_destroy();
     <?php
     include_once 'Views/General/navbar.php';
     ?>
+
         <section>
             <header class="header">
                 <label class="headerFont">Welcome</label>

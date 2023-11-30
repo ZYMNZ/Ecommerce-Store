@@ -38,7 +38,7 @@ body {
 }
 
 /*Invalid input field border color*/
-.invalidInputField {
+.invalidInput {
     border-color: red;
 
 }

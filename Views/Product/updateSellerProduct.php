@@ -13,6 +13,8 @@ include_once "Views/General/session.php";
     <link rel="stylesheet" type="text/css" href="Views/styles/footer.css">
     <link rel="stylesheet" type="text/css" href="Views/styles/home.css">
     <link rel="stylesheet" type="text/css" href="Views/styles/product.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="Views/Product/scripts/validateProductTextFields.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -28,10 +30,14 @@ include_once "Views/General/session.php";
 ?>
 <form action="/?controller=product&action=submitProductUpdate&id=<?php echo $dataToSend[0]->getProductId() . "\""; ?> method="post">
     <label>Title:<input class="form" type="text" name="title" value=<?php echo "'" . $dataToSend[0]->getTitle() . "'" ?>></label><br>
+    <label class="invalidInputLabel displayBlock displayNone" name="titleErrorLabel"></label>
     <label>Description:<textarea name="description" rows="2" cols="50"><?php echo $dataToSend[0]->getDescription() ?></textarea></label><br>
     <label>Price:<input class="form" type="text" name="price" value=<?php echo "'" . $dataToSend[0]->getPrice() . "'" ?>></label><br>
-    <label>
-        <select name="category_id"  class="categoryNavBar cursorPointer">
+    <label class="invalidInputLabel displayBlock displayNone" name="emptyPriceErrorLabel"></label>
+    <label class="invalidInputLabel displayBlock displayNone" name="notANumberPriceErrorLabel"></label>
+
+<label>
+        <select name="category" class="categoryNavBar cursorPointer">
             <option id="optionNone" value="None">None</option>
             <?php
             // Get the list of categories from the data that was sent from the controller
@@ -62,6 +68,8 @@ include_once "Views/General/session.php";
         </select>
     </label><br>
     <label>Submit:<input class="form" type="submit" name="submit"></label><br>
+    <label class="invalidInputLabel displayBlock displayNone" name="categoryErrorLabel">Please choose a category</label>
+
 </form>
 <?php
 include_once "Views/General/footer.php";

@@ -104,7 +104,7 @@ class User {
     }
 
 
-    private function initializeProperties(
+    public function initializeProperties(
         $pUserId,
         $pFirstName,
         $pLastName,
