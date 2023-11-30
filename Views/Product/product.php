@@ -31,7 +31,6 @@ include_once "Views/General/session.php";
     }
     */?>
     <?php
-
     foreach ($dataToSend["products"] as $product) {
         echo "<tr><div class='product'>";
         echo "<div class='title'>" . $product->getTitle() . "</div>";

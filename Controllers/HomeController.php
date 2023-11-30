@@ -9,9 +9,6 @@ class HomeController{
             $categories = Category::listCategories();
             $this->render($action, $categories);
         }
-//        else {
-//
-//        }
     }
     function render($action,$dataToSend=[])
     {

@@ -11,24 +11,17 @@ class ProductController {
 
         // To list all the products
         if ($action == "product") {
-//            var_dump($_POST['category']);
-            if ($_POST['category'] != "None") {
-//                var_dump("inside");
+            $categories = Category::listCategories();
+            if (isset($_POST['category'])) {
                 $category = Category::getByCategoryName($_POST['category']);
                 if ($category == "None"){
-                    header("/?controller=home&action=home");
+                    header("Location: /?controller=home&action=home");
                 }
                 $products = Product::listProductsByCategory($category->getCategoryId());
-
-                $categories = Category::listCategories();
-
-                $dataToSend = [
-                    "products" => $products,
-                    "categories" => $categories
-                ];
-                $this->render($action, $dataToSend);
+                $this->render($action, ['categories' => $categories, 'products' => $products]);
+            } else {
+                $this->render($action, ['categories' => $categories]);
             }
-
         } else if ($action == "view") {
             $product = new Product($_GET['id']);
             $categories = Category::listCategories();
@@ -72,7 +65,9 @@ class ProductController {
         else if ($action == "deleteSellerProduct") {
             noAccess($_SESSION['user_id'], $_SESSION['userRoles'], 'seller');
             $this->render($action);
-         }
+         } else if ($action == "addToCart") {
+            $this->render($action);
+        }
     }
 
     function render($action, $dataToSend = [])

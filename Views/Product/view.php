@@ -54,7 +54,7 @@ include_once "Views/General/session.php";
                         ?>
                     </label>
                 </div>
-                <a href="" class="buyButtonAnchor backgroundColorD9D9D9">
+                <a href='<?php echo "/?controller=product&action=addToCart&id=" . $dataToSend["product"]-> getProductId() ?>' class="buyButtonAnchor backgroundColorD9D9D9">
                     Add to Cart
                 </a>
         </section>
