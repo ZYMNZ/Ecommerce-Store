@@ -66,9 +66,17 @@ include_once "Views/General/session.php";
                         ?>
                     </label>
                 </div>
+            <?php
+            if (isset($_SESSION['user_id'])) {
+            ?>
                 <a href='<?php echo "/?controller=cart&action=addToCart&id=" . $dataToSend["product"]-> getProductId() ?>' class="buyButtonAnchor backgroundColorD9D9D9">
                     Add to Cart
                 </a>
+            <?php
+            } else {
+                echo "<h3>Must be logged in to purchase</h3>";
+            }
+            ?>
         </section>
     </section>
 

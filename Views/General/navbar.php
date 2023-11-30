@@ -59,7 +59,7 @@ global $action, $controllerPrefix;
                     <a href='/?controller=user&action=personalDetails'>Personal Info</a>
                     <?php
                     if (isset($_SESSION['user_id']) && !in_array('seller', $_SESSION["userRoles"], true)) {
-                        echo "<a href='/?controller=seller&action=register'>Register as a Seller</a>";
+                        echo "<a href='/?controller=user&action=sellerRegister'>Register as a Seller</a>";
                     } else if ($_SESSION['user_id'] && in_array('seller', $_SESSION["userRoles"], true)) {
                         echo "<a href='/?controller=product&action=sellerProduct'>View your products</a>";
                     }

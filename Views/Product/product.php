@@ -11,6 +11,7 @@ include_once "Views/General/session.php";
     <link rel="stylesheet" type="text/css" href="Views/styles/footer.css">
     <link rel="stylesheet" type="text/css" href="Views/styles/home.css">
     <link rel="stylesheet" type="text/css" href="Views/styles/product.css">
+
 </head>
 
 <body>

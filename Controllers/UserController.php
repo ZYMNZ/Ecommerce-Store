@@ -64,6 +64,10 @@ class UserController
         } else if ($action == "updateSeller") {
             noAccess($_SESSION['user_id'], $_SESSION['userRoles'], 'admin');
             $this->render($action);
+        } else if ($action == "sellerRegister") {
+            $this->render($action);
+        } else if ($action == "validateSellerRegistration") {
+            $this->render($action);
         }
     }
 
