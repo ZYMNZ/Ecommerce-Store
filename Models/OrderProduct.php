@@ -73,16 +73,20 @@ class OrderProduct
     }
 
 
-
-    public static function createOrderProduct($pOrderId, $pProductId): void
+    public static function createOrderProduct($pUserId, $pOrderComment, $pIsPaid): array
     {
-        $conn = openDatabaseConnection();
-        $sqlQuery = "INSERT INTO order_product (order_id,product_id) VALUES (?,?)";
-        $prepareStmt = $conn->prepare($sqlQuery);
-        $prepareStmt->bind_param("ii" , $pOrderId, $pProductId);
-        $prepareStmt->execute();
-        $prepareStmt->close();
-        $conn->close();
+        $mySqliConnection = openDatabaseConnection();
+        $sql = "INSERT INTO order_product (order_id, product_Id, comment) VALUES (?, ?, ?)";
+        $stmt = $mySqliConnection->prepare($sql);
+        $stmt->bind_param('isi', $pUserId, $pOrderComment, $pIsPaid);
+        $isSuccessful = $stmt->execute();
+        $orderId = $mySqliConnection->insert_id;
+        $stmt->close();
+        $mySqliConnection->close();
+        return [
+            'isSuccessful' => $isSuccessful,
+            'orderId' => $orderId
+        ];
     }
 
     public static function updateOrderProduct($pOrderId, $pProductId)
