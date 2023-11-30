@@ -14,6 +14,7 @@ include_once "Views/General/session.php";
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="Views/styles/adminView.css">
 </head>
 <body>
 <?php
@@ -23,7 +24,7 @@ include_once "Views/General/navbar.php";
 <h1>Admin</h1>
 <br>
 <br>
-<table>
+<table class="userViewTable">
     <tr>
         <th>First Name</th>
         <th>Last Name</th>

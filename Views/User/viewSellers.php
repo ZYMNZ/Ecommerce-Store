@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
     <title>Sellers List</title>
 
     <?php
@@ -26,7 +27,7 @@
     <h1>Admin</h1>
     <br>
     <br>
-    <table>
+    <table class="userViewTable">
         <tr>
             <th>First Name</th>
             <th>Last Name</th>
@@ -44,12 +45,12 @@
             ?>
             <tr>
                 <input type='hidden' name='userId' id='userId' value='<?php $id ?>'>
-                <td> <?php $user->getFirstName() ?> </td>
-                <td> <?php $user->getLastName() ?> </td>
-                <td> <?php $user->getEmail() ?> </td>
-                <td> <?php $user->getDescription() ?> </td>
-                <td> <?php $user->getPhoneNumber() ?> </td>
-                <td><button><a href="/?controller=user&action=editSeller&id=<?php $id ?>">Edit...</a></button></td>
+                <td> <?php echo $user->getFirstName() ?> </td>
+                <td> <?php echo $user->getLastName() ?> </td>
+                <td> <?php echo $user->getEmail() ?> </td>
+                <td> <?php echo $user->getDescription() ?> </td>
+                <td> <?php echo $user->getPhoneNumber() ?> </td>
+                <td><button><a href="/?controller=user&action=editSeller&id=<?php echo $id ?>">Edit...</a></button></td>
                 <td><button type='button' data-toggle='modal' data-target='#myModal'>Delete...</button></td>
             </tr>
 

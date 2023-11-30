@@ -10,8 +10,9 @@ noAccess($_SESSION['user_id'], $_SESSION['userRoles'], 'admin');
     <link rel="stylesheet" type="text/css" href="Views/styles/navbar.css">
     <link rel="stylesheet" type="text/css" href="Views/styles/login.css">
     <link rel="stylesheet" type="text/css" href="Views/styles/footer.css">
-    <link rel="stylesheet" type="text/css" href="Views/styles/home.css"
-    <link rel="stylesheet" type="text/css" href="Views/styles/account.css"
+    <link rel="stylesheet" type="text/css" href="Views/styles/home.css">
+    <link rel="stylesheet" type="text/css" href="Views/styles/account.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
 <?php

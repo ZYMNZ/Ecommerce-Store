@@ -1,0 +1,7 @@
+.userViewTable th, .userViewTable td {
+    padding: 5px;
+}
+
+form {
+    margin-bottom: 14px;
+}

@@ -11,6 +11,8 @@ include_once "Views/General/session.php";
     <link rel="stylesheet" type="text/css" href="Views/styles/footer.css">
     <link rel="stylesheet" type="text/css" href="Views/styles/home.css">
     <link rel="stylesheet" type="text/css" href="Views/styles/account.css">
+    <link rel="stylesheet" type="text/css" href="Views/styles/adminView.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
 <?php
@@ -26,28 +28,28 @@ $data['user']->getPhoneNumber() === 'NULL' && $data['user']->setPhoneNumber('Non
 ?>
 <form action='<?php echo "/?controller=user&action=updateBuyer&id=" . $_GET['id'] ?>' method="post">
     <label>First Name:
-        <input type="text" name='firstName' value='<?php echo $data['user']->getFirstName() ?>'>
+        <input type="text" name='firstName' value='<?php echo $data['user']->getFirstName(); ?>'>
     </label>
     <br>
     <label>Last Name:
-        <input type="text" name='lastName' value='<?php echo $data['user']->getLastName() ?>'>
+        <input type="text" name='lastName' value='<?php echo $data['user']->getLastName(); ?>'>
     </label>
     <br>
     <label>Email:
-        <input type="text" name='email' value='<?php echo $data['user']->getEmail() ?>'>
+        <input type="text" name='email' value='<?php echo $data['user']->getEmail(); ?>'>
     </label>
     <br>
     <label>Description:
-        <input type="text" name='description' value='<?php echo $data['user']->getDescription() ?>'>
+        <input type="text" name='description' value='<?php echo $data['user']->getDescription(); ?>'>
     </label>
     <br>
     <label>Phone Number:
-        <input type="text" name='phoneNumber' value='<?php echo $data['user']->getPhoneNumber() ?>'>
+        <input type="text" name='phoneNumber' value='<?php echo $data['user']->getPhoneNumber(); ?>'>
     </label>
     <input type="submit" name="submit" value="Update">
 </form>
 <?php
-include_once "Views/General/footer.php";
+    include_once "Views/General/footer.php";
 ?>
 </body>
 </html>
