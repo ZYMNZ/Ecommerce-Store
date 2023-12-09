@@ -3,9 +3,6 @@ body {
     background-color: #f0f0f0;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 .product {
     background-color: #f8f8f8;
@@ -18,9 +15,10 @@ body {
     opacity: 0;
     transform: translateY(-20px);
     animation: fadeInSlide 0.5s ease-in-out forwards;
-    margin-top: 20px;
+    margin: 20px auto 0 auto;
     position: relative;
 }
+
 .title {
     font-size: 24px;
     font-weight: bold;

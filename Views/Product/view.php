@@ -13,12 +13,10 @@ include_once "Views/General/session.php";
     <link rel="stylesheet" type="text/css" href="Views/styles/productview.css">
 </head>
 <body>
-<div class="navbar">
     <?php
 
     include_once "Views/General/navbar.php";
     ?>
-</div>
 <!--<div class="product">-->
 <!--    <div class="title">--><?php //echo $dataToSend[0]->getTitle() ?><!--</div>-->
 <!--    <div class="description">--><?php //echo $dataToSend[0]->getDescription() ?><!--</div>-->

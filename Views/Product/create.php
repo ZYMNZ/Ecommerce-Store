@@ -11,11 +11,9 @@
 </head>
 
 <body>
-<div class="navbar">
     <?php
     include_once "Views/General/navbar.php";
     ?>
-</div>
 <form action="/?controller=product&action=product" method="post">
     <label>Title:<input class="form" type="text" name="title"></label><br>
     <label>Description:<textarea name="description" rows="2" cols="50"></textarea></label><br>

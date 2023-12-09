@@ -15,11 +15,9 @@ include_once "Views/General/session.php";
 </head>
 
 <body>
-<div class="navbar">
     <?php
     include_once "Views/General/navbar.php";
     ?>
-</div>
 <table>
     <?php
 /*    foreach ($dataToSend as $product) {

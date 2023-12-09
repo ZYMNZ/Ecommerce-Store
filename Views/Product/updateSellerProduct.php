@@ -19,17 +19,15 @@ include_once "Views/General/session.php";
 </head>
 
 <body>
-<div class="navbar">
     <?php
     include_once "Views/General/navbar.php";
     ?>
-</div>
 <?php
 //echo $dataToSend[2][0]->getCategory();
 //echo ($dataToSend[2][0]->getCategoryId() === $dataToSend[1]->getCategoryId()) ? 'true01' : 'false01';
 //echo ($dataToSend[2][1]->getCategoryId() === $dataToSend[1]->getCategoryId()) ? 'true02' : 'false02';
 ?>
-<form action="/?controller=product&action=submitProductUpdate&id=<?php echo $dataToSend[0]->getProductId() . "\""; ?> method="post">
+<form action="/?controller=product&action=submitProductUpdate&id=<?php echo $dataToSend[0]->getProductId() . "\""; ?> class="textAlignCenter" method="post">
     <label>Title:<input class="form" type="text" name="title" value=<?php echo "'" . $dataToSend[0]->getTitle() . "'" ?>></label><br>
     <label class="invalidInputLabel displayBlock displayNone" name="titleErrorLabel"></label>
     <label>Description:<textarea name="description" rows="2" cols="50"><?php echo $dataToSend[0]->getDescription() ?></textarea></label><br>

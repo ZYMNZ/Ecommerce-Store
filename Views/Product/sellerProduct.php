@@ -14,12 +14,13 @@ include_once "Views/General/session.php";
 </head>
 
 <body>
-<div class="navbar">
     <?php
     include_once "Views/General/navbar.php";
     ?>
-</div>
-<button><a href='/?controller=product&action=createSellerProduct'>Create</a></button>
+    <div class="textAlignCenter">
+        <button class=""><a href='/?controller=product&action=createSellerProduct'>Create</a></button>
+    </div>
+
 <table>
     <?php
     /*    foreach ($dataToSend as $product) {
