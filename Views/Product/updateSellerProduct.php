@@ -19,57 +19,62 @@ include_once "Views/General/session.php";
 </head>
 
 <body>
-    <?php
-    include_once "Views/General/navbar.php";
-    ?>
-<?php
-//echo $dataToSend[2][0]->getCategory();
-//echo ($dataToSend[2][0]->getCategoryId() === $dataToSend[1]->getCategoryId()) ? 'true01' : 'false01';
-//echo ($dataToSend[2][1]->getCategoryId() === $dataToSend[1]->getCategoryId()) ? 'true02' : 'false02';
-?>
-<form action="/?controller=product&action=submitProductUpdate&id=<?php echo $dataToSend[0]->getProductId() . "\""; ?> class="textAlignCenter" method="post">
-    <label>Title:<input class="form" type="text" name="title" value=<?php echo "'" . $dataToSend[0]->getTitle() . "'" ?>></label><br>
-    <label class="invalidInputLabel displayBlock displayNone" name="titleErrorLabel"></label>
-    <label>Description:<textarea name="description" rows="2" cols="50"><?php echo $dataToSend[0]->getDescription() ?></textarea></label><br>
-    <label>Price:<input class="form" type="text" name="price" value=<?php echo "'" . $dataToSend[0]->getPrice() . "'" ?>></label><br>
-    <label class="invalidInputLabel displayBlock displayNone" name="emptyPriceErrorLabel"></label>
-    <label class="invalidInputLabel displayBlock displayNone" name="notANumberPriceErrorLabel"></label>
-
-<label>
-        <select name="category" class="categoryNavBar cursorPointer">
-            <option id="optionNone" value="None">None</option>
+    <div class="mainContentWrapper">
+        <main>
             <?php
-            // Get the list of categories from the data that was sent from the controller
-            // So that we can use it in the category dropdown (to update the product)
-            $categories = $dataToSend[2];
-            // Store the current product's category so that
-            // We can check whether this product's category
-            // Matches any category in the $categories variable
-            // When they are listed in the dropdown
-            $productCategory = $dataToSend[1];
-            foreach ($categories as $category) {
-//                echo "<p>".$categories->getCategoryId() === $dataToSend[1]->getCategoryId()."</p>";
-                /*if ($categories->getCategoryId() === $dataToSend[1]->getCategoryId()) {
-                    echo "<option value='" . $category->getCategory() . "' selected>" . $category->getCategory() . "</option>";
-                    continue;
-                }*/
-
-                // List all the options of categories
-                // If the category of the product to update is
-                // Equal to the category currently being put in the
-                // Dropdown, it will put the selected option for that dropdown option
-                echo "<option value='" . $category->getCategoryId() . "' "
-                    . (($category->getCategoryId() == $productCategory->getCategoryId()) ? "selected" : ""). " >"
-                    . $category->getCategory()
-                    . "</option>";
-            }
+            include_once "Views/General/navbar.php";
             ?>
-        </select>
-    </label><br>
-    <label>Submit:<input class="form" type="submit" name="submit"></label><br>
-    <label class="invalidInputLabel displayBlock displayNone" name="categoryErrorLabel">Please choose a category</label>
+            <?php
+            //echo $dataToSend[2][0]->getCategory();
+            //echo ($dataToSend[2][0]->getCategoryId() === $dataToSend[1]->getCategoryId()) ? 'true01' : 'false01';
+            //echo ($dataToSend[2][1]->getCategoryId() === $dataToSend[1]->getCategoryId()) ? 'true02' : 'false02';
+            ?>
+            <form action="/?controller=product&action=submitProductUpdate&id=<?php echo $dataToSend[0]->getProductId() . "\""; ?> class="textAlignCenter" method="post">
+            <label>Title:<input class="form" type="text" name="title" value=<?php echo "'" . $dataToSend[0]->getTitle() . "'" ?>></label><br>
+            <label class="invalidInputLabel displayBlock displayNone" name="titleErrorLabel"></label>
+            <label>Description:<textarea name="description" rows="2" cols="50"><?php echo $dataToSend[0]->getDescription() ?></textarea></label><br>
+            <label>Price:<input class="form" type="text" name="price" value=<?php echo "'" . $dataToSend[0]->getPrice() . "'" ?>></label><br>
+            <label class="invalidInputLabel displayBlock displayNone" name="emptyPriceErrorLabel"></label>
+            <label class="invalidInputLabel displayBlock displayNone" name="notANumberPriceErrorLabel"></label>
 
-</form>
+            <label>
+                <select name="category" class="categoryNavBar cursorPointer">
+                    <option id="optionNone" value="None">None</option>
+                    <?php
+                    // Get the list of categories from the data that was sent from the controller
+                    // So that we can use it in the category dropdown (to update the product)
+                    $categories = $dataToSend[2];
+                    // Store the current product's category so that
+                    // We can check whether this product's category
+                    // Matches any category in the $categories variable
+                    // When they are listed in the dropdown
+                    $productCategory = $dataToSend[1];
+                    foreach ($categories as $category) {
+//                echo "<p>".$categories->getCategoryId() === $dataToSend[1]->getCategoryId()."</p>";
+                        /*if ($categories->getCategoryId() === $dataToSend[1]->getCategoryId()) {
+                            echo "<option value='" . $category->getCategory() . "' selected>" . $category->getCategory() . "</option>";
+                            continue;
+                        }*/
+
+                        // List all the options of categories
+                        // If the category of the product to update is
+                        // Equal to the category currently being put in the
+                        // Dropdown, it will put the selected option for that dropdown option
+                        echo "<option value='" . $category->getCategoryId() . "' "
+                            . (($category->getCategoryId() == $productCategory->getCategoryId()) ? "selected" : ""). " >"
+                            . $category->getCategory()
+                            . "</option>";
+                    }
+                    ?>
+                </select>
+            </label><br>
+            <label>Submit:<input class="form" type="submit" name="submit"></label><br>
+            <label class="invalidInputLabel displayBlock displayNone" name="categoryErrorLabel">Please choose a category</label>
+
+            </form>
+        </main>
+    </div>
+
 <?php
 include_once "Views/General/footer.php";
 ?>

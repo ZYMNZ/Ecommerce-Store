@@ -15,21 +15,26 @@ noAccess($_SESSION['user_id'], $_SESSION['userRoles'], 'admin');
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
-<?php
-include_once "Views/General/navbar.php";
-?>
+    <div class="mainContentWrapper">
+        <main>
+            <?php
+            include_once "Views/General/navbar.php";
+            ?>
 
-<h1>Admin</h1>
-<br>
-<br>
-<table>
+            <h1>Admin</h1>
+            <br>
+            <br>
+            <table>
+                <?php
+                echo "<tr><td>&emsp;&emsp;Buyer</td><td></td><td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href='/?controller=user&action=viewBuyers'><button>View...</button></a>";
+                echo "<tr><td>&emsp;&emsp;Seller</td><td></td><td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href='/?controller=user&action=viewSellers'><button>View...</button></a>";
+                ?>
+            </table>
+        </main>
+    </div>
+
     <?php
-    echo "<tr><td>&emsp;&emsp;Buyer</td><td></td><td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href='/?controller=user&action=viewBuyers'><button>View...</button></a>";
-    echo "<tr><td>&emsp;&emsp;Seller</td><td></td><td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href='/?controller=user&action=viewSellers'><button>View...</button></a>";
+    include_once "Views/General/footer.php";
     ?>
-</table>
-<?php
-include_once "Views/General/footer.php";
-?>
 </body>
 </html>

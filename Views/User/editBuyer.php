@@ -15,33 +15,38 @@ include_once "Views/General/session.php";
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
-<?php
-include_once "Views/General/navbar.php";
-?>
+    <div class="mainContentWrapper">
+        <main>
+            <?php
+            include_once "Views/General/navbar.php";
+            ?>
 
-<h1>Admin</h1>
-<br>
-<br>
-<?php
-$data['user']->getDescription() === 'NULL' && $data['user']->setDescription('None');
-$data['user']->getPhoneNumber() === 'NULL' && $data['user']->setPhoneNumber('None');
-?>
-<form action='<?php echo "/?controller=user&action=updateBuyer&id=" . $_GET['id'] ?>' method="post">
-    <label>First Name:
-        <input type="text" name='firstName' value='<?php echo $data['user']->getFirstName(); ?>'>
-    </label>
-    <br>
-    <label>Last Name:
-        <input type="text" name='lastName' value='<?php echo $data['user']->getLastName(); ?>'>
-    </label>
-    <br>
-    <label>Email:
-        <input type="text" name='email' value='<?php echo $data['user']->getEmail(); ?>'>
-    </label>
-    <input type="submit" name="submit" value="Update">
-</form>
-<?php
-    include_once "Views/General/footer.php";
-?>
+            <h1>Admin</h1>
+            <br>
+            <br>
+            <?php
+            $data['user']->getDescription() === 'NULL' && $data['user']->setDescription('None');
+            $data['user']->getPhoneNumber() === 'NULL' && $data['user']->setPhoneNumber('None');
+            ?>
+            <form action='<?php echo "/?controller=user&action=updateBuyer&id=" . $_GET['id'] ?>' method="post">
+                <label>First Name:
+                    <input type="text" name='firstName' value='<?php echo $data['user']->getFirstName(); ?>'>
+                </label>
+                <br>
+                <label>Last Name:
+                    <input type="text" name='lastName' value='<?php echo $data['user']->getLastName(); ?>'>
+                </label>
+                <br>
+                <label>Email:
+                    <input type="text" name='email' value='<?php echo $data['user']->getEmail(); ?>'>
+                </label>
+                <input type="submit" name="submit" value="Update">
+            </form>
+        </main>
+    </div>
+
+    <?php
+        include_once "Views/General/footer.php";
+    ?>
 </body>
 </html>

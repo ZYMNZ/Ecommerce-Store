@@ -17,32 +17,37 @@ include_once "Views/General/session.php";
 </head>
 
 <body>
-    <?php
-    include_once "Views/General/navbar.php";
-    ?>
-<form action="?controller=product&action=submitProductCreation" method="post" class="productForm textAlignCenter">
-    <label>Title:<input class="form" type="text" name="title"></label><br>
-    <label class="invalidInputLabel displayBlock displayNone" name="titleErrorLabel"></label>
-    <label>Description:<textarea name="description" rows="2" cols="50"></textarea></label><br>
-    <label>Price:<input class="form" type="text" name="price"></label><br>
-    <label class="invalidInputLabel displayBlock displayNone" name="emptyPriceErrorLabel"></label>
-    <label class="invalidInputLabel displayBlock displayNone" name="notANumberPriceErrorLabel"></label>
+    <div class="mainContentWrapper">
+        <main>
+            <?php
+            include_once "Views/General/navbar.php";
+            ?>
+            <form action="?controller=product&action=submitProductCreation" method="post" class="productForm textAlignCenter">
+                <label>Title:<input class="form" type="text" name="title"></label><br>
+                <label class="invalidInputLabel displayBlock displayNone" name="titleErrorLabel"></label>
+                <label>Description:<textarea name="description" rows="2" cols="50"></textarea></label><br>
+                <label>Price:<input class="form" type="text" name="price"></label><br>
+                <label class="invalidInputLabel displayBlock displayNone" name="emptyPriceErrorLabel"></label>
+                <label class="invalidInputLabel displayBlock displayNone" name="notANumberPriceErrorLabel"></label>
 
-    <select name="category"  class="categoryNavBar cursorPointer displayInlineBlock">
-        <option id="optionNone" value="None" selected>None</option>
-        <?php
-        $categories = $dataToSend;
-        foreach ($categories as $category) {
-            echo "<option value='" . $category->getCategory() . "'>" . $category->getCategory() . "</option>";
-        }
-        ?>
-    </select>
-    <label><input class="form" type="submit" name="submit"></label><br>
-    <label class="invalidInputLabel displayBlock displayNone" name="categoryErrorLabel">Please choose a category</label>
-</form>
-<?php
-include_once "Views/General/footer.php";
-?>
+                <select name="category"  class="categoryNavBar cursorPointer displayInlineBlock">
+                    <option id="optionNone" value="None" selected>None</option>
+                    <?php
+                    $categories = $dataToSend;
+                    foreach ($categories as $category) {
+                        echo "<option value='" . $category->getCategory() . "'>" . $category->getCategory() . "</option>";
+                    }
+                    ?>
+                </select>
+                <label><input class="form" type="submit" name="submit"></label><br>
+                <label class="invalidInputLabel displayBlock displayNone" name="categoryErrorLabel">Please choose a category</label>
+            </form>
+        </main>
+    </div>
+
+    <?php
+    include_once "Views/General/footer.php";
+    ?>
 </body>
 </html>
 

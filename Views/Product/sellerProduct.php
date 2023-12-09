@@ -14,42 +14,35 @@ include_once "Views/General/session.php";
 </head>
 
 <body>
-    <?php
-    include_once "Views/General/navbar.php";
-    ?>
-    <div class="textAlignCenter">
-        <button class=""><a href='/?controller=product&action=createSellerProduct'>Create</a></button>
+    <div class="mainContentWrapper">
+        <main>
+            <?php
+            include_once "Views/General/navbar.php";
+            ?>
+            <div class="textAlignCenter">
+                <button class=""><a href='/?controller=product&action=createSellerProduct'>Create</a></button>
+            </div>
+
+
+            <div>
+                <?php
+                if(count($dataToSend) > 0) {
+                    foreach ($dataToSend as $product) {
+                        echo "<tr><div class='product'>";
+                        echo "<div class='title'>" . $product->getTitle() . "</div>";
+                        echo "<div class='description'>" . $product->getDescription() . "</div>";
+                        echo "<div class='price'>$" . $product->getPrice() . "</div>";
+                        echo "<div><a /*href='/?controller=seller&action=view&id=" . $product->getProductId() . "'*/ class='buy-button'>View</a></div>";
+                        echo "<button><a href='/?controller=product&action=updateSellerProduct&id=" . $product->getProductId() . "' >Update</a></button>";
+                        echo "<button><a href='/?controller=product&action=deleteSellerProduct&id=" . $product->getProductId() . "' >Delete</a></button>";
+                        echo "</div></tr>";
+                    }
+                }
+                ?>
+            </div>
+        </main>
     </div>
 
-<table>
-    <?php
-    /*    foreach ($dataToSend as $product) {
-            echo "<tr class='table-row'>";
-            echo "<td class='table-title'>" . $product->getTitle() . "</td>";
-            echo "<td class='table-description'>" . $product->getDescription() . "</td>";
-            echo "<td class='table-price'>$" . $product->getPrice() . "</td>";
-            echo "<td><a href='/?controller=product&action=view&id=" . $product->getProductId() . "' class='table-buy-button'>View</a></td>";
-            echo "</tr>";
-        }
-        */?>
-
-    <div>
-    <?php
-        if(count($dataToSend) > 0) {
-            foreach ($dataToSend as $product) {
-                echo "<tr><div class='product'>";
-                echo "<div class='title'>" . $product->getTitle() . "</div>";
-                echo "<div class='description'>" . $product->getDescription() . "</div>";
-                echo "<div class='price'>$" . $product->getPrice() . "</div>";
-                echo "<div><a /*href='/?controller=seller&action=view&id=" . $product->getProductId() . "'*/ class='buy-button'>View</a></div>";
-                echo "<button><a href='/?controller=product&action=updateSellerProduct&id=" . $product->getProductId() . "' >Update</a></button>";
-                echo "<button><a href='/?controller=product&action=deleteSellerProduct&id=" . $product->getProductId() . "' >Delete</a></button>";
-                echo "</div></tr>";
-            }
-        }
-    ?>
-    </div>
-</table>
 <?php
 include_once "Views/General/footer.php";
 ?>

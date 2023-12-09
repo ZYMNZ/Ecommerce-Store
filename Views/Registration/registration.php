@@ -12,39 +12,43 @@
 </head>
 
 <body>
-<?php
-include_once "Views/General/navbar.php";
-?>
-<form action="/?controller=registration&action=register" method="POST" id="registrationForm">
-    <section class="loginRegistrationSection marginAuto">
-        <label class="hintLabel displayBlock denseHintLabel">First Name:</label>
-        <input type="text" name="firstName" class="inputField width100Percent" required> <br/>
-        <label class="hintLabel displayBlock denseHintLabel">Last Name:</label>
-        <input type="text" name="lastName" class="inputField width100Percent" required> <br/>
-        <label class="hintLabel displayBlock denseHintLabel">Email:</label>
-        <input type="text" name="email" class="inputField width100Percent" required> <br/>
-        <label name="emailCheck" class="displayBlock displayNone invalidInputLabel"></label>
-        <label class="hintLabel displayBlock denseHintLabel">Password:</label>
-        <label class="invalidInputLabel displayBlock displayNone" name="emptyPasswordLabel"></label>
-        <input type="password" name="password" class="inputField width100Percent" required> <br/>
-        <label class="hintLabel displayBlock denseHintLabel">Confirm Password:</label>
-        <input type="password" name="confirmPassword" class="inputField width100Percent" required> <br/>
-        <label class="invalidInputLabel displayBlock displayNone" name="notMatchingPasswordLabel"></label>
-    </section>
+    <div class="mainContentWrapper">
+        <main>
+            <?php
+            include_once "Views/General/navbar.php";
+            ?>
+            <form action="/?controller=registration&action=register" method="POST" id="registrationForm">
+                <section class="loginRegistrationSection marginAuto">
+                    <label class="hintLabel displayBlock denseHintLabel">First Name:</label>
+                    <input type="text" name="firstName" class="inputField width100Percent" required> <br/>
+                    <label class="hintLabel displayBlock denseHintLabel">Last Name:</label>
+                    <input type="text" name="lastName" class="inputField width100Percent" required> <br/>
+                    <label class="hintLabel displayBlock denseHintLabel">Email:</label>
+                    <input type="text" name="email" class="inputField width100Percent" required> <br/>
+                    <label name="emailCheck" class="displayBlock displayNone invalidInputLabel"></label>
+                    <label class="hintLabel displayBlock denseHintLabel">Password:</label>
+                    <label class="invalidInputLabel displayBlock displayNone" name="emptyPasswordLabel"></label>
+                    <input type="password" name="password" class="inputField width100Percent" required> <br/>
+                    <label class="hintLabel displayBlock denseHintLabel">Confirm Password:</label>
+                    <input type="password" name="confirmPassword" class="inputField width100Percent" required> <br/>
+                    <label class="invalidInputLabel displayBlock displayNone" name="notMatchingPasswordLabel"></label>
+                </section>
 
-    <section>
+                <section>
 
-    </section>
-    <section class="signButtons marginAuto">
-        <input type="submit" name="submit" value="Sign up" href="" class="defaultButtonStyling cursorPointer width100Percent borderNone">
-        <a href="/?controller=login&action=login">
-            <input type="button" name="signIn" value="Sign in" href="/?controller=login&action=login" class="defaultButtonStyling cursorPointer width100Percent borderNone">
-        </a> <br/>
-    </section>
-</form>
+                </section>
+                <section class="signButtons marginAuto">
+                    <input type="submit" name="submit" value="Sign up" href="" class="defaultButtonStyling cursorPointer width100Percent borderNone">
+                    <a href="/?controller=login&action=login">
+                        <input type="button" name="signIn" value="Sign in" href="/?controller=login&action=login" class="defaultButtonStyling cursorPointer width100Percent borderNone">
+                    </a> <br/>
+                </section>
+            </form>
+        </main>
+    </div>
 
-<?php
-include_once "Views/General/footer.php";
-?>
+    <?php
+    include_once "Views/General/footer.php";
+    ?>
 </body>
 </html>
