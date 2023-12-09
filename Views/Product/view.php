@@ -31,15 +31,17 @@ include_once "Views/General/session.php";
         <div class="title backgroundColorD9D9D9">
             <label><?php echo $dataToSend["product"]-> getTitle() ?></label>
         </div>
+
         <?php
         if (isset($_SESSION['user_id']))
         {
         ?>
+        <!--
         <div class="cart">
             <a href="?controller=cart&action=cart">
                 <img src="Views/images/cart.png" class="cartImage">
             </a>
-        </div>
+        </div>-->
         <?php
         }
         ?>
