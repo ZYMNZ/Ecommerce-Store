@@ -32,8 +32,9 @@ include_once "Views/General/navbar.php";
     echo "<tr><td>Last Name:</td><td>&emsp;&emsp;" . $user->getLastName() . "</td><td>";
     if (in_array('seller', $_SESSION['userRoles'], true)) {
         echo "<tr><td>Description:</td><td>&emsp;&emsp;" . $user->getDescription() . "</td><td>";
-        echo "<tr><td>Phone Number:</td><td>&emsp;&emsp;" . $user->getPhoneNumber() . "</td><td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href='/?controller=user&action=editPersonalDetails'><button>Edit...</button></a>";
+        echo "<tr><td>Phone Number:</td><td>&emsp;&emsp;" . $user->getPhoneNumber() . "</td><td>";
     }
+    echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href='/?controller=user&action=editPersonalDetails'><button>Edit...</button></a>";
     echo "<tr><td>Password:</td><td>&emsp;&emsp;********</td><td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href='/?controller=user&action=changePassword'><button>Change...</button></a>";
     ?>
 </table>
