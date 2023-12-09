@@ -43,12 +43,11 @@ include_once "Views/General/session.php";
                     <?php
                     // Get the list of categories from the data that was sent from the controller
                     // So that we can use it in the category dropdown (to update the product)
-                    $categories = $dataToSend[2];
+                    $categories = $dataToSend[1];
                     // Store the current product's category so that
                     // We can check whether this product's category
                     // Matches any category in the $categories variable
                     // When they are listed in the dropdown
-                    $productCategory = $dataToSend[1];
                     foreach ($categories as $category) {
 //                echo "<p>".$categories->getCategoryId() === $dataToSend[1]->getCategoryId()."</p>";
                         /*if ($categories->getCategoryId() === $dataToSend[1]->getCategoryId()) {
@@ -61,7 +60,7 @@ include_once "Views/General/session.php";
                         // Equal to the category currently being put in the
                         // Dropdown, it will put the selected option for that dropdown option
                         echo "<option value='" . $category->getCategoryId() . "' "
-                            . (($category->getCategoryId() == $productCategory->getCategoryId()) ? "selected" : ""). " >"
+                            . (($category->getCategoryId() == $dataToSend[0]->getCategoryId()) ? "selected" : ""). " >"
                             . $category->getCategory()
                             . "</option>";
                     }

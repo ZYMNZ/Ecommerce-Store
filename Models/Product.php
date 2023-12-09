@@ -81,6 +81,7 @@ class Product{
             $product->title = $row['title'];
             $product->description = $row['description'];
             $product->price = $row['price'];
+            $product->categoryId = $row["category_id"];
         }
         array_push($list,$product);
 
@@ -104,6 +105,7 @@ class Product{
             $product->title = $row['title'];
             $product->description = $row['description'];
             $product->price = $row['price'];
+            $product->categoryId = $row["category_id"];
             $products[] = $product;
         }
         return $products;
@@ -126,6 +128,7 @@ class Product{
                 $product->title = $row['title'];
                 $product->description = $row['description'];
                 $product->price = $row['price'];
+                $product->categoryId = $row["category_id"];
                 $products[] = $product;
             }
         }
@@ -147,25 +150,26 @@ class Product{
             $product->title = $result['title'];
             $product->description = $result['description'];
             $product->price = $result['price'];
+            $product->categoryId = $result["category_id"];
             return $product;
         }
         return null;
     }
-    public static function createProduct($pUserId, $pTitle, $pDescription, $pPrice): void {
+    public static function createProduct($pUserId, $pTitle, $pDescription, $pPrice, $pCategoryId): void {
         $mySqliConnection = openDatabaseConnection();
-        $sql = "INSERT INTO product (user_id, title, description, price) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO product (user_id, title, description, price, category_id) VALUES (?, ?, ?, ?, ?)";
         $stmt = $mySqliConnection->prepare($sql);
-        $stmt->bind_param('issd', $pUserId, $pTitle, $pDescription, $pPrice);
+        $stmt->bind_param('issdi', $pUserId, $pTitle, $pDescription, $pPrice, $pCategoryId);
         $stmt->execute();
         $stmt->close();
         $mySqliConnection->close();
     }
 
-    public static function updateProduct($pUserId, $pTitle, $pDescription, $pPrice, $pProductId) {
+    public static function updateProduct($pUserId, $pTitle, $pDescription, $pPrice, $pProductId, $pCategoryId) {
         $mySqliConnection = openDatabaseConnection();
-        $sql = "UPDATE product SET user_id = ?, title = ?, description = ?, price = ? WHERE product_id = ?";
+        $sql = "UPDATE product SET user_id = ?, title = ?, description = ?, price = ?, category_id = ? WHERE product_id = ?";
         $stmt = $mySqliConnection->prepare($sql);
-        $stmt->bind_param('issdi', $pUserId, $pTitle, $pDescription, $pPrice, $pProductId);
+        $stmt->bind_param('issdii', $pUserId, $pTitle, $pDescription, $pPrice, $pProductId, $pCategoryId);
         $stmt->execute();
         $stmt->close();
         $mySqliConnection->close();

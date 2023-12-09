@@ -55,9 +55,8 @@ class ProductController {
             noAccess($_SESSION['user_id'], $_SESSION['userRoles'], 'seller');
             // Get the current product and its category associated with it
             $product = new Product($_GET['id']);
-            $productCategory = new ProductCategory($_GET['id']);
             $categories = Category::listCategories();
-            $this->render($action, [$product, $productCategory, $categories]);
+            $this->render($action, [$product, $categories]);
         }
         else if($action == "submitProductUpdate") {
             noAccess($_SESSION['user_id'], $_SESSION['userRoles'], 'seller');

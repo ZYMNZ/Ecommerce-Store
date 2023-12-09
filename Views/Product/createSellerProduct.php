@@ -35,7 +35,7 @@ include_once "Views/General/session.php";
                     <?php
                     $categories = $dataToSend;
                     foreach ($categories as $category) {
-                        echo "<option value='" . $category->getCategory() . "'>" . $category->getCategory() . "</option>";
+                        echo "<option value='" . $category->getCategoryId() . "'>" . $category->getCategory() . "</option>";
                     }
                     ?>
                 </select>
