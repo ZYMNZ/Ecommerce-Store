@@ -31,20 +31,6 @@ include_once "Views/General/session.php";
         <div class="title backgroundColorD9D9D9">
             <label><?php echo $dataToSend["product"]-> getTitle() ?></label>
         </div>
-
-        <?php
-        if (isset($_SESSION['user_id']))
-        {
-        ?>
-        <!--
-        <div class="cart">
-            <a href="?controller=cart&action=cart">
-                <img src="Views/images/cart.png" class="cartImage">
-            </a>
-        </div>-->
-        <?php
-        }
-        ?>
     </section>
 
     <div class="creatorName">
@@ -123,24 +109,6 @@ include_once "Views/General/session.php";
 
                 }
             ?>
-            <!--<div class="review backgroundColorD9D9D9">
-                <div class="reviewPoster">
-                    <label class="fontWeightBold">Review Poster's Full Name</label>
-                </div>
-
-                <div class="reviewParagraph">
-                    <label>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy
-                        text ever since the 1500s, when an unknown printer
-                        took a galley of type and scrambled it to make a type specimen
-                        book. It has survived not only five centuries, but
-                        also the leap into electronic typesetting, remaining
-                        essentially unchanged.
-                    </label>
-                </div>
-            </div>-->
-
         </div>
     </section>
 </body>
