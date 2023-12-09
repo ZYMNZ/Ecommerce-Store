@@ -29,15 +29,21 @@ include_once "Views/General/navbar.php";
     <label>&emsp;Last Name:&emsp;&emsp;&emsp;
         <input type="text" name="lastName" value='<?php echo $data['user']->getLastName() ?>'>
     </label>
-    <br>
-    <label>&emsp;Description:&emsp;&emsp;&emsp;
-        <input type="text" name="description" value='<?php echo $data['user']->getDescription() ?>'>
-    </label>
-    <br>
-    <label>&emsp;Phone Number:&emsp;&emsp;&emsp;
-        <input type="text" name="phoneNumber" value='<?php echo $data['user']->getPhoneNumber() ?>'>
-    </label>
-        <input type="submit" name="submit" value="Update">
+    <?php
+    if (in_array('seller', $_SESSION['userRoles'], true)) {
+        ?>
+        <br>
+        <label>&emsp;Description:&emsp;&emsp;&emsp;
+            <input type="text" name="description" value='<?php echo $data['user']->getDescription() ?>'>
+        </label>
+        <br>
+        <label>&emsp;Phone Number:&emsp;&emsp;&emsp;
+            <input type="text" name="phoneNumber" value='<?php echo $data['user']->getPhoneNumber() ?>'>
+        </label>
+    <?php
+    }
+    ?>
+    <input type="submit" name="submit" value="Update">
 </form>
 <?php
 include_once "Views/General/footer.php";

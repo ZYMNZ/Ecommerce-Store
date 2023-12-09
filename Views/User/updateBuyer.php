@@ -5,8 +5,8 @@ $isSuccessful = User::updatePersonalInfo(
     $_POST['lastName'],
     $userInfo->getEmail(),
     $userInfo->getPassword(),
-    $_POST['description'],
-    $_POST['phoneNumber'],
+    $userInfo->getDescription(),
+    $userInfo->getPhoneNumber(),
     $_GET['id']
 );
 header('Location: /?controller=user&action=viewBuyers');

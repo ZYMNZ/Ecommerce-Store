@@ -44,8 +44,6 @@ include_once "Views/General/navbar.php";
         echo "<td>" . $user->getFirstName() . "</td>";
         echo "<td>" . $user->getLastName() . "</td>";
         echo "<td>" . $user->getEmail() . "</td>";
-        echo "<td>" . $user->getDescription() . "</td>";
-        echo "<td>" . $user->getPhoneNumber() . "</td>";
         echo "<td><button><a href='/?controller=user&action=editBuyer&id=$id'>Edit...</a></button></td>";
         echo "<td><button type='button' data-toggle='modal' data-target='#myModal'>Delete...</button></td></tr>";
     }

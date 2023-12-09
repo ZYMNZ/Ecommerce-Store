@@ -1,9 +1,3 @@
-<?php
-include_once "Views/General/session.php";
-noAccess($_SESSION['user_id'], $_SESSION['userRoles'], 'admin');
-
-?>
-
 <html lang="en">
 <head>
     <title>Personal Details</title>
@@ -18,7 +12,7 @@ noAccess($_SESSION['user_id'], $_SESSION['userRoles'], 'admin');
 <?php
 include_once "Views/General/navbar.php";
 ?>
-
+ 
 <h1>Profile</h1>
 <h2>Edit your First Name</h2>
 <br>

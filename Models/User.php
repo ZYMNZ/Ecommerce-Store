@@ -221,7 +221,7 @@ class User {
     {
         var_dump($pLastName, gettype($pLastName));
         $dBConnection = openDatabaseConnection();
-        $sql = "UPDATE user SET first_name = ?, last_name = ?, email = ?, password = md5(?), description = ?, phone_number = ? WHERE user_id = ?";
+        $sql = "UPDATE user SET first_name = ?, last_name = ?, email = ?, password = ?, description = ?, phone_number = ? WHERE user_id = ?";
         $stmt = $dBConnection->prepare($sql);
         $stmt->bind_param('ssssssi',
             $pFirstName,

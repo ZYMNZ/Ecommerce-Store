@@ -6,6 +6,7 @@ class Product{
     private string $title;
     private string $description;
     private float $price;
+    private int $categoryId;
 
 
     public function __construct
@@ -14,84 +15,31 @@ class Product{
         $pUserId = -1,
         $pDescription = "",
         $pTitle = "",
-        $pPrice = -1
+        $pPrice = -1,
+        $pCategoryId = -1
     )
     {
         // we check all cases inside the function
-        self::initializeProperties($pProductId,$pUserId,$pDescription,$pTitle,$pPrice);
+        $this->initializeProperties($pProductId,$pUserId,$pDescription,$pTitle,$pPrice,$pCategoryId);
     }
 
-
-    public function getProductId() : int
+    private function initializeProperties ($pProductId,$pUserId,$pDescription,$pTitle,$pPrice, $pCategoryId) : void
     {
-        return $this->productId;
-    }
-
-    public function setProductId(string $pProductId) : void
-    {
-        $this->productId = $pProductId;
-    }
-
-
-    public function getDescription() : string
-    {
-        return $this->description;
-    }
-
-    public function setDescription($pDescription) : void
-    {
-        $this->description = $pDescription;
-    }
-
-    public function getUserId(): int
-    {
-        return $this->userId;
-    }
-
-    public function setUserId(int $pUserId): void
-    {
-        $this->userId = $pUserId;
-    }
-
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(string $pTitle): void
-    {
-        $this->title = $pTitle;
-    }
-
-    public function getPrice(): float
-    {
-        return $this->price;
-    }
-
-    public function setPrice(float $pPrice): void
-    {
-        $this->price = $pPrice;
-    }
-
-
-    private function initializeProperties ($pProductId,$pUserId,$pDescription,$pTitle,$pPrice) : void
-    {
-        if ($pProductId < 0){
-            // use the default initialization if nothing was sent in the param
-            return;
-        }
+        if ($pProductId < 0) return;
         else if (
             $pProductId > 0 &&
             $pUserId > 0 &&
             strlen($pDescription) > 0 &&
             strlen($pTitle) > 0 &&
             $pPrice > 0
+            && $pCategoryId > 0
         ){
             $this->productId = $pProductId;
             $this->userId = $pUserId;
             $this->description = $pDescription;
             $this->title = $pTitle;
             $this->price = $pPrice;
+            $this->categoryId = $pCategoryId;
         }
         else if ($pProductId > 0){
             // initialize only if the Product id was sent
@@ -108,16 +56,16 @@ class Product{
 
                 $queryProductAssocRow = $getProductResult->fetch_assoc();
 
-                $this->productId = $pProductId;
+                $this->productId = $queryProductAssocRow['product_id'];
                 $this->userId = $queryProductAssocRow['user_id'];
                 $this->title = $queryProductAssocRow['title'];
                 $this->description = $queryProductAssocRow['description'];
                 $this->price = $queryProductAssocRow['price'];
+                $this->categoryId = $queryProductAssocRow['category_id'];
             }
         }
 
     }
-
 
     public function listProduct() : array{
 
@@ -143,12 +91,12 @@ class Product{
     {
         $products = [];
         $mySqliConnection = openDatabaseConnection();
-        $SQL = "SELECT * FROM product p JOIN product_category pc ON p.product_id = pc.product_id  WHERE pc.category_id = ?";
-        $stmt = $mySqliConnection->prepare($SQL);
+        $sql = "SELECT * FROM product WHERE category_id = ?";
+        $stmt = $mySqliConnection->prepare($sql);
         $stmt->bind_param('i', $categoryId);
         $stmt->execute();
         $results = $stmt->get_result();
-        // Fetch user data (assuming you have a user class or similar)
+        // Fetch products data
         while ($row = $results->fetch_assoc()){
             $product = new Product();
             $product->productId = $row['product_id'];
@@ -246,7 +194,6 @@ class Product{
 
         if ($result->num_rows > 0){
             $fetchAssoc = $result->fetch_assoc();
-//            var_dump($fetchAssoc);
             $user = new User();
             $user->initializeProperties(
                 $fetchAssoc["user_id"],
@@ -264,5 +211,63 @@ class Product{
         return null;
     }
 
+    public function getProductId(): int
+    {
+        return $this->productId;
+    }
 
+    public function setProductId(int $productId): void
+    {
+        $this->productId = $productId;
+    }
+
+    public function getUserId(): int
+    {
+        return $this->userId;
+    }
+
+    public function setUserId(int $userId): void
+    {
+        $this->userId = $userId;
+    }
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): void
+    {
+        $this->title = $title;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
+
+    public function getPrice(): float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(float $price): void
+    {
+        $this->price = $price;
+    }
+
+    public function getCategoryId(): int
+    {
+        return $this->categoryId;
+    }
+
+    public function setCategoryId(int $categoryId): void
+    {
+        $this->categoryId = $categoryId;
+    }
 }

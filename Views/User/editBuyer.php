@@ -38,14 +38,6 @@ $data['user']->getPhoneNumber() === 'NULL' && $data['user']->setPhoneNumber('Non
     <label>Email:
         <input type="text" name='email' value='<?php echo $data['user']->getEmail(); ?>'>
     </label>
-    <br>
-    <label>Description:
-        <input type="text" name='description' value='<?php echo $data['user']->getDescription(); ?>'>
-    </label>
-    <br>
-    <label>Phone Number:
-        <input type="text" name='phoneNumber' value='<?php echo $data['user']->getPhoneNumber(); ?>'>
-    </label>
     <input type="submit" name="submit" value="Update">
 </form>
 <?php

@@ -30,8 +30,10 @@ include_once "Views/General/navbar.php";
     $user->getPhoneNumber() === 'NULL' && $user->setPhoneNumber('None');
     echo "<tr><td>First Name:</td><td>&emsp;&emsp;" . $user->getFirstName() . "</td><td>";
     echo "<tr><td>Last Name:</td><td>&emsp;&emsp;" . $user->getLastName() . "</td><td>";
-    echo "<tr><td>Description:</td><td>&emsp;&emsp;" . $user->getDescription() . "</td><td>";
-    echo "<tr><td>Phone Number:</td><td>&emsp;&emsp;" . $user->getPhoneNumber() . "</td><td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href='/?controller=user&action=editPersonalDetails'><button>Edit...</button></a>";
+    if (in_array('seller', $_SESSION['userRoles'], true)) {
+        echo "<tr><td>Description:</td><td>&emsp;&emsp;" . $user->getDescription() . "</td><td>";
+        echo "<tr><td>Phone Number:</td><td>&emsp;&emsp;" . $user->getPhoneNumber() . "</td><td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href='/?controller=user&action=editPersonalDetails'><button>Edit...</button></a>";
+    }
     echo "<tr><td>Password:</td><td>&emsp;&emsp;********</td><td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href='/?controller=user&action=changePassword'><button>Change...</button></a>";
     ?>
 </table>
