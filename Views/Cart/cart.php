@@ -16,20 +16,9 @@ include_once "Views/General/session.php";
         <link rel="stylesheet" type="text/css" href="Views/styles/footer.css">
         <link rel="stylesheet" type="text/css" href="Views/styles/home.css">
         <link rel="stylesheet" type="text/css" href="Views/styles/cart.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     </head>
 
-    <script>
-
-        //to be continued ;)
-    // function toggle() {
-    // var x = document.getElementById("toggleDiv");
-    //     if (x.style.display === "none") {
-    //         x.style.display = "block";
-    //     } else {
-    //         x.style.display = "none";
-    //     }
-    // }
-    </script>
 
     <body>
     <div class="mainContentWrapper">
@@ -57,7 +46,7 @@ include_once "Views/General/session.php";
                         <div class="secondHalfCartItemBlock displayInlineBlock">
                             <div class="expandButtonContainer displayInlineFlex width100Percent justifyContentEnd">
                                 <div class="cartItemExpandButton cursorPointer textAlignCenter displayInlineBlock">
-                                    <button class="toggleButton" onclick="toggle()"><img src="Views/images/downArrow.png" class="expandArrow"></button>
+                                    <button class="deleteButton">Delete</button>
                                 </div>
                             </div>
 
@@ -74,7 +63,7 @@ include_once "Views/General/session.php";
                             <label>Request for this service:</label>
                         </div>
 
-                        <div class="displayBlock textAreaDiv" id=toggleDiv >
+                        <div class="displayBlock textAreaDiv" >
                             <textarea name="requestService" ></textarea>
                         </div>
                     </div>

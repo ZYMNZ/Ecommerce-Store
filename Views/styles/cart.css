@@ -107,7 +107,7 @@ textarea{
     border-width: 4px
 }
 
-.toggleButton{
+.deleteButton{
     aspect-ratio: 1;
     border-radius: 50%;
     display: grid;

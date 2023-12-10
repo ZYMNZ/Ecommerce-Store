@@ -99,7 +99,7 @@ class OrderProduct
     {
         try {
             $mySqliConnection = openDatabaseConnection();
-            $sql = "INSERT INTO order_product (order_id, product_Id) VALUES (?, ?)";
+            $sql = "INSERT INTO order_product (order_id, product_id) VALUES (?, ?)";
             $stmt = $mySqliConnection->prepare($sql);
             $stmt->bind_param('ii', $pOrderId, $pProductId);
             $isSuccessful = $stmt->execute();
