@@ -22,7 +22,7 @@ include_once "Views/General/session.php";
             <?php
             include_once "Views/General/navbar.php";
             ?>
-            <form action="?controller=product&action=submitProductCreation" method="post" class="productForm textAlignCenter">
+            <form action="?controller=product&action=submitProductCreation" method="post" enctype="multipart/form-data" class="productForm textAlignCenter">
                 <label>Title:<input class="form" type="text" name="title"></label><br>
                 <label class="invalidInputLabel displayBlock displayNone" name="titleErrorLabel"></label>
                 <label>Description:<textarea name="description" rows="2" cols="50"></textarea></label><br>
@@ -39,6 +39,13 @@ include_once "Views/General/session.php";
                     }
                     ?>
                 </select>
+
+                <br/>
+                <label>
+                    Upload an image for the product. The limit for the image size is 30 MB.:
+                </label>
+
+                <input type="file" name="productImage" value="Upload an image...">
                 <label><input class="form" type="submit" name="submit"></label><br>
                 <label class="invalidInputLabel displayBlock displayNone" name="categoryErrorLabel">Please choose a category</label>
             </form>

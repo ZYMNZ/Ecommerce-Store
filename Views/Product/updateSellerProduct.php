@@ -29,7 +29,7 @@ include_once "Views/General/session.php";
             //echo ($dataToSend[2][0]->getCategoryId() === $dataToSend[1]->getCategoryId()) ? 'true01' : 'false01';
             //echo ($dataToSend[2][1]->getCategoryId() === $dataToSend[1]->getCategoryId()) ? 'true02' : 'false02';
             ?>
-            <form action="/?controller=product&action=submitProductUpdate&id=<?php echo $dataToSend[0]->getProductId() . "\""; ?> class="textAlignCenter" method="post">
+            <form action="/?controller=product&action=submitProductUpdate&id=<?php echo $dataToSend[0]->getProductId() . "\""; ?> enctype="multipart/form-data" class="textAlignCenter" method="post">
             <label>Title:<input class="form" type="text" name="title" value=<?php echo "'" . $dataToSend[0]->getTitle() . "'" ?>></label><br>
             <label class="invalidInputLabel displayBlock displayNone" name="titleErrorLabel"></label>
             <label>Description:<textarea name="description" rows="2" cols="50"><?php echo $dataToSend[0]->getDescription() ?></textarea></label><br>
@@ -67,6 +67,11 @@ include_once "Views/General/session.php";
                     ?>
                 </select>
             </label><br>
+            <label>
+                Upload an image for the product. The limit for the image size is 30 MB.:
+            </label>
+
+            <input type="file" name="productImage" value="Upload an image...">
             <label>Submit:<input class="form" type="submit" name="submit"></label><br>
             <label class="invalidInputLabel displayBlock displayNone" name="categoryErrorLabel">Please choose a category</label>
 
