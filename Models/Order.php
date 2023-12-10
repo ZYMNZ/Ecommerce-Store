@@ -132,15 +132,18 @@ class Order {
 //        print_r($arrayProducts);
 
             $list = [];
-            foreach ($arrayProducts as $productId){
-                $prodId = $productId->getProductId();
+            if ($arrayProducts != null) {
+                foreach ($arrayProducts as $productId) {
+                    $prodId = $productId->getProductId();
 //                echo  "<br>". $prodId;
-                $product = new Product($prodId);
-                $categoryName = $product->getCategoryNameByProductId($prodId);
-                $list[] = array("title" => "{$product->getTitle()}" , "price" => "{$product->getPrice()}", "category" => "{$categoryName}");
-            }
+                    $product = new Product($prodId);
+                    $categoryName = $product->getCategoryNameByProductId($prodId);
+                    $list[] = array("title" => "{$product->getTitle()}", "price" => "{$product->getPrice()}","productId" => "{$product->getProductId()}", "category" => "{$categoryName}");
+                }
 //            print_r($list);
-            return $list;
+                return $list;
+            }
+            return null;
     }
 
 

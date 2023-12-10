@@ -11,8 +11,16 @@ include_once 'Models/OrderProduct.php';
                 $displayCart = new Order();
                 $display = $displayCart->displayCart($_SESSION['user_id']);
 //                var_dump($display);
-                $this->render($action,$display);
+                if ($display != null) {
+                    $this->render($action, $display);
+                }
+                else{
+                    $this->render($action);
+                }
             } else if ($action == "addToCart") {
+                $this->render($action);
+            }
+            else if ($action == "deleteCartProduct"){
                 $this->render($action);
             }
         }

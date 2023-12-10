@@ -140,6 +140,18 @@ class OrderProduct
         $conn->close();
     }
 
+    public function deleteProductOrder($pProductId) :void //: bool
+    {
+        $conn = openDatabaseConnection();
+        $sqlQuery = "DELETE FROM order_product where product_id = ?";
+        $prepareStmt = $conn->prepare($sqlQuery);
+        $prepareStmt->bind_param("i" , $pProductId);
+        $successful = $prepareStmt->execute();
+        $prepareStmt->close();
+        $conn->close();
+        //return $successful;
+    }
+
     public function getOrderId(): int
     {
         return $this->orderId;

@@ -112,4 +112,5 @@ textarea{
     border-radius: 50%;
     display: grid;
     place-items: center;
+    text-decoration: none;
 }
