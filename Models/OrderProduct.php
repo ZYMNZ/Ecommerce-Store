@@ -51,20 +51,21 @@ class OrderProduct
         }
         return null;
     }
-    private function getProductByOrder($pProductId): ?array
+    public static function getProductByOrder($pOrderId): ?array
     {
         $mySqliConnection = openDatabaseConnection();
-        $sql = "SELECT * FROM order_product WHERE order_Id = ?";
+        $sql = "SELECT * FROM order_product WHERE order_id = ?";
         $stmt = $mySqliConnection->prepare($sql);
-        $stmt->bind_param('i', $pProductId);
+        $stmt->bind_param('i', $pOrderId);
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
             $products = [];
-            while ($result = $result->fetch_assoc()) {
+//            var_dump($result);
+            while ($results = $result->fetch_assoc()) {
                 $orderProduct = new OrderProduct();
-                $orderProduct->orderId = $result['order_id'];
-                $orderProduct->productId = $result['product_Id'];
+                $orderProduct->orderId = $results['order_id'];
+                $orderProduct->productId = $results['product_id'];
                 $products[] = $orderProduct;
             }
             return $products;
@@ -72,14 +73,35 @@ class OrderProduct
         return null;
     }
 
+    //testing
+//    public static function getProductsByOrder($pOrderId): ?array
+//    {
+//        $mySqliConnection = openDatabaseConnection();
+//        $sql = "SELECT product_id FROM order_product WHERE order_id = ?";
+//        $stmt = $mySqliConnection->prepare($sql);
+//        $stmt->bind_param('i', $pOrderId);
+//        $stmt->execute();
+//        $result = $stmt->get_result();
+//        if ($result->num_rows > 0) {
+//            $products = [];
+////            var_dump($result);
+//            while ($results = $result->fetch_assoc()) {
+//                $orderProduct = new OrderProduct();
+//                $orderProduct->productId = $results['product_id'];
+//                $products[] = $orderProduct;
+//            }
+//            return $products;
+//        }
+//        return null;
+//    }
 
-    public static function createOrderProduct($pUserId, $pProductId): array
+    public static function createOrderProduct($pOrderId, $pProductId): array
     {
         try {
             $mySqliConnection = openDatabaseConnection();
             $sql = "INSERT INTO order_product (order_id, product_Id) VALUES (?, ?)";
             $stmt = $mySqliConnection->prepare($sql);
-            $stmt->bind_param('ii', $pUserId, $pProductId);
+            $stmt->bind_param('ii', $pOrderId, $pProductId);
             $isSuccessful = $stmt->execute();
             $orderId = $mySqliConnection->insert_id;
             $stmt->close();

@@ -1,15 +1,15 @@
 <?php
 include_once "database.php";
 include_once "Models/File.php";
+include_once "Models/Category.php";
+
 class Product{
     private int $productId;
     private int $userId;
     private string $title;
     private string $description;
     private float $price;
-    private string $productImagePath;
     private int $categoryId;
-    const PRODUCT_IMAGE_UPLOAD_PATH = "Views/Product/productImages/";
 
 
     public function __construct
@@ -19,15 +19,14 @@ class Product{
         $pDescription = "",
         $pTitle = "",
         $pPrice = -1,
-        $pProductImagePath = "",
         $pCategoryId = -1
     )
     {
         // we check all cases inside the function
-        $this->initializeProperties($pProductId,$pUserId,$pDescription,$pTitle,$pPrice, $pProductImagePath, $pCategoryId);
+        $this->initializeProperties($pProductId,$pUserId,$pDescription,$pTitle,$pPrice,$pCategoryId);
     }
 
-    private function initializeProperties ($pProductId,$pUserId,$pDescription,$pTitle,$pPrice, $pProductImagePath, $pCategoryId) : void
+    private function initializeProperties ($pProductId,$pUserId,$pDescription,$pTitle,$pPrice, $pCategoryId) : void
     {
         if ($pProductId < 0) return;
         else if (
@@ -36,7 +35,6 @@ class Product{
             strlen($pDescription) > 0 &&
             strlen($pTitle) > 0 &&
             $pPrice > 0
-            && strlen($pProductImagePath) > 0
             && $pCategoryId > 0
         ){
             $this->productId = $pProductId;
@@ -44,7 +42,6 @@ class Product{
             $this->description = $pDescription;
             $this->title = $pTitle;
             $this->price = $pPrice;
-            $this->productImagePath = $pProductImagePath;
             $this->categoryId = $pCategoryId;
         }
         else if ($pProductId > 0){
@@ -67,7 +64,6 @@ class Product{
                 $this->title = $queryProductAssocRow['title'];
                 $this->description = $queryProductAssocRow['description'];
                 $this->price = $queryProductAssocRow['price'];
-                $this->productImagePath = $queryProductAssocRow["product_image_path"] ?? "";
                 $this->categoryId = $queryProductAssocRow['category_id'];
             }
         }
@@ -88,7 +84,6 @@ class Product{
             $product->title = $row['title'];
             $product->description = $row['description'];
             $product->price = $row['price'];
-            $product->productImagePath = $row["productImagePath"];
             $product->categoryId = $row["category_id"];
         }
         array_push($list,$product);
@@ -113,7 +108,6 @@ class Product{
             $product->title = $row['title'];
             $product->description = $row['description'];
             $product->price = $row['price'];
-            $product->productImagePath = $row["product_image_path"];
             $product->categoryId = $row["category_id"];
             $products[] = $product;
         }
@@ -137,7 +131,6 @@ class Product{
                 $product->title = $row['title'];
                 $product->description = $row['description'];
                 $product->price = $row['price'];
-                $product->productImagePath = $row["product_image_path"] ?? "";
                 $product->categoryId = $row["category_id"];
                 $products[] = $product;
             }
@@ -160,96 +153,29 @@ class Product{
             $product->title = $result['title'];
             $product->description = $result['description'];
             $product->price = $result['price'];
-            $product->productImagePath = $result["product_image_path"];
             $product->categoryId = $result["category_id"];
             return $product;
         }
         return null;
     }
-
-    public static function getNextAutoIncrementId() : int
-    {
+    public static function createProduct($pUserId, $pTitle, $pDescription, $pPrice, $pCategoryId): void {
         $mySqliConnection = openDatabaseConnection();
-        $sqlQuery = "SELECT auto_increment
-            FROM information_schema.TABLES
-            WHERE table_schema = 'freelance'
-            AND table_name = 'product';
-        ";
-
-        $stmt = $mySqliConnection->prepare($sqlQuery);
-
+        $sql = "INSERT INTO product (user_id, title, description, price, category_id) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $mySqliConnection->prepare($sql);
+        $stmt->bind_param('issdi', $pUserId, $pTitle, $pDescription, $pPrice, $pCategoryId);
         $stmt->execute();
-        $result = $stmt->get_result();
-
-        $autoIncrementRow = $result->fetch_assoc();
-        $nextAutoincrementId = $autoIncrementRow["auto_increment"];
-        return $nextAutoincrementId;
+        $stmt->close();
+        $mySqliConnection->close();
     }
 
-
-    public static function createProduct($pUserId, $pTitle, $pDescription, $pPrice, $pCategoryId, $pProductImagePath = ""): void {
-        $uploadSuccessful = false;
-        if(strlen($pProductImagePath) > 0)
-        {
-            $uploadedFileExtension = strtolower(pathinfo($pProductImagePath, PATHINFO_EXTENSION));
-            $productImageName = File::getProductImageName(self::PRODUCT_IMAGE_UPLOAD_PATH, $uploadedFileExtension, self::getNextAutoIncrementId());
-            $uploadSuccessful = File::uploadProductImage(self::PRODUCT_IMAGE_UPLOAD_PATH, $productImageName, $_FILES["productImage"]["tmp_name"]);
-        }
-
-
-        var_dump($pProductImagePath);
-        if($uploadSuccessful || (strlen($pProductImagePath) == 0)) {
-            $mySqliConnection = openDatabaseConnection();
-            $sql = "INSERT INTO product (user_id, title, description, price, product_image_path, category_id) VALUES (?, ?, ?, ?, ?, ?)";
-            $stmt = $mySqliConnection->prepare($sql);
-            $productImagePathColumn = strlen($pProductImagePath) > 0? $productImageName : $pProductImagePath;
-            $stmt->bind_param('issdsi', $pUserId, $pTitle, $pDescription, $pPrice, $productImagePathColumn, $pCategoryId);
-            $stmtExecSuccess = $stmt->execute();
-
-            $stmt->close();
-            $mySqliConnection->close();
-        }
-        else
-        {
-            // TODO: redirect to an error page if the image uploaded was invalid
-        }
-    }
-
-    public static function updateProduct($pUserId, $pTitle, $pDescription, $pPrice, $pProductId, $pCategoryId, $pProductImagePath = "") {
-        $uploadSuccessful = false;
-        if(strlen($pProductImagePath) > 0)
-        {
-            $uploadedFileExtension = strtolower(pathinfo($pProductImagePath, PATHINFO_EXTENSION));
-            $productImageName = File::getProductImageName(self::PRODUCT_IMAGE_UPLOAD_PATH, $uploadedFileExtension, $pProductId);
-            $uploadSuccessful = File::uploadProductImage(self::PRODUCT_IMAGE_UPLOAD_PATH, $productImageName, $_FILES["productImage"]["tmp_name"]);
-        }
-
-        if($uploadSuccessful)
-        {
-            $mySqliConnection = openDatabaseConnection();
-            $sql = "UPDATE product SET user_id = ?, title = ?, description = ?, price = ?, category_id = ?, product_image_path = ? WHERE product_id = ?";
-            $stmt = $mySqliConnection->prepare($sql);
-            $stmt->bind_param('issdiis', $pUserId, $pTitle, $pDescription, $pPrice, $pProductId, $pCategoryId, $pProductImagePath);
-            $stmt->execute();
-            $stmt->close();
-            $mySqliConnection->close();
-        }
-        else if(
-            strlen($pProductImagePath) == 0
-        )
-        {
-            // If there was no image uploaded, update the columns but not the image path
-            $mySqliConnection = openDatabaseConnection();
-            $sql = "UPDATE product SET user_id = ?, title = ?, description = ?, price = ?, category_id = ? WHERE product_id = ?";
-            $stmt = $mySqliConnection->prepare($sql);
-            $stmt->bind_param('issdii', $pUserId, $pTitle, $pDescription, $pPrice, $pProductId, $pCategoryId);
-            $stmt->execute();
-            $stmt->close();
-            $mySqliConnection->close();
-        }
-        else {
-            // TODO: redirect to same page but say there was an error when uploading the file
-        }
+    public static function updateProduct($pUserId, $pTitle, $pDescription, $pPrice, $pProductId, $pCategoryId) {
+        $mySqliConnection = openDatabaseConnection();
+        $sql = "UPDATE product SET user_id = ?, title = ?, description = ?, price = ?, category_id = ? WHERE product_id = ?";
+        $stmt = $mySqliConnection->prepare($sql);
+        $stmt->bind_param('issdii', $pUserId, $pTitle, $pDescription, $pPrice, $pProductId, $pCategoryId);
+        $stmt->execute();
+        $stmt->close();
+        $mySqliConnection->close();
     }
 
     public static function deleteProduct($pProductId) {
@@ -351,16 +277,4 @@ class Product{
     {
         $this->categoryId = $categoryId;
     }
-
-    public function getProductImagePath() : string
-    {
-        return $this->productImagePath;
-    }
-
-    public function setProductImagePath(string $pProductImagePath): void
-    {
-        $this->productImagePath = $pProductImagePath;
-    }
-
-
 }

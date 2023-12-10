@@ -8,7 +8,10 @@ include_once 'Models/OrderProduct.php';
         {
             global $action;
             if($action == "cart") {
-                $this->render($action);
+                $displayCart = new Order();
+                $display = $displayCart->displayCart($_SESSION['user_id']);
+//                var_dump($display);
+                $this->render($action,$display);
             } else if ($action == "addToCart") {
                 $this->render($action);
             }
