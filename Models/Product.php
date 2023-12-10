@@ -1,5 +1,7 @@
 <?php
 include_once "database.php";
+include_once "Models/Category.php";
+
 class Product{
     private int $productId;
     private int $userId;
@@ -211,6 +213,28 @@ class Product{
             return
                 "{$user->getFirstName()} {$user->getLastName()}"
             ;
+        }
+        return null;
+    }
+
+    //fetching category name by a product Id
+    public function getCategoryNameByProductId($pProductId) : ?String
+    {
+        $conn = openDatabaseConnection();
+        $sql = "SELECT * FROM product join category on product.category_id = category.category_id WHERE product_id = ?";
+        $queryPrepare = $conn->prepare($sql);
+        $queryPrepare->bind_param("i",$pProductId);
+        $queryPrepare->execute();
+        $result = $queryPrepare->get_result();
+        if ($result->num_rows > 0){
+
+            $fetchAssoc = $result->fetch_assoc();
+            $category = new Category();
+            $category->initializeProperties(
+                $fetchAssoc['category_id'],
+                $fetchAssoc['category']
+            );
+            return $category->getCategory();
         }
         return null;
     }

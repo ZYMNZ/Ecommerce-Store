@@ -8,7 +8,7 @@ class Category {
         $this->initializeProperties($pCategoryId, $pCategory);
     }
 
-    private function initializeProperties ($pCategoryId, $pCategory) : void
+    public function initializeProperties ($pCategoryId, $pCategory) : void
     {
         if ($pCategoryId < 0) return;
         else if (

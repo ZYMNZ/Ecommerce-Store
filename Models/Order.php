@@ -1,5 +1,9 @@
 <?php
 include_once "database.php";
+include_once "Models/OrderProduct.php";
+include_once "Models/Product.php";
+
+
 class Order {
     private int $orderId;
     private int $userId;
@@ -109,7 +113,36 @@ class Order {
     {
         $timestamp = strtotime($date);
         return date("F j, Y H:i:s", $timestamp);
+//        It would be better to use 12h cycle => h:i:s a
+//        small h for 12hrs cycle and 'a' for am\pm
     }
+
+    // return the order id DONE
+    // from order id get all products id
+    // from products id get their title and price and category id
+    // from cat id get the cat name
+    public function displayCart($pUserId) : ?array
+    {
+            $orderObj = self::cartExists($pUserId);
+            $orderId = $orderObj->getOrderId();
+            $arrayProducts = OrderProduct::getProductByOrder($orderId);
+//            $test = new OrderProduct($pUserId);
+
+//            var_dump($arrayProducts->getProductId());
+//        print_r($arrayProducts);
+
+            $list = [];
+            foreach ($arrayProducts as $productId){
+                $prodId = $productId->getProductId();
+//                echo  "<br>". $prodId;
+                $product = new Product($prodId);
+                $categoryName = $product->getCategoryNameByProductId($prodId);
+                $list[] = array("title" => "{$product->getTitle()}" , "price" => "{$product->getPrice()}", "category" => "{$categoryName}");
+            }
+//            print_r($list);
+            return $list;
+    }
+
 
     public function getOrderId(): int
     {
@@ -160,5 +193,7 @@ class Order {
     {
         $this->isPaid = $isPaid;
     }
+
+
 
 }

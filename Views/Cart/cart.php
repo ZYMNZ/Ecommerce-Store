@@ -1,10 +1,13 @@
 <?php
 include_once "Views/General/session.php";
 
-
+//include_once "Models/Order.php";
+//$order = new Order();
+//$order->displayCart($_SESSION['user_id']);
+//var_dump($order);
 ?>
 
-<html>
+<html lang="en">
     <head>
         <title>Shopping Cart</title>
         <link rel="stylesheet" type="text/css" href="Views/styles/generalstyles.css">
@@ -15,6 +18,19 @@ include_once "Views/General/session.php";
         <link rel="stylesheet" type="text/css" href="Views/styles/cart.css">
     </head>
 
+    <script>
+
+        //to be continued ;)
+    // function toggle() {
+    // var x = document.getElementById("toggleDiv");
+    //     if (x.style.display === "none") {
+    //         x.style.display = "block";
+    //     } else {
+    //         x.style.display = "none";
+    //     }
+    // }
+    </script>
+
     <body>
     <div class="mainContentWrapper">
         <main>
@@ -22,31 +38,33 @@ include_once "Views/General/session.php";
             include_once "Views/General/navbar.php";
             ?>
 
-            <!--        style="  float: inline-start;"-->
             <div style="width: 50%">
                 <header class="shoppingCartHeader fontWeightBold">
                     <label>Shopping Cart</label>
                 </header>
 
                 <div class="wrapper">
+<!--                    --><?php //var_dump($dataToSend); ?>
+
+                    <?php foreach ($dataToSend as $data ) : ?>
 
                     <div class="cartItemBlock">
                         <div class="firstHalfCartItemBlock displayInlineBlock">
-                            <label class="fontWeightBold displayBlock categoryLabel">Category</label>
-                            <label class="productTitle" name="productTitle"><?php ?> Title of Product</label>
+                            <label class="fontWeightBold displayBlock categoryLabel"><?php echo $data['category'] ?></label>
+                            <label class="productTitle" name="productTitle"> <?php echo $data['title'] ?></label>
                         </div>
 
                         <div class="secondHalfCartItemBlock displayInlineBlock">
                             <div class="expandButtonContainer displayInlineFlex width100Percent justifyContentEnd">
                                 <div class="cartItemExpandButton cursorPointer textAlignCenter displayInlineBlock">
-                                    <img src="Views/images/downArrow.png" class="expandArrow">
+                                    <button class="toggleButton" onclick="toggle()"><img src="Views/images/downArrow.png" class="expandArrow"></button>
                                 </div>
                             </div>
 
 
                             <div class="priceContainer displayInlineFlex width100Percent justifyContentEnd">
                                 <div>
-                                    <label name="price"><?php ?>CAD $26.98</label>
+                                    <label name="price"><?php echo $data['price'] ?></label>
                                 </div>
                             </div>
 
@@ -56,42 +74,11 @@ include_once "Views/General/session.php";
                             <label>Request for this service:</label>
                         </div>
 
-                        <div class="displayBlock textAreaDiv">
+                        <div class="displayBlock textAreaDiv" id=toggleDiv >
                             <textarea name="requestService" ></textarea>
                         </div>
                     </div>
-                    <!--                -->
-
-                    <div class="cartItemBlock">
-                        <div class="firstHalfCartItemBlock displayInlineBlock">
-                            <label class="fontWeightBold displayBlock categoryLabel">Category</label>
-                            <label class="productTitle" name="productTitle"><?php ?> Title of Product</label>
-                        </div>
-
-                        <div class="secondHalfCartItemBlock displayInlineBlock">
-                            <div class="expandButtonContainer displayInlineFlex width100Percent justifyContentEnd">
-                                <div class="cartItemExpandButton cursorPointer textAlignCenter displayInlineBlock">
-                                    <img src="Views/images/downArrow.png" class="expandArrow">
-                                </div>
-                            </div>
-
-
-                            <div class="priceContainer displayInlineFlex width100Percent justifyContentEnd">
-                                <div>
-                                    <label name="price"><?php ?>CAD $26.98</label>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="displayBlock requestService" >
-                            <label>Request for this service:</label>
-                        </div>
-
-                        <div class="displayBlock textAreaDiv">
-                            <textarea name="requestService" ></textarea>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
 
                 </div>
             </div>
