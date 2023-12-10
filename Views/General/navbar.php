@@ -20,6 +20,7 @@ global $action, $controllerPrefix;
         if (($controllerPrefix === "home" && $action === "home")
             || ($controllerPrefix === "product" && $action === "product")
             || ($controllerPrefix === "product" && $action === "view")
+            || ($controllerPrefix === "cart" && $action === "cart")
         ) {
             include_once "Views/General/category.php";
         }

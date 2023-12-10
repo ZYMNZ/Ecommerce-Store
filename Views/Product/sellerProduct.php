@@ -1,6 +1,3 @@
-<?php
-include_once "Views/General/session.php";
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +29,7 @@ include_once "Views/General/session.php";
                         echo "<div class='title'>" . $product->getTitle() . "</div>";
                         echo "<div class='description'>" . $product->getDescription() . "</div>";
                         echo "<div class='price'>$" . $product->getPrice() . "</div>";
-                        echo "<div><a /*href='/?controller=seller&action=view&id=" . $product->getProductId() . "'*/ class='buy-button'>View</a></div>";
+                        echo "<div><a href='/?controller=product&action=viewSellerProduct&id=" . $product->getProductId() . "' class='buy-button'>View</a></div>";
                         echo "<button><a href='/?controller=product&action=updateSellerProduct&id=" . $product->getProductId() . "' >Update</a></button>";
                         echo "<button><a href='/?controller=product&action=deleteSellerProduct&id=" . $product->getProductId() . "' >Delete</a></button>";
                         echo "</div></tr>";

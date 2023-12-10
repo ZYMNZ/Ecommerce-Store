@@ -10,9 +10,10 @@ include_once 'Models/OrderProduct.php';
             if($action == "cart") {
                 $displayCart = new Order();
                 $display = $displayCart->displayCart($_SESSION['user_id']);
+                $categories = Category::listCategories();
 //                var_dump($display);
                 if ($display != null) {
-                    $this->render($action, $display);
+                    $this->render($action, ['display' => $display, 'categories' => $categories]);
                 }
                 else{
                     $this->render($action);

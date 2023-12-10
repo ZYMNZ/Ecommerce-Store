@@ -68,6 +68,19 @@ class ProductController {
             noAccess($_SESSION['user_id'], $_SESSION['userRoles'], 'seller');
             $this->render($action);
          }
+        else if ($action == "viewSellerProduct") {
+            noAccess($_SESSION['user_id'], $_SESSION['userRoles'], 'seller');
+            $product = new Product($_GET['id']);
+            $categories = Category::listCategories();
+            $reviewsAndUsers = Review::listReviewsAndUsersByProductId($product->getProductId());
+
+            $dataToSend = [
+                "product" => $product,
+                "categories" => $categories,
+                "reviewsAndUsers" => $reviewsAndUsers
+            ];
+            $this->render($action, $dataToSend);
+        }
     }
 
     function render($action, $dataToSend = [])
