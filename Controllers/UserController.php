@@ -1,6 +1,7 @@
 <?php
 include_once 'Models/User.php';
 include_once 'Views/General/session.php';
+
 class UserController
 {
 
@@ -65,7 +66,14 @@ class UserController
             noAccess($_SESSION['user_id'], $_SESSION['userRoles'], 'admin');
             $this->render($action);
         } else if ($action == "sellerRegister") {
-            $this->render($action);
+            if (isset($_SESSION['user_id'])
+                && in_array('buyer', $_SESSION['userRoles'], true)
+                && sizeof($_SESSION['userRoles']) == 1)
+            {
+                $this->render($action);
+            } else {
+                header('Location: /?controller=home&action=home');
+            }
         } else if ($action == "validateSellerRegistration") {
             $this->render($action);
         }

@@ -11,6 +11,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['userRoles'][] = 'seller';
         header("Location: /?controller=product&action=sellerProduct");
     } else {
-        header("Location: /?controller=user&action=register");
+        $_SESSION['error'] = 'wrongPassword';
+        header("Location: /?controller=user&action=sellerRegister");
     }
 }

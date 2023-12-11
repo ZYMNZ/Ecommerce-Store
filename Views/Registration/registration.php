@@ -24,6 +24,12 @@
                     <label class="hintLabel displayBlock denseHintLabel">Last Name:</label>
                     <input type="text" name="lastName" class="inputField width100Percent" required> <br/>
                     <label class="hintLabel displayBlock denseHintLabel">Email:</label>
+                    <?php
+                    if (isset($_SESSION['error']) && $_SESSION['error'] === 'email already exists') {
+                        echo "<label class='invalidInputLabel'>The {$_SESSION['error']}</label>";
+                        unset($_SESSION['error']);
+                    }
+                    ?>
                     <input type="text" name="email" class="inputField width100Percent" required> <br/>
                     <label name="emailCheck" class="displayBlock displayNone invalidInputLabel"></label>
                     <label class="hintLabel displayBlock denseHintLabel">Password:</label>

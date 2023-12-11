@@ -178,6 +178,20 @@ class User {
         return null;
     }
 
+    public static function checkForExistingEmail($pEmail): bool
+    {
+        $dBConnection = openDatabaseConnection();
+        $SQL = "SELECT * FROM user WHERE email = ?";
+        $stmt = $dBConnection->prepare($SQL);
+        $stmt->bind_param('s', $pEmail);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            return true;
+        }
+        return false;
+    }
+
     public static function registerUser($pPostArray) : ?bool
     {
         $results = self::createUser($pPostArray);

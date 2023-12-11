@@ -45,9 +45,6 @@ function checkCategoryIsNone() {
     return categorySelectedIsNone;
 }
 
-
-
-
 function setUpEventHandlers() {
     $("[name='submit']").click(function(event) {
 
