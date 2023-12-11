@@ -29,6 +29,7 @@ include_once "Views/General/session.php";
                 <label>Price:<input class="form" type="text" name="price"></label><br>
                 <label class="invalidInputLabel displayBlock displayNone" name="emptyPriceErrorLabel"></label>
                 <label class="invalidInputLabel displayBlock displayNone" name="notANumberPriceErrorLabel"></label>
+                <label class="invalidInputLabel displayBlock displayNone" name="notTwoDecimalsPriceErrorLabel"></label>
 
                 <select name="category"  class="categoryNavBar cursorPointer displayInlineBlock">
                     <option id="optionNone" value="None" selected>None</option>

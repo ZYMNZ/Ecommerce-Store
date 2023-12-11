@@ -82,7 +82,7 @@ class Order {
     public static function orderConfirm($pOrderId): void
     {
         $dBConnection = openDatabaseConnection();
-        $sql = "UPDATE `order` SET order_date = current_timestamp(), isPaid = TRUE WHERE order_id = ?";
+        $sql = "UPDATE `order` SET order_date = date_format(current_timestamp(),'%Y-%m-%d %h:%i:%s %tt'), isPaid = TRUE WHERE order_id = ?";
         $stmt = $dBConnection->prepare($sql);
         $stmt->bind_param('i', $pOrderId);
         $stmt->execute();
@@ -112,7 +112,7 @@ class Order {
     private function convertDate($date): string
     {
         $timestamp = strtotime($date);
-        return date("F j, Y H:i:s", $timestamp);
+        return date("F j, Y h:i:s a", $timestamp);
 //        It would be better to use 12h cycle => h:i:s a
 //        small h for 12hrs cycle and 'a' for am\pm
     }
@@ -124,24 +124,22 @@ class Order {
     public function displayCart($pUserId) : ?array
     {
             $orderObj = self::cartExists($pUserId);
-            $orderId = $orderObj->getOrderId();
-            $arrayProducts = OrderProduct::getProductByOrder($orderId);
-//            $test = new OrderProduct($pUserId);
+            if ($orderObj !== null) {
+                $orderId = $orderObj->getOrderId();
+                $arrayProducts = OrderProduct::getProductByOrder($orderId);
 
-//            var_dump($arrayProducts->getProductId());
-//        print_r($arrayProducts);
+                $list = [];
+                if ($arrayProducts != null) {
+                    foreach ($arrayProducts as $productId) {
+                        $prodId = $productId->getProductId();
 
-            $list = [];
-            if ($arrayProducts != null) {
-                foreach ($arrayProducts as $productId) {
-                    $prodId = $productId->getProductId();
-//                echo  "<br>". $prodId;
-                    $product = new Product($prodId);
-                    $categoryName = $product->getCategoryNameByProductId($prodId);
-                    $list[] = array("title" => "{$product->getTitle()}", "price" => "{$product->getPrice()}","productId" => "{$product->getProductId()}", "category" => "{$categoryName}");
+                        $product = new Product($prodId);
+                        $categoryName = $product->getCategoryNameByProductId($prodId);
+                        $list[] = array("title" => "{$product->getTitle()}", "price" => "{$product->getPrice()}", "productId" => "{$product->getProductId()}", "category" => "{$categoryName}");
+                    }
+
+                    return $list;
                 }
-//            print_r($list);
-                return $list;
             }
             return null;
     }

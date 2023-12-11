@@ -36,7 +36,7 @@ include_once "Views/General/session.php";
                     echo "<tr><div class='product'>";
                     echo "<div class='title'>" . $product->getTitle() . "</div>";
                     echo "<div class='description'>" . $product->getDescription() . "</div>";
-                    echo "<div class='price'>$" . $product->getPrice() . "</div>";
+                    echo "<div class='price'>$" . number_format($product->getPrice(), 2, '.', ',') . "</div>";
                     echo "<div><a href='/?controller=product&action=view&id=" . $product->getProductId() . "' class='buy-button'>View</a></div>";
                     echo "</div></tr>";
                 }

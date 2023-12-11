@@ -20,8 +20,14 @@ include_once "Views/General/navbar.php";
     <form action="/?controller=user&action=validateSellerRegistration" method="post">
         <section class="loginRegistrationSection marginAuto">
             <label style="font-size: 30px" class="hintLabel displayBlock">Please enter your current password to sign up
-                <input type="password" name="password" class="inputField width100Percent" placeholder="password">
+                <input type="password" name="password" class="inputField width100Percent" placeholder="password" required>
             </label><br>
+            <?php
+            if (isset($_SESSION['error']) && $_SESSION['error'] == 'wrongPassword') {
+                echo "<label>The password is incorrect</label>";
+                unset($_SESSION['error']);
+            }
+            ?>
             <input type="submit" name="submit" value="Sign up" class="defaultButtonStyling cursorPointer width100Percent borderNone">
         </section>
     </form>
