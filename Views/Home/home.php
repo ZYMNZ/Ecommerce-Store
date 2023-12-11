@@ -14,11 +14,11 @@ include_once 'Views/General/session.php';
     </head>
 
     <body>
+    <?php
+    include_once "Views/General/navbar.php";
+    ?>
         <div class="mainContentWrapper">
             <main>
-                <?php
-                include_once "Views/General/navbar.php";
-                ?>
                 <div class="wrapper">
                     <section id="heroSection">
                         <section class="headerParagraphSection">

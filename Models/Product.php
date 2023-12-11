@@ -121,6 +121,30 @@ class Product{
         }
         return $products;
     }
+    public static function getProductsByNotSpecificUserIdAndCategory($pUserId, $pCategoryId): array
+    {
+        $products = [];
+        $mySqliConnection = openDatabaseConnection();
+        $sql = "SELECT * FROM product WHERE user_id != ? AND category_id = ?";
+        $stmt = $mySqliConnection->prepare($sql);
+        $stmt->bind_param('ii', $pUserId, $pCategoryId);
+        $stmt->execute();
+        $results = $stmt->get_result();
+        if ($results->num_rows > 0){
+            while ($row = $results->fetch_assoc()) {
+                $product = new Product();
+                $product->productId = $row['product_id'];
+                $product->userId = $row['user_id'];
+                $product->title = $row['title'];
+                $product->description = $row['description'];
+                $product->price = $row['price'];
+                $product->productImagePath = $row["product_image_path"] ?? "";
+                $product->categoryId = $row["category_id"];
+                $products[] = $product;
+            }
+        }
+        return $products;
+    }
 
     public static function getProductsByUserId($pUserId): ?array
     {

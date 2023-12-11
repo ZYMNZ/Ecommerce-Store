@@ -32,13 +32,17 @@ include_once "Views/General/session.php";
                     }
                     */?>
                 <?php
-                foreach ($dataToSend["products"] as $product) {
-                    echo "<tr><div class='product'>";
-                    echo "<div class='title'>" . $product->getTitle() . "</div>";
-                    echo "<div class='description'>" . $product->getDescription() . "</div>";
-                    echo "<div class='price'>$" . number_format($product->getPrice(), 2, '.', ',') . "</div>";
-                    echo "<div><a href='/?controller=product&action=view&id=" . $product->getProductId() . "' class='buy-button'>View</a></div>";
-                    echo "</div></tr>";
+                if (!empty($dataToSend["products"])) {
+                    foreach ($dataToSend["products"] as $product) {
+                        echo "<tr><div class='product'>";
+                        echo "<div class='title'>" . $product->getTitle() . "</div>";
+                        echo "<div class='description'>" . $product->getDescription() . "</div>";
+                        echo "<div class='price'>$" . number_format($product->getPrice(), 2, '.', ',') . "</div>";
+                        echo "<div><a href='?controller=product&action=view&id=" . $product->getProductId() . "' class='buy-button'>View</a></div>";
+                        echo "</div></tr>";
+                    }
+                } else {
+                    echo "<label class='title'>This category currently has no products</label>";
                 }
                 ?>
             </table>

@@ -6,7 +6,7 @@
 $categories = $dataToSend["categories"] ?? $dataToSend;
 ?>
     <section>
-        <form id="category" action="/?controller=product&action=product" method="post">
+        <form id="category" action="/?controller=general&action=handleCategoryForm" method="post">
             <select name="category"  class="categoryNavBar cursorPointer" required>
                 <option id="optionNone" value="None" selected disabled>Choose Category</option>
                 <?php
@@ -14,9 +14,11 @@ $categories = $dataToSend["categories"] ?? $dataToSend;
                     echo "<option value='" . $category->getCategory() . "'>" . $category->getCategory() . "</option>";
                 }
                 ?>
+                <input type="hidden" name="selectedCategory" id="selectedCategory">
             </select>
         </form>
     </section>
+
 <script>
     /*const form = document.querySelector('form');
     const option = document.querySelector('#optionNone');
@@ -34,18 +36,28 @@ $categories = $dataToSend["categories"] ?? $dataToSend;
     // var selectedName = $('#category').val();
     // console.log(txtName);
 
-    document.querySelector('select[name="category"]').addEventListener('change', function () {
-        // console.log("inside blub blub")
 
-        // if(!document.getElementById("optionNone").innerHTML) {
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // Retrieve the stored category from local storage
+        const storedCategory = localStorage.getItem('selectedCategory');
+
+        // Set the hidden input value with the stored category
+        document.querySelector("#selectedCategory").value = storedCategory || '';
+
+        // Event listener for select change
+        document.querySelector('select[name="category"]').addEventListener('change', function () {
+            const selectedCategory = this.value;
+            document.querySelector("#selectedCategory").value = selectedCategory;
+
+            // Store the selected category in local storage
+            localStorage.setItem('selectedCategory', selectedCategory);
+            // Submit the form programmatically
             document.getElementById('category').submit();
-        // }
-
-        // }
+        });
     });
 
-
-    // Work on later to prevent None from submitting
+// Work on later to prevent None from submitting
     /*const form = document.querySelector('form');
     const select = document.querySelector('select');
     const optionNone = document.querySelector('#optionNone');

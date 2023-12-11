@@ -1,25 +1,20 @@
 <?php
 include_once 'Models/Category.php';
-//remove controller
+include_once 'Models/Product.php';
+include_once 'Views/General/session.php';
 class GeneralController {
     function route()
     {
         global $action;
-
-        /*if ($action == "category") {
+        if ($action == "handleCategoryForm") {
             $categories = Category::listCategories();
             $this->render($action, $categories);
-        } else if ($action == "navbar") {
-            $this->render($action);
-
-        }*/
-
+        }
     }
 
     function render($action, $dataToSend = [])
     {
         extract($dataToSend);
-
         include_once "Views/General/$action.php";
     }
 }
