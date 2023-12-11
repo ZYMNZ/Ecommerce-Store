@@ -16,7 +16,6 @@ include_once "Views/General/session.php";
         <link rel="stylesheet" type="text/css" href="Views/styles/footer.css">
         <link rel="stylesheet" type="text/css" href="Views/styles/home.css">
         <link rel="stylesheet" type="text/css" href="Views/styles/cart.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     </head>
 
     <?php $subPrice=0 ?>
@@ -33,7 +32,6 @@ include_once "Views/General/session.php";
                 </header>
 
                 <div class="wrapper">
-<!--                    --><?php //var_dump($dataToSend); ?>
 
                     <?php foreach ($dataToSend as $data ) : ?>
 
@@ -91,10 +89,12 @@ include_once "Views/General/session.php";
 
                 <div class="totalPrice">
                     <label>Total Price</label>
-                    <label>CAD <?php echo ($subPrice + $estimatedtax); ?></label>
+                    <label>CAD <?php $totalPrice = $subPrice + $estimatedtax; echo ($totalPrice); ?></label>
                 </div>
                 <div style="padding: 310px 0 0;">
-                    <a href="/?controller=order&action=orderConfirmed"><button class="confirmButton"></button></a>
+                    <?php if ($totalPrice > 0){ ?>
+                    <a href="?controller=order&action=orderConfirmed"><button class="confirmButton">CHECKOUT</button></a>
+                    <?php } ?>
                 </div>
             </div>
         </main>

@@ -73,27 +73,6 @@ class OrderProduct
         return null;
     }
 
-    //testing
-//    public static function getProductsByOrder($pOrderId): ?array
-//    {
-//        $mySqliConnection = openDatabaseConnection();
-//        $sql = "SELECT product_id FROM order_product WHERE order_id = ?";
-//        $stmt = $mySqliConnection->prepare($sql);
-//        $stmt->bind_param('i', $pOrderId);
-//        $stmt->execute();
-//        $result = $stmt->get_result();
-//        if ($result->num_rows > 0) {
-//            $products = [];
-////            var_dump($result);
-//            while ($results = $result->fetch_assoc()) {
-//                $orderProduct = new OrderProduct();
-//                $orderProduct->productId = $results['product_id'];
-//                $products[] = $orderProduct;
-//            }
-//            return $products;
-//        }
-//        return null;
-//    }
 
     public static function createOrderProduct($pOrderId, $pProductId): array
     {
@@ -140,16 +119,16 @@ class OrderProduct
         $conn->close();
     }
 
-    public function deleteProductOrder($pProductId) :void //: bool
+    public function deleteProductOrder($pProductId) : bool
     {
         $conn = openDatabaseConnection();
         $sqlQuery = "DELETE FROM order_product where product_id = ?";
         $prepareStmt = $conn->prepare($sqlQuery);
         $prepareStmt->bind_param("i" , $pProductId);
-        $successful = $prepareStmt->execute();
-        $prepareStmt->close();
-        $conn->close();
-        //return $successful;
+        //$successful = $prepareStmt->execute();
+//        $prepareStmt->close();
+//        $conn->close();
+        return $prepareStmt->execute();
     }
 
     public function getOrderId(): int

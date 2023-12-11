@@ -1,4 +1,8 @@
 .footer {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: 100%;
     background-color: #10215D;
     height: 14vh;
 }

@@ -5,7 +5,7 @@ class OrderController{
     function route(): void
     {
         global $action;
-        if ($action == "orderConfirmed") {
+        if ($action == "orderConfirmed" || $action == "greeting") {
             $this->render($action);
         }
     }
