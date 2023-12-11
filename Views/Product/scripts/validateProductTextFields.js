@@ -101,7 +101,7 @@ async function checkFileType(fileInputElement, fileTypes) {
         var fileReader = new FileReader();
 
 
-        var blobArrayBuffer = await imageBlob.arrayBuffer();
+        var blobArrayBuffer = await imageBlob.slice(0,4).arrayBuffer();
 
             // Take the 4 first bytes of the file to check the header of the file
             // This header will help us determine the type of the file

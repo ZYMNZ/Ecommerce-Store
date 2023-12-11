@@ -249,12 +249,29 @@ class Product{
 
     public static function deleteProduct($pProductId) {
         $mySqliConnection = openDatabaseConnection();
+        self::deleteProductImage($mySqliConnection, $pProductId);
         $sql = "DELETE FROM product WHERE product_id = ?";
         $stmt = $mySqliConnection->prepare($sql);
         $stmt->bind_param('i', $pProductId);
         $stmt->execute();
         $stmt->close();
         $mySqliConnection->close();
+    }
+
+    private static function deleteProductImage($sqliConnection, $pProductId) : void
+    {
+        $sqlQuery = "SELECT product_image_path FROM PRODUCT
+            WHERE PRODUCT_ID = ?
+        ";
+
+        $sqliStmt = $sqliConnection->prepare($sqlQuery);
+        $sqliStmt->bind_param("i", $pProductId);
+        $sqliStmt->execute();
+
+        $result = $sqliStmt->get_result();
+
+        $productImagePathRow = $result->fetch_assoc();
+        unlink($productImagePathRow["product_image_path"]);
     }
 
     //to be continued

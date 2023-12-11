@@ -41,7 +41,16 @@
 
             <section class="productBodySection marginAuto displayFlex">
                 <div class="productImageDiv displayInlineFlex backgroundColorD9D9D9">
-                    <img src="Views/images/java.png" rel="JAVA IMAGE" class="productImage">
+                    <img src="<?php
+                    $productImagePath = $dataToSend["product"]->getProductImagePath();
+                    if(strlen($productImagePath) > 0)
+                    {
+                        echo $productImagePath;
+                    }
+                    else {
+                        echo "Views/images/no-photo.png";
+                    }
+                    ?>" class="productImage">
                 </div>
                 <section class="productPriceBuySection displayFlex">
                     <div class="productPriceDiv">
