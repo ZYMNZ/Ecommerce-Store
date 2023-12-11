@@ -9,19 +9,15 @@ include_once 'Models/OrderProduct.php';
         {
             global $action;
             if ($action == "cart") {
-                $displayCart = new Order();
-                $display = $displayCart->displayCart($_SESSION['user_id']);
+                $display = Order::displayCart($_SESSION['user_id']);
                 $categories = Category::listCategories();
 //                var_dump($display);
                 if ($display != null) {
                     $this->render($action, ['display' => $display, 'categories' => $categories]);
                 }
-//                if ($display !== null) {
-//                    $this->render($action, $display);
-//                }
-//                else{
-                $this->render($action);
-//                }
+                else{
+                $this->render($action, $categories);
+                }
             } else if ($action == "addToCart") {
                 $this->render($action);
             } else if ($action == "deleteCartProduct") {

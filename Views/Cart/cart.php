@@ -30,7 +30,12 @@ include_once "Views/General/session.php";
                 <header class="shoppingCartHeader fontWeightBold">
                     <label>Shopping Cart</label>
                 </header>
-
+                <?php
+                if (isset($_SESSION['error'])) {
+                    echo "<label>{$_SESSION['error']}</label>";
+                }
+                if (isset($dataToSend['display'])) {
+                ?>
                 <div class="wrapper">
 
                     <?php foreach ($dataToSend['display'] as $data ) : ?>
@@ -69,6 +74,11 @@ include_once "Views/General/session.php";
                     <?php endforeach; ?>
 
                 </div>
+                <?php
+                } else {
+                    echo "<label>Your shopping cart is currently empty</label>";
+                }
+                ?>
             </div>
 
 
@@ -101,7 +111,8 @@ include_once "Views/General/session.php";
     </div>
 
     <?php
-        include_once "Views/General/footer.php";
+    unset($_SESSION['error']);
+    include_once "Views/General/footer.php";
     ?>
     </body>
 </html>

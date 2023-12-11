@@ -56,7 +56,7 @@
                         echo "<h3>Must be logged in to purchase</h3>";
                     } else {
                         ?>
-                        <a href='<?php echo "/?controller=cart&action=addToCart&id=" . $dataToSend["product"]-> getProductId() ?>' class="buyButtonAnchor backgroundColorD9D9D9">
+                        <a href='<?php echo "?controller=cart&action=addToCart&id=" . $dataToSend["product"]-> getProductId() ?>' class="buyButtonAnchor backgroundColorD9D9D9">
                             Add to Cart
                         </a>
                         <?php

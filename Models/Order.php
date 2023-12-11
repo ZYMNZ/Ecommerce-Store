@@ -49,7 +49,7 @@ class Order {
     private function getOrderById($pOrderId): void
     {
         $mySqliConnection = openDatabaseConnection();
-        $sql = "SELECT * FROM order WHERE order_id = ?";
+        $sql = "SELECT * FROM `order` WHERE order_id = ?";
         $stmt = $mySqliConnection->prepare($sql);
         $stmt->bind_param('i', $pOrderId);
         $stmt->execute();
@@ -121,27 +121,27 @@ class Order {
     // from order id get all products id
     // from products id get their title and price and category id
     // from cat id get the cat name
-    public function displayCart($pUserId) : ?array
+    public static function displayCart($pUserId) : ?array
     {
-            $orderObj = self::cartExists($pUserId);
-            if ($orderObj !== null) {
-                $orderId = $orderObj->getOrderId();
-                $arrayProducts = OrderProduct::getProductByOrder($orderId);
+        $orderObj = self::cartExists($pUserId);
+        if ($orderObj !== null) {
+            $orderId = $orderObj->getOrderId();
+            $arrayProducts = OrderProduct::getProductByOrder($orderId);
 
-                $list = [];
-                if ($arrayProducts != null) {
-                    foreach ($arrayProducts as $productId) {
-                        $prodId = $productId->getProductId();
+            $list = [];
+            if ($arrayProducts != null) {
+                foreach ($arrayProducts as $productId) {
+                    $prodId = $productId->getProductId();
 
-                        $product = new Product($prodId);
-                        $categoryName = $product->getCategoryNameByProductId($prodId);
-                        $list[] = array("title" => "{$product->getTitle()}", "price" => "{$product->getPrice()}", "productId" => "{$product->getProductId()}", "category" => "{$categoryName}");
-                    }
-
-                    return $list;
+                    $product = new Product($prodId);
+                    $categoryName = $product->getCategoryNameByProductId($prodId);
+                    $list[] = array("title" => "{$product->getTitle()}", "price" => "{$product->getPrice()}", "productId" => "{$product->getProductId()}", "category" => "{$categoryName}");
                 }
+
+                return $list;
             }
-            return null;
+        }
+        return null;
     }
 
 
