@@ -8,6 +8,7 @@ include_once 'Models/OrderProduct.php';
         function route(): void
         {
             global $action;
+            noAccess($_SESSION['user_id'], $_SESSION['userRoles'], 'buyer');
             if ($action == "cart") {
                 $display = Order::displayCart($_SESSION['user_id']);
                 $categories = Category::listCategories();

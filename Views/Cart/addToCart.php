@@ -1,9 +1,14 @@
 <?php
+$orderId = null;
 $cart = Order::cartExists($_SESSION['user_id']);
+$orderId = null;
 if ($cart === null) {
     $cart = Order::createOrder($_SESSION['user_id']);
+    $orderId = $cart['orderId'];
+} else {
+    $orderId = $cart->getOrderId();
 }
-$orderProduct = OrderProduct::createOrderProduct($cart->getOrderId(), $_GET['id']);
+$orderProduct = OrderProduct::createOrderProduct($orderId, $_GET['id']);
 if ($orderProduct['isSuccessful'] === false) {
     $_SESSION['error'] = 'cannot add the same product';
 }
