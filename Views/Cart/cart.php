@@ -30,7 +30,12 @@ include_once "Views/General/session.php";
                 <header class="shoppingCartHeader fontWeightBold">
                     <label>Shopping Cart</label>
                 </header>
-
+                <?php
+                if (isset($_SESSION['error'])) {
+                    echo "<label>{$_SESSION['error']}</label>";
+                }
+                if (isset($dataToSend['display'])) {
+                ?>
                 <div class="wrapper">
 
                     <?php foreach ($dataToSend['display'] as $data ) : ?>
@@ -52,7 +57,8 @@ include_once "Views/General/session.php";
 
                             <div class="priceContainer displayInlineFlex width100Percent justifyContentEnd">
                                 <div>
-                                    <label name="price"><?php echo $data['price'] ?></label>
+
+                                    <label name="price"><?php echo "$" . number_format($data['price'], 2, '.', ',') ?></label>
                                 </div>
                             </div>
                             <?php $subPrice +=$data['price']; ?>
@@ -69,6 +75,11 @@ include_once "Views/General/session.php";
                     <?php endforeach; ?>
 
                 </div>
+                <?php
+                } else {
+                    echo "<label>Your shopping cart is currently empty</label>";
+                }
+                ?>
             </div>
 
 
@@ -77,19 +88,19 @@ include_once "Views/General/session.php";
             <div class="priceContainerBlock">
                 <div class="subTotal">
                     <label>Subtotal</label>
-                    <label>CAD <?php echo $subPrice;?></label>
+                    <label>CAD $<?php echo number_format($subPrice, 2, '.', ',');?></label>
 
                 </div>
 
                 <div class="estimatedTax" style="top: 8%">
                     <label>Estimated Tax</label>
-                    <label>CAD <?php $estimatedtax = number_format($subPrice * 0.15,2); echo $estimatedtax;?></label>
+                    <label>CAD $<?php $estimatedtax = number_format($subPrice * 0.15,2, '.', ','); echo $estimatedtax;?></label>
 
                 </div>
 
                 <div class="totalPrice">
                     <label>Total Price</label>
-                    <label>CAD <?php $totalPrice = $subPrice + $estimatedtax; echo ($totalPrice); ?></label>
+                    <label>CAD $<?php $totalPrice = $subPrice + $estimatedtax; echo number_format($totalPrice, 2, '.', ','); ?></label>
                 </div>
                 <div style="padding: 310px 0 0;">
                     <?php if ($totalPrice > 0){ ?>
@@ -101,7 +112,8 @@ include_once "Views/General/session.php";
     </div>
 
     <?php
-        include_once "Views/General/footer.php";
+    unset($_SESSION['error']);
+    include_once "Views/General/footer.php";
     ?>
     </body>
 </html>

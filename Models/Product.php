@@ -186,18 +186,16 @@ class Product{
         $nextAutoincrementId = $autoIncrementRow["auto_increment"];
         return $nextAutoincrementId;
     }
-    public static function createProduct($pUserId, $pTitle, $pDescription, $pPrice, $pCategoryId, $pProductImagePath = ""): void {
-        $uploadSuccessful = false;
+    public static function createProduct($pUserId, $pTitle, $pDescription, $pPrice, $pCategoryId, $pProductImagePath = ""): array {
+        $uploadStatus = [];
         if(strlen($pProductImagePath) > 0)
         {
             $uploadedFileExtension = strtolower(pathinfo($pProductImagePath, PATHINFO_EXTENSION));
             $productImageName = File::getProductImageName(self::PRODUCT_IMAGE_UPLOAD_PATH, $uploadedFileExtension, self::getNextAutoIncrementId());
-            $uploadSuccessful = File::uploadProductImage(self::PRODUCT_IMAGE_UPLOAD_PATH, $productImageName, $_FILES["productImage"]["tmp_name"]);
+            $uploadStatus = File::uploadProductImage(self::PRODUCT_IMAGE_UPLOAD_PATH, $productImageName, $_FILES["productImage"]["tmp_name"]);
         }
 
-
-        var_dump($pProductImagePath);
-        if($uploadSuccessful || (strlen($pProductImagePath) == 0)) {
+        if((strlen($pProductImagePath) == 0) || $uploadStatus["shouldUploadImage"]) {
             $mySqliConnection = openDatabaseConnection();
             $sql = "INSERT INTO product (user_id, title, description, price, product_image_path, category_id) VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = $mySqliConnection->prepare($sql);
@@ -208,27 +206,27 @@ class Product{
             $stmt->close();
             $mySqliConnection->close();
         }
-        else
-        {
-            // TODO: redirect to an error page if the image uploaded was invalid
-        }
+
+        return $uploadStatus;
     }
 
-    public static function updateProduct($pUserId, $pTitle, $pDescription, $pPrice, $pProductId, $pCategoryId, $pProductImagePath = "") {
-        $uploadSuccessful = false;
+    public static function updateProduct($pUserId, $pTitle, $pDescription, $pPrice, $pProductId, $pCategoryId, $pProductImagePath = "") : array
+    {
+        $uploadStatus = [];
+        $productImageName = "";
         if(strlen($pProductImagePath) > 0)
         {
             $uploadedFileExtension = strtolower(pathinfo($pProductImagePath, PATHINFO_EXTENSION));
             $productImageName = File::getProductImageName(self::PRODUCT_IMAGE_UPLOAD_PATH, $uploadedFileExtension, $pProductId);
-            $uploadSuccessful = File::uploadProductImage(self::PRODUCT_IMAGE_UPLOAD_PATH, $productImageName, $_FILES["productImage"]["tmp_name"]);
+            $uploadStatus = File::uploadProductImage(self::PRODUCT_IMAGE_UPLOAD_PATH, $productImageName, $_FILES["productImage"]["tmp_name"]);
         }
 
-        if($uploadSuccessful)
+        if($uploadStatus["shouldUploadImage"])
         {
             $mySqliConnection = openDatabaseConnection();
             $sql = "UPDATE product SET user_id = ?, title = ?, description = ?, price = ?, category_id = ?, product_image_path = ? WHERE product_id = ?";
             $stmt = $mySqliConnection->prepare($sql);
-            $stmt->bind_param('issdiis', $pUserId, $pTitle, $pDescription, $pPrice, $pProductId, $pCategoryId, $pProductImagePath);
+            $stmt->bind_param('issdisi', $pUserId, $pTitle, $pDescription, $pPrice, $pCategoryId, $productImageName, $pProductId);
             $stmt->execute();
             $stmt->close();
             $mySqliConnection->close();
@@ -246,9 +244,7 @@ class Product{
             $stmt->close();
             $mySqliConnection->close();
         }
-        else {
-            // TODO: redirect to same page but say there was an error when uploading the file
-        }
+        return $uploadStatus;
     }
 
     public static function deleteProduct($pProductId) {

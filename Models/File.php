@@ -67,7 +67,7 @@
             return $fileDirectoryToUploadTo;
         }
 
-        public static function uploadProductImage(string $targetDirectory, string $imageName, string $temporaryServerImageDirectory) : bool
+        public static function uploadProductImage(string $targetDirectory, string $imageName, string $temporaryServerImageDirectory) : array
         {
             define("IMAGE_TYPES_ALLOWED", [
                 "jpg",
@@ -79,46 +79,66 @@
             $shouldUploadImage = true;
             $uploadDirectory = $targetDirectory . basename($imageName);
 
+
+
+            $fileByteSizeIsValid = self::fileIsUnderSize($_FILES["productImage"]["size"], MAX_IMAGE_SIZE);
+
+
+
             $fileIsAValidImage = self::fileHasExtension($uploadDirectory, IMAGE_TYPES_ALLOWED);
             if(!$fileIsAValidImage)
             {
                 $shouldUploadImage = false;
-                return $shouldUploadImage;
+
+                return [
+                    "shouldUploadImage" => $shouldUploadImage,
+                    "imageIsSame" => false
+                ];
             }
-            $fileByteSizeIsValid = self::fileIsUnderSize($_FILES["productImage"]["size"], MAX_IMAGE_SIZE);
 
             if(!$fileByteSizeIsValid)
             {
-
                 $shouldUploadImage = false;
-                return $shouldUploadImage;
+                return [
+                    "shouldUploadImage" => $shouldUploadImage,
+                    "imageIsSame" => false
+                ];
             }
+
 
             $fileUploadedIsSame = self::checkFileIsSame($temporaryServerImageDirectory, $uploadDirectory);
 
             if($fileUploadedIsSame)
             {
                 $shouldUploadImage = false;
-                return $shouldUploadImage;
+                return [
+                    "shouldUploadImage" => $shouldUploadImage,
+                    "imageIsSame" => true
+                ];
             }
 
-
-
-            $uploadedImageSuccess = false;
             if($shouldUploadImage) {
+                if($_GET["id"])
+                {
+                    self::deleteAssocProductImage();
+                }
                 if(move_uploaded_file($temporaryServerImageDirectory, $uploadDirectory)) {
-                    $uploadedImageSuccess = true;
+                    // If there was a success when uploading the file, say that the image has been uploaded successfully through this boolean
+                    $shouldUploadImage = true;
                 }
                 else {
-                    $uploadedImageSuccess = false;
+                    $shouldUploadImage = false;
 
                 }
             }
             else {
-                $uploadedImageSuccess = false;
+                $shouldUploadImage = false;
             }
 
-            return $uploadedImageSuccess;
+            return [
+                "shouldUploadImage" => $shouldUploadImage,
+                "imageIsSame" => false
+            ];
         }
 
         private static function fileHasExtension(string $pPathToFile, array $listOfFileTypesAllowed) : bool
@@ -134,7 +154,6 @@
 
                 if($fileType === $stringFileType)
                 {
-
                     $fileIsOfCorrectExtension = true;
                     break;
                 }
@@ -152,6 +171,7 @@
             {
                 $fileIsUnderSizeInBytes = true;
             }
+
 
             return $fileIsUnderSizeInBytes;
         }
@@ -183,7 +203,7 @@
              * Check if the file size between the two files are the same
              * because it will tell us if the files are the same or not
              * */
-            if($_FILES["productImage"]["size"] !== filesize($uploadFilePath))
+            if(filesize($clientImagePath) !== filesize($uploadFilePath))
             {
                 $fileIsSame = false;
                 return $fileIsSame;
@@ -243,6 +263,38 @@
             }
 
             return $fileIsSame;
+        }
+
+        private static function deleteAssocProductImage()
+        {
+            /*
+             * Check if there is another associated product image with the current product
+             * and delete it because we do not need it
+             */
+
+            /*
+             * The file extension here does not matter, we just want the file name without the extension because we need it
+             * when checking for files with the same name
+             */
+            $fileName = pathinfo(self::getProductImageName(
+                Product::PRODUCT_IMAGE_UPLOAD_PATH,
+                ".jpg",
+                $_GET["id"]
+            ));
+            /*
+             * Search through the directory of product images to delete files with the same file name
+             * because we want to delete those before uploading the new image
+             */
+
+            $imageAssocProduct = glob(Product::PRODUCT_IMAGE_UPLOAD_PATH . $fileName["filename"] . "*");
+            /*
+             * Delete the image found for the same product because we do not need it anymore
+             */
+            if($imageAssocProduct) {
+                unlink($imageAssocProduct[0]);
+            }
+
+
         }
     }
 
