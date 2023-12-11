@@ -11,8 +11,9 @@ include_once "Views/General/session.php";
     <link rel="stylesheet" type="text/css" href="Views/styles/footer.css">
     <link rel="stylesheet" type="text/css" href="Views/styles/home.css"
     <link rel="stylesheet" type="text/css" href="Views/styles/account.css">
-    <script src="Views/User/scripts/personalDetails.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="Views/General/scripts/errorValidation.js" type="text/javascript"></script>
+    <script src="Views/User/scripts/personalDetails.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -26,13 +27,15 @@ include_once "Views/General/session.php";
         <h2>Edit your First Name</h2>
         <br>
         <br>
-        <form action="/?controller=user&action=updatePersonalDetails" method="post">
+        <form action="/?controller=user&action=updatePersonalDetails" method="post" id="formPersonalDetails">
             <label>&emsp;First Name:&emsp;&emsp;&emsp;
                 <input type="text" name="firstName" value='<?php echo $data['user']->getFirstName() ?>'>
+                <label class="invalidInputLabel displayBlock displayNone" style="margin-left: 137px;" name="firstNameErrorLabel"></label>
             </label>
             <br>
             <label>&emsp;Last Name:&emsp;&emsp;&emsp;
                 <input type="text" name="lastName" value='<?php echo $data['user']->getLastName() ?>'>
+                <label class="invalidInputLabel displayBlock displayNone" style="margin-left: 137px;" name="lastNameErrorLabel"></label>
             </label>
             <?php
             if (in_array('seller', $_SESSION['userRoles'], true)) {
@@ -40,11 +43,14 @@ include_once "Views/General/session.php";
                 <br>
                 <label>&emsp;Description:&emsp;&emsp;&emsp;
                     <input type="text" name="description" value='<?php echo $data['user']->getDescription() ?>'>
+
                 </label>
                 <br>
                 <label>&emsp;Phone Number:&emsp;&emsp;&emsp;
                     <input type="text" name="phoneNumber" value='<?php echo $data['user']->getPhoneNumber() ?>'>
+                    <label class="invalidInputLabel displayBlock displayNone" style="margin-left: 137px;" name="notANumberErrorLabel"></label>
                 </label>
+                <br>
                 <?php
             }
             ?>
