@@ -1,7 +1,7 @@
 <?php
 $orderId = null;
 $cart = Order::cartExists($_SESSION['user_id']);
-$orderId = null;
+
 if ($cart === null) {
     $cart = Order::createOrder($_SESSION['user_id']);
     $orderId = $cart['orderId'];
