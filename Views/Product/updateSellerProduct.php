@@ -66,14 +66,17 @@ include_once "Views/General/session.php";
                     }
                     ?>
                 </select>
+                <label class="invalidInputLabel displayBlock displayNone" name="categoryErrorLabel">Please choose a category</label>
+
             </label><br>
             <label>
-                Upload an image for the product. The limit for the image size is 30 MB.:
+                Upload an image for the product. The limit for the image size is 30 MB. Only images of types .jpg, .jpeg and .png are accepted:
             </label>
 
-            <input type="file" name="productImage" value="Upload an image...">
+            <input type="file" name="productImage" value="Upload an image..." accept=".png, .jpg, .jpeg"> <br/>
+            <label class="invalidInputLabel displayBlock displayNone" name="fileSizeErrorLabel"></label>
+            <label class="invalidInputLabel displayBlock displayNone" name="fileTypeErrorLabel"></label>
             <label>Submit:<input class="form" type="submit" name="submit"></label><br>
-            <label class="invalidInputLabel displayBlock displayNone" name="categoryErrorLabel">Please choose a category</label>
 
             </form>
         </main>
