@@ -61,7 +61,6 @@ class OrderProduct
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
             $products = [];
-//            var_dump($result);
             while ($results = $result->fetch_assoc()) {
                 $orderProduct = new OrderProduct();
                 $orderProduct->orderId = $results['order_id'];

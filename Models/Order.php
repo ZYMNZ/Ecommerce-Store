@@ -121,16 +121,21 @@ class Order {
     // from order id get all products id
     // from products id get their title and price and category id
     // from cat id get the cat name
-    public function displayCart($pUserId) : ?array
+    public function displayCart($pUserId) : array
     {
             $orderObj = self::cartExists($pUserId);
-            if ($orderObj !== null) {
-                $orderId = $orderObj->getOrderId();
-                $arrayProducts = OrderProduct::getProductByOrder($orderId);
-
-                $list = [];
-                if ($arrayProducts != null) {
-                    foreach ($arrayProducts as $productId) {
+        var_dump($orderObj);
+        if ($orderObj !== null) {
+            $orderId = $orderObj->getOrderId();
+            var_dump($orderId);
+            $arrayProducts = OrderProduct::getProductByOrder($orderId);
+//                var_dump();
+            $list = [];
+            var_dump($arrayProducts);
+            echo "<br>";
+            print_r($arrayProducts);
+            if ($arrayProducts != null) {
+                foreach ($arrayProducts as $productId) {
                         $prodId = $productId->getProductId();
 
                         $product = new Product($prodId);
@@ -141,7 +146,7 @@ class Order {
                     return $list;
                 }
             }
-            return null;
+            return [];
     }
 
 

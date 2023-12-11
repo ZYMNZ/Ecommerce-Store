@@ -11,11 +11,11 @@ if ($cart === null) {
 //var_dump("<br>");
 //print_r($cart);
 header('Location: ?controller=product&action=view&id='.$_GET['id']);
-// var_dump($orderId = $cart->getOrderId());
+ var_dump($orderId = $cart->getOrderId());
 
 $orderProduct = OrderProduct::createOrderProduct($cart->getOrderId(), $_GET['id']);
-//echo "<br>";
-//var_dump($orderProduct);
+echo "<br>";
+var_dump($orderProduct);
 if ($orderProduct['isSuccessful'] === true) {
     header('Location: ?controller=product&action=view&id=' . $_GET['id']);
 } else {

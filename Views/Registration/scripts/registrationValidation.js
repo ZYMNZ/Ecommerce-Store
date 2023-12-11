@@ -13,17 +13,16 @@ function doPasswordsMatch() {
     // var emptyPasswordField = $("[name='emptyPasswordLabel']");
 
     var passwordsMatch = false;
-    // if (passwordInputField.val() == "" || confirmPasswordErrorInputLabel.val() == "") {
         if (passwordInputField.val() === confirmPasswordInputField.val()) {
             removeErrorInputBorder(confirmPasswordInputField);
             removeErrorInputLabel(confirmPasswordErrorInputLabel);
             passwordsMatch = true;
         }
-    // }
-    else {
-        addErrorInputBorder(confirmPasswordInputField);
-        addErrorInputLabel(confirmPasswordErrorInputLabel, "Passwords do not match");
-    }
+
+        else {
+            addErrorInputBorder(confirmPasswordInputField);
+            addErrorInputLabel(confirmPasswordErrorInputLabel, "Passwords do not match");
+        }
     return passwordsMatch;
 }
 
