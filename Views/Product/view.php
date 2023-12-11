@@ -1,6 +1,3 @@
-<?php
-include_once "Views/General/session.php";
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,14 +52,14 @@ include_once "Views/General/session.php";
                         </label>
                     </div>
                     <?php
-                    if (isset($_SESSION['user_id'])) {
+                    if (!isset($_SESSION['user_id'])) {
+                        echo "<h3>Must be logged in to purchase</h3>";
+                    } else {
                         ?>
                         <a href='<?php echo "/?controller=cart&action=addToCart&id=" . $dataToSend["product"]-> getProductId() ?>' class="buyButtonAnchor backgroundColorD9D9D9">
                             Add to Cart
                         </a>
                         <?php
-                    } else {
-                        echo "<h3>Must be logged in to purchase</h3>";
                     }
                     ?>
                 </section>
@@ -78,10 +75,12 @@ include_once "Views/General/session.php";
 
 
             <section class="commentsSection">
+                <?php
+                if (isset($_SESSION['user_id']) && $dataToSend["product"]->getUserId() !== $_SESSION['user_id']) {
+                ?>
                 <div class="commentsHeaderDiv">
                     <label class="reviewHeader fontWeightBold">Reviews</label>
                 </div>
-
                 <div class="reviewsDiv">
                     <form action="/?controller=review&action=postReview&id=<?php
                     echo $dataToSend["product"]->getProductId();
@@ -94,6 +93,9 @@ include_once "Views/General/session.php";
                             </div>
                         </div>
                     </form>
+                    <?php
+                }
+                ?>
 
                     <?php
                     foreach($dataToSend["reviewsAndUsers"] as $review) {
@@ -106,7 +108,6 @@ include_once "Views/General/session.php";
                             . "<label>" . $review["review"]->getReview() . "</label>"
                             . "</div>"
                             . "</div>";
-
                     }
                     ?>
                 </div>

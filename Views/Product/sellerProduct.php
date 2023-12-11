@@ -1,6 +1,3 @@
-<?php
-include_once "Views/General/session.php";
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +15,9 @@ include_once "Views/General/session.php";
         <main>
             <?php
             include_once "Views/General/navbar.php";
+            if (count($dataToSend) == 0) {
+                echo "<h1>Create your product with the create button</h1>";
+            }
             ?>
             <div class="textAlignCenter">
                 <button class=""><a href='/?controller=product&action=createSellerProduct'>Create</a></button>
@@ -31,8 +31,8 @@ include_once "Views/General/session.php";
                         echo "<tr><div class='product'>";
                         echo "<div class='title'>" . $product->getTitle() . "</div>";
                         echo "<div class='description'>" . $product->getDescription() . "</div>";
-                        echo "<div class='price'>$" . $product->getPrice() . "</div>";
-                        echo "<div><a /*href='/?controller=seller&action=view&id=" . $product->getProductId() . "'*/ class='buy-button'>View</a></div>";
+                        echo "<div class='price'>$" . number_format($product->getPrice(), 2, '.', ',') . "</div>";
+                        echo "<div><a href='/?controller=product&action=viewSellerProduct&id=" . $product->getProductId() . "' class='buy-button'>View</a></div>";
                         echo "<button><a href='/?controller=product&action=updateSellerProduct&id=" . $product->getProductId() . "' >Update</a></button>";
                         echo "<button><a href='/?controller=product&action=deleteSellerProduct&id=" . $product->getProductId() . "' >Delete</a></button>";
                         echo "</div></tr>";

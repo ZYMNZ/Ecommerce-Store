@@ -33,7 +33,7 @@ include_once "Views/General/session.php";
 
                 <div class="wrapper">
 
-                    <?php foreach ($dataToSend as $data ) : ?>
+                    <?php foreach ($dataToSend['display'] as $data ) : ?>
 
                     <div class="cartItemBlock">
                         <div class="firstHalfCartItemBlock displayInlineBlock">
