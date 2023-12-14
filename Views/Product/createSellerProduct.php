@@ -32,7 +32,7 @@ include_once "Views/General/session.php";
                 <label class="invalidInputLabel displayBlock displayNone" name="notTwoDecimalsPriceErrorLabel"></label>
 
                 <select name="category"  class="categoryNavBar cursorPointer displayInlineBlock">
-                    <option id="optionNone" value="None" selected>None</option>
+                    <option id="optionNone" value="None" disabled selected>None</option>
                     <?php
                     $categories = $dataToSend;
                     foreach ($categories as $category) {

@@ -11,19 +11,24 @@ class ProductController {
 
         // To list all the products
         if ($action == "product") {
+//                $category = Category::getByCategoryName($_SESSION['category']);
+//                if ($category == "None"){
+//                    header("Location: /?controller=home&action=home");
+//                }
             $categories = Category::listCategories();
-            if (isset($_POST['category'])) {
-                $category = Category::getByCategoryName($_POST['category']);
-                if ($category == "None"){
-                    header("Location: /?controller=home&action=home");
-                }
-                $products = Product::listProductsByCategory($category->getCategoryId());
-                $this->render($action, ['categories' => $categories, 'products' => $products]);
+            $category = Category::getByCategoryName($_SESSION['category']);
+
+            if (isset($_SESSION['user_id'])) {
+                $_SESSION['products'] = Product::getProductsByNotSpecificUserIdAndCategory($_SESSION['user_id'], $category->getCategoryId());
             } else {
-                $this->render($action, ['categories' => $categories]);
+                $_SESSION['products'] = Product::listProductsByCategory($category->getCategoryId());
             }
+            $this->render($action, ['categories' => $categories, 'products' => $_SESSION['products']]);
         } else if ($action == "view") {
             $product = new Product($_GET['id']);
+            if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $product->getUserId()) {
+                header('Location: ?controller=product&action=product');
+            }
             $categories = Category::listCategories();
             $reviewsAndUsers = Review::listReviewsAndUsersByProductId($product->getProductId());
 
