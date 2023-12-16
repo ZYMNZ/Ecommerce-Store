@@ -6,7 +6,7 @@ class OrderController{
     {
         global $action;
         noAccess($_SESSION["user_id"], $_SESSION["userRoles"], "buyer");
-        if (($action == "orderConfirmed" || $action == "greeting") && isset($_POST["submit"])) {
+        if (($action == "orderConfirmed" || $action == "greeting")) {
             $this->render($action);
         }
         else {
