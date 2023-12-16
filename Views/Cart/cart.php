@@ -102,7 +102,7 @@ include_once "Views/General/session.php";
                     <label>Total Price</label>
                     <label>CAD $<?php $totalPrice = $subPrice + $estimatedtax; echo number_format($totalPrice, 2, '.', ','); ?></label>
                 </div>
-                <div style="padding: 310px 0 0;">
+                <div style="padding: 220px 0 0;">
                     <?php if ($totalPrice > 0){ ?>
                     <a href="?controller=order&action=orderConfirmed"><button class="confirmButton">CHECKOUT</button></a>
                     <?php } ?>
