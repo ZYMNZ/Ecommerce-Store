@@ -25,7 +25,7 @@
 
 </head>
     <body style="padding: unset">
-    <label style="display: flex;position: relative;left: 0;top: 0; color:gray">Press On The LOGO To Go Back To HOME!</label>
+    <label style="display: flex;position: relative;left: 0;top: 0; color:red">Press On The LOGO To Go Back To HOME!</label>
         <header class="site-header" id="header">
             <h1 class="site-header__title" data-lead-id="site-header-title">THANK YOU!</h1>
         </header>
