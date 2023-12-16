@@ -81,11 +81,12 @@ textarea{
     width: 280px;
     height: 400px;
     right: 2%;
-    top: 15%;
+    top: 22%;
     position: fixed;
     float: right;
     border-radius: 20px;
     padding: 30px;
+    z-index: 1;
 }
 
 .subTotal, .estimatedTax, .totalPrice{

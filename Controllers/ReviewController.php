@@ -1,9 +1,11 @@
 <?php
+include_once 'Views/General/session.php';
     include_once "Models/Review.php";
     class ReviewController {
         function route() {
             global $action;
 
+            noAccess($_SESSION["user_id"], $_SESSION["userRoles"], "buyer");
             if($action == "postReview") {
                 $this->render($action);
             }
