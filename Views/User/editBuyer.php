@@ -28,7 +28,7 @@ include_once "Views/General/session.php";
             <h1>Admin</h1>
             <br>
             <br>
-            <form action='<?php echo "/?controller=user&action=updateBuyer&id=" . $_GET['id'] ?>' method="post">
+            <form action='<?php echo "/?controller=user&action=updateBuyer&id=" . $_GET['id'] ?>' method="post" id="editBuyerForm">
                 <label>First Name:
                     <input type="text" name='firstName' value='<?php echo $data['user']->getFirstName(); ?>'>
                     <label class="invalidInputLabel displayBlock displayNone" style="margin-left: 137px;" name="firstNameErrorLabel"></label>

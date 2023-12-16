@@ -8,7 +8,7 @@ $(document).ready(
 
 
 function setUpEventHandlers() {
-    var productForm = $("#formPersonalDetails");
+    var productForm = $("#editBuyerForm");
     $("[name='submit']").on("click", function (event) {
             event.preventDefault();
 
