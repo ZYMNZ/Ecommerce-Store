@@ -77,11 +77,11 @@ textarea{
 }
 
 .priceContainerBlock{
-    background-color: #d9d9d9;
+    background-color: #b1e3ff;
     width: 280px;
-    height: 400px;
+    height: 300px;
     right: 2%;
-    top: 15%;
+    top: 22%;
     position: fixed;
     float: right;
     border-radius: 20px;
