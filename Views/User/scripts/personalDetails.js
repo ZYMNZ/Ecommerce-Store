@@ -6,24 +6,38 @@ $(document).ready(
 );
 
 function phoneNumberCheck() {
-    var password = $("[name='phoneNumber']");
+    var phoneNumber = $("[name='phoneNumber']");
     var notANumberErrorLabel = $("[name='notANumberErrorLabel']");
 
     var regex = /^[0-9]{10}$/;
 
-    var phoneNumberValid = regex.test(password.val());
-    console.log(phoneNumberValid);
+    var phoneNumberValid = regex.test(phoneNumber.val());
+    // console.log(phoneNumberValid);
     var check = false
     if(phoneNumberValid) {
         check = true;
-        removeErrorInputBorder(password);
+        removeErrorInputBorder(phoneNumber);
         removeErrorInputLabel(notANumberErrorLabel);
     }
     else {
-        addErrorInputBorder(password);
-        addErrorInputLabel(notANumberErrorLabel, "PhoneNumber must be a number,must be 10 digits");
+        addErrorInputBorder(phoneNumber);
+        addErrorInputLabel(notANumberErrorLabel, "If you want to enter your phone number it should be 10 numbers please!");
     }
     return check;
+}
+
+function phoneNumberIsEmpty() {
+    var phoneNumber = $("[name='phoneNumber']");
+
+    var regex = /^$/;
+
+    var phoneNumberValid = regex.test(phoneNumber.val());
+
+    if(phoneNumberValid) {
+        return true;
+    }
+
+    return false;
 }
 
 function firstNameCheck() {
@@ -34,7 +48,7 @@ function firstNameCheck() {
 
     var firstNameValid = regex.test(firstName.val());
     var check = false;
-    console.log(firstNameValid);
+    // console.log(firstNameValid);
     if(firstNameValid) {
         check = true;
         removeErrorInputBorder(firstName);
@@ -55,7 +69,7 @@ function lastNameCheck() {
     var regex = /^[A-Za-z]{2,50}$/;
     var check = false;
     var lastNameValid = regex.test(lastName.val());
-    console.log(lastNameValid);
+    // console.log(lastNameValid);
     if(lastNameValid) {
         check=true;
         removeErrorInputBorder(lastName);
@@ -73,20 +87,36 @@ function lastNameCheck() {
  function setUpEventHandlers() {
     var productForm = $("#formPersonalDetails");
     $("[name='submit']").on("click", function (event) {
-            event.preventDefault();
+            // event.preventDefault();
             // Check values inside the text fields before you submit the form
+            var phoneNum = $("[name='phoneNumber']");
 
-            var phoneNumber = phoneNumberCheck();
             var firstName = firstNameCheck();
             var lastName = lastNameCheck();
-
-            if (phoneNumber && firstName && lastName) {
-                /*
-                Prevent the submit from happening
-                if the values are wrong
-                */
-                $(this).off("click");
-                productForm.submit();
+            var phoneIsEmpty = phoneNumberIsEmpty();
+            console.log(firstName + "    FirstN");
+            console.log(lastName + "      LastN");
+            console.log(phoneIsEmpty + "     isempty");
+            if (phoneIsEmpty || phoneNum.val() === undefined){
+                if (firstName && lastName) {
+                    /*
+                    Prevent the submit from happening
+                    if the values are wrong
+                    */
+                    $(this).off("click");
+                    productForm.submit();
+                }
+            }
+            else {
+                var phoneNumber = phoneNumberCheck();
+                if (phoneNumber && firstName && lastName) {
+                    /*
+                    Prevent the submit from happening
+                    if the values are wrong
+                    */
+                    $(this).off("click");
+                    productForm.submit();
+                }
             }
         }
     );

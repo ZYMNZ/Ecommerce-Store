@@ -47,7 +47,7 @@ include_once "Views/General/session.php";
                 </label>
                 <br>
                 <label>&emsp;Phone Number:&emsp;&emsp;&emsp;
-                    <input type="text" name="phoneNumber" value='<?php echo $data['user']->getPhoneNumber() ?>'>
+                    <input type="text" id="phoneNumber" name="phoneNumber" value='<?php echo $data['user']->getPhoneNumber() ?>'>
                     <label class="invalidInputLabel displayBlock displayNone" style="margin-left: 137px;" name="notANumberErrorLabel"></label>
                 </label>
                 <br>
