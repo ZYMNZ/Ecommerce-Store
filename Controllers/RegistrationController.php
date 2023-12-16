@@ -4,13 +4,16 @@ include_once 'Views/General/session.php';
     class RegistrationController {
         function route() {
             global $action;
+            if(!isset($_SESSION['user_id'])) {
+                if ($action == "registration" || $action == "register") {
+                    $this->render($action);
+                } else {
+                    header("Location: /?controller=general&action=error");
+                }
+            }else{
+                header("Location: ?controller=home&action=home");
+            }
 
-            if($action == "registration" || $action == "register") {
-                $this->render($action);
-            }
-            else {
-                header("Location: /?controller=general&action=error");
-            }
         }
 
         function render($action, $dataToSend = []) {
