@@ -1,8 +1,3 @@
-<?php
-include_once "Views/General/session.php";
-noAccess($_SESSION['user_id'], $_SESSION['userRoles'], 'admin');
-?>
-
 <html lang="en">
 <head>
     <title>Personal Details</title>
@@ -26,8 +21,8 @@ noAccess($_SESSION['user_id'], $_SESSION['userRoles'], 'admin');
             <br>
             <table>
                 <?php
-                echo "<tr><td>&emsp;&emsp;Buyer</td><td></td><td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href='/?controller=user&action=viewBuyers'><button>View...</button></a>";
-                echo "<tr><td>&emsp;&emsp;Seller</td><td></td><td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href='/?controller=user&action=viewSellers'><button>View...</button></a>";
+                echo "<tr><td>&emsp;&emsp;Buyer</td><td></td><td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href='/?controller=user&action=viewBuyers'><button class='actions'>View...</button></a>";
+                echo "<tr><td>&emsp;&emsp;Seller</td><td></td><td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href='/?controller=user&action=viewSellers'><button class='actions'>View...</button></a>";
                 ?>
             </table>
         </main>

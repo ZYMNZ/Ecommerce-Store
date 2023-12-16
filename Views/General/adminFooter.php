@@ -8,7 +8,8 @@
 </script>
 
 <?php
+global $action;
 include_once 'Views/General/modal.php';
-modal('deleteBuyer', $id);
+modal($action, $id);
 include_once "Views/General/footer.php";
 ?>

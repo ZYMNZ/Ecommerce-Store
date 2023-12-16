@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="Views/styles/home.css">
     <link rel="stylesheet" type="text/css" href="Views/styles/account.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Views/styles/modal.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
@@ -50,8 +51,8 @@
                         <td> <?php echo $user->getEmail() ?> </td>
                         <td> <?php echo $user->getDescription() ?> </td>
                         <td> <?php echo $user->getPhoneNumber() ?> </td>
-                        <td><button><a href="/?controller=user&action=editSeller&id=<?php echo $id ?>">Edit...</a></button></td>
-                        <td><button type='button' data-toggle='modal' data-target='#myModal'>Delete...</button></td>
+                        <td><a class="actions" href="/?controller=user&action=editSeller&id=<?php echo $id ?>"><button>Edit...</button></a></td>
+                        <td><button class="actions" type='button' data-toggle='modal' data-target='#myModal'>Delete...</button></td>
                     </tr>
 
                 <?php  endforeach;  ?>

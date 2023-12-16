@@ -113,3 +113,7 @@ body {
 .mainContentWrapper main {
     min-height: 100vh;
 }
+
+.actions {
+    color: black;
+}
