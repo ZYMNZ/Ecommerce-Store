@@ -12,6 +12,7 @@ include_once "Views/General/session.php";
     <link rel="stylesheet" type="text/css" href="Views/styles/home.css">
     <link rel="stylesheet" type="text/css" href="Views/styles/account.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Views/styles/modal.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="Views/styles/adminView.css">
@@ -44,8 +45,8 @@ include_once "Views/General/session.php";
                     echo "<td>" . $user->getFirstName() . "</td>";
                     echo "<td>" . $user->getLastName() . "</td>";
                     echo "<td>" . $user->getEmail() . "</td>";
-                    echo "<td><button><a href='/?controller=user&action=editBuyer&id=$id'>Edit...</a></button></td>";
-                    echo "<td><button type='button' data-toggle='modal' data-target='#myModal'>Delete...</button></td></tr>";
+                    echo "<td><a href='/?controller=user&action=editBuyer&id=$id'><button class='actions'>Edit...</button></a></td>";
+                    echo "<td><button class='actions' type='button' data-toggle='modal' data-target='#myModal'>Delete...</button></td></tr>";
                 }
                 ?>
             </table>

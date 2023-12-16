@@ -5,8 +5,8 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 function noAccess($userId, $userRoles, $permission): void
 {
-    if (!isset($userRoles)
-        || !isset($userId)
+    if ((!isset($userRoles) || $userRoles === "")
+        || (!isset($userId) || $userId === -1)
         || !in_array($permission, $userRoles)) {
         header("Location: /?controller=home&action=home");
     }

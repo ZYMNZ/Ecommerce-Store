@@ -128,11 +128,14 @@ include_once "Models/User.php";
             $sqlStatement->bind_param("i", $pProductId);
             $sqlStatement->execute();
             $sqliResult = $sqlStatement->get_result();
+
             $reviewsAndUsers = [];
             $sqlStatement->close();
             $dbConnection->close();
+
             if($sqliResult->num_rows > 0) {
                 while($reviewRow = $sqliResult->fetch_assoc()) {
+
                     $review = new Review();
                     $review->initializeProperties(
                         $reviewRow["review_id"],
@@ -142,6 +145,7 @@ include_once "Models/User.php";
                     );
 
                     $user = new User();
+
                     $user->initializeProperties(
                         $reviewRow["user_id"],
                         $reviewRow["first_name"],
@@ -151,7 +155,6 @@ include_once "Models/User.php";
                         $reviewRow["description"],
                         $reviewRow["phone_number"]
                     );
-
                     $reviewsAndUsers[] = [
                       "review" => $review,
                       "user" => $user

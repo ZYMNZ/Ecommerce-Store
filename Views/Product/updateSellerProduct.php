@@ -29,7 +29,7 @@ include_once "Views/General/session.php";
             //echo ($dataToSend[2][0]->getCategoryId() === $dataToSend[1]->getCategoryId()) ? 'true01' : 'false01';
             //echo ($dataToSend[2][1]->getCategoryId() === $dataToSend[1]->getCategoryId()) ? 'true02' : 'false02';
             ?>
-            <form action="/?controller=product&action=submitProductUpdate&id=<?php echo $dataToSend[0]->getProductId() . "\""; ?> enctype="multipart/form-data" class="textAlignCenter" id="productFormId" method="post">
+            <form action="/?controller=product&action=submitProductUpdate&id=<?php echo $dataToSend[0]->getProductId(); ?>" enctype="multipart/form-data" class="textAlignCenter" id="productFormId" method="post">
             <label>Title:<input class="form" type="text" name="title" value=<?php echo "'" . $dataToSend[0]->getTitle() . "'" ?>></label><br>
             <label class="invalidInputLabel displayBlock displayNone" name="titleErrorLabel"></label>
             <label>Description:<textarea name="description" rows="2" cols="50"><?php echo $dataToSend[0]->getDescription() ?></textarea></label><br>

@@ -1,0 +1,14 @@
+.errorSection {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.errorHeader {
+    font-size: 160px;
+}
+
+.pageNotFound {
+    font-size: 24px;
+}

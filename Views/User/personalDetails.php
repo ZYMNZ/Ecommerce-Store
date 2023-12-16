@@ -29,6 +29,8 @@ include_once "Views/General/session.php";
                 <?php
                 $user = $data['user'];
                 $user->getDescription() === 'NULL' && $user->setDescription('None');
+
+
                 $user->getPhoneNumber() === 'NULL' && $user->setPhoneNumber('None');
                 echo "<tr><td>First Name:</td><td>&emsp;&emsp;" . $user->getFirstName() . "</td><td>";
                 echo "<tr><td>Last Name:</td><td>&emsp;&emsp;" . $user->getLastName() . "</td><td>";

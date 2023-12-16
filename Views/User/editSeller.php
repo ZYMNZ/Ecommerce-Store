@@ -24,10 +24,6 @@ include_once "Views/General/session.php";
             <h1>Admin</h1>
             <br>
             <br>
-            <?php
-            $data['user']->getDescription() === 'NULL' && $data['user']->setDescription('None');
-            $data['user']->getPhoneNumber() === 'NULL' && $data['user']->setPhoneNumber('None');
-            ?>
             <form action="/?controller=user&action=updateSeller&id=<?php echo $_GET['id']; ?>" method="POST">
                 <label>First Name:
                     <input type="text" name="firstName" value="<?php echo $data['user']->getFirstName(); ?>">

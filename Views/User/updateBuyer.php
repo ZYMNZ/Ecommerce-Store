@@ -3,7 +3,7 @@ $userInfo = new User($_GET['id']);
 $isSuccessful = User::updatePersonalInfo(
     $_POST['firstName'],
     $_POST['lastName'],
-    $userInfo->getEmail(),
+    $_POST['email'],
     $userInfo->getPassword(),
     $userInfo->getDescription(),
     $userInfo->getPhoneNumber(),

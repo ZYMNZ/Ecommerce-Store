@@ -24,7 +24,7 @@ include_once "Views/General/navbar.php";
             </label><br>
             <?php
             if (isset($_SESSION['error']) && $_SESSION['error'] == 'wrongPassword') {
-                echo "<label>The password is incorrect</label>";
+                echo "<label class='invalidInputLabel'>The password is incorrect</label>";
                 unset($_SESSION['error']);
             }
             ?>
