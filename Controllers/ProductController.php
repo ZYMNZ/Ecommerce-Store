@@ -28,7 +28,11 @@ class ProductController {
                 $_SESSION['products'] = Product::listProductsByCategory($category->getCategoryId());
             }
             $this->render($action, ['categories' => $categories, 'products' => $_SESSION['products']]);
-        } else if ($action == "view") {
+        } else if ($action == "view" && isset($_GET["id"])) {
+//            if(isset($_GET["id"]) && ($_GET["id"] < 0)) {
+//                // If the ID was set, but the ID is < 0, then go to the error page
+//                header("Location: /?controller=general&action=error");
+//            }
             $product = new Product($_GET['id']);
             if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $product->getUserId()) {
                 header('Location: ?controller=product&action=product');
@@ -44,8 +48,11 @@ class ProductController {
             ];
             $this->render($action, $dataToSend);
         }
+        else{
+            header("Location: /?controller=general&action=error");
+        }
         //SELLER PRODUCTS
-        else if ($action == "sellerProduct") {
+        /*else*/ if ($action == "sellerProduct") {
             noAccess($_SESSION['user_id'], $_SESSION['userRoles'], 'seller');
             $products = Product::getProductsByUserId($_SESSION['user_id']);
             $this->render($action, $products);
