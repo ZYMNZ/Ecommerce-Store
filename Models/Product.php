@@ -4,13 +4,13 @@ include_once "Models/File.php";
 include_once "Models/Category.php";
 
 class Product{
-    private int $productId;
-    private int $userId;
-    private string $title;
-    private string $description;
-    private float $price;
-    private string $productImagePath;
-    private int $categoryId;
+    private int $productId = -1;
+    private int $userId = -1;
+    private string $title = "";
+    private string $description = "";
+    private float $price = -1;
+    private string $productImagePath = "";
+    private int $categoryId = -1;
     const PRODUCT_IMAGE_UPLOAD_PATH = "Views/Product/productImages/";
 
 
@@ -71,6 +71,10 @@ class Product{
                 $this->price = $queryProductAssocRow['price'];
                 $this->productImagePath = $queryProductAssocRow["product_image_path"];
                 $this->categoryId = $queryProductAssocRow['category_id'];
+            }
+            else {
+                // If the ID is > 0 and no product rows were returned, go to the error page
+                header("Location: /?controller=general&action=error");
             }
         }
 
@@ -231,7 +235,7 @@ class Product{
             $mySqliConnection->close();
         }
         else {
-            header("Location: /?controller=error&action=error");
+            header("Location: /?controller=general&action=error");
         }
 
         return $uploadStatus;
@@ -272,7 +276,8 @@ class Product{
             $mySqliConnection->close();
         }
         else {
-            header("Location: /?controller=error&action=error");
+
+            header("Location: /?controller=general&action=error");
         }
         return $uploadStatus;
     }

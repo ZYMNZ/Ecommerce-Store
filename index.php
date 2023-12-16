@@ -9,7 +9,7 @@
 
 
     if(!file_exists("Controllers/$controllerName.php")) {
-        header("Location: /?controller=error&action=error");
+        header("Location: /?controller=general&action=error");
     }
     else {
         include_once "Controllers/$controllerName.php";

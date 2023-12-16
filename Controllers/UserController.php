@@ -78,14 +78,14 @@ class UserController
             $this->render($action);
         }
         else {
-            header("Location: /?controller=error&action=error");
+            header("Location: /?controller=general&action=error");
         }
     }
 
     function render($action, $data = []): void
     {
         if(!file_exists("Views/User/$action.php")) {
-            header("Location: /?controller=error&action=error");
+            header("Location: /?controller=general&action=error");
         }
         else {
             extract($data);

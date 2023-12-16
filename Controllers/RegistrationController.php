@@ -9,14 +9,14 @@ include_once 'Views/General/session.php';
                 $this->render($action);
             }
             else {
-                header("Location: /?controller=error&action=error");
+                header("Location: /?controller=general&action=error");
             }
         }
 
         function render($action, $dataToSend = []) {
 
             if(!file_exists("Views/Registration/$action.php")) {
-                header("Location: /?controller=error&action=error");
+                header("Location: /?controller=general&action=error");
             }
             else {
                 extract($dataToSend);

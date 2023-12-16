@@ -9,6 +9,10 @@ class ProductController {
     {
         global $action;
 
+        if(isset($_GET["id"]) && ($_GET["id"] < 0)) {
+            // If the ID was set, but the ID is < 0, then go to the error page
+            header("Location: /?controller=general&action=error");
+        }
         // To list all the products
         if ($action == "product") {
 //                $category = Category::getByCategoryName($_SESSION['category']);
@@ -61,6 +65,9 @@ class ProductController {
             noAccess($_SESSION['user_id'], $_SESSION['userRoles'], 'seller');
             // Get the current product and its category associated with it
             $product = new Product($_GET['id']);
+            if($product->getUserId() != $_SESSION["user_id"]) {
+                header("Location: /?controller=general&action=error");
+            }
             $categories = Category::listCategories();
             $this->render($action, [$product, $categories]);
         }
@@ -77,6 +84,9 @@ class ProductController {
         else if ($action == "viewSellerProduct") {
             noAccess($_SESSION['user_id'], $_SESSION['userRoles'], 'seller');
             $product = new Product($_GET['id']);
+            if($product->getUserId() != $_SESSION["user_id"]) {
+                header("Location: /?controller=general&action=error");
+            }
             $categories = Category::listCategories();
             $reviewsAndUsers = Review::listReviewsAndUsersByProductId($product->getProductId());
 
@@ -88,14 +98,15 @@ class ProductController {
             $this->render($action, $dataToSend);
         }
         else {
-            header("Location: /?controller=error&action=error");
+            // If the action does not exist, go to the error page
+            header("Location: /?controller=general&action=error");
         }
     }
 
     function render($action, $dataToSend = [])
     {
         if(!file_exists("Views/Product/$action.php")) {
-            header("Location: /?controller=error&action=error");
+            header("Location: /?controller=general&action=error");
         }
         else {
             extract($dataToSend);
