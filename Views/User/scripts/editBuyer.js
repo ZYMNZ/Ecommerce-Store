@@ -8,9 +8,8 @@ $(document).ready(
 
 
 function setUpEventHandlers() {
-    var productForm = $("#editBuyerForm");
+    var editBuyerForm = $("#editBuyerForm");
     $("[name='submit']").on("click", function (event) {
-            event.preventDefault();
 
             // Check values inside the text fields before you submit the form
             var firstName = $("[name='firstName']");
@@ -31,7 +30,10 @@ function setUpEventHandlers() {
                 if the values are wrong
                 */
                 $(this).off("click");
-                productForm.submit();
+                editBuyerForm.submit();
+            }
+            else {
+                event.preventDefault();
             }
         }
     );

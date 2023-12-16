@@ -102,3 +102,38 @@ function emailCheck(pEmail,pEmailErrorLabel) {
     }
     return check;
 }
+
+function phoneNumberCheck(pPhoneNumber,pErrorLabel) {
+    var phoneNumber = pPhoneNumber;
+    var notANumberErrorLabel = pErrorLabel;
+
+    var regex = /^[0-9]{10}$/;
+
+    var phoneNumberValid = regex.test(phoneNumber.val());
+    // console.log(phoneNumberValid);
+    var check = false
+    if(phoneNumberValid) {
+        check = true;
+        removeErrorInputBorder(phoneNumber);
+        removeErrorInputLabel(notANumberErrorLabel);
+    }
+    else {
+        addErrorInputBorder(phoneNumber);
+        addErrorInputLabel(notANumberErrorLabel, "If you want to enter your phone number it should be 10 numbers please!");
+    }
+    return check;
+}
+
+function phoneNumberIsEmpty(pPhoneNumber) {
+    var phoneNumber = pPhoneNumber;
+
+    var regex = /^$/;
+
+    var phoneNumberValid = regex.test(phoneNumber.val());
+
+    if(phoneNumberValid) {
+        return true;
+    }
+
+    return false;
+}

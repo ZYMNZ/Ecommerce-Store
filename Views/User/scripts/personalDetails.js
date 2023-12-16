@@ -85,7 +85,7 @@ function lastNameCheck() {
 
 
  function setUpEventHandlers() {
-    var productForm = $("#formPersonalDetails");
+    var personalDetailsForm = $("#formPersonalDetails");
     $("[name='submit']").on("click", function (event) {
             event.preventDefault();
             // Check values inside the text fields before you submit the form
@@ -104,7 +104,7 @@ function lastNameCheck() {
                     if the values are wrong
                     */
                     $(this).off("click");
-                    productForm.submit();
+                    personalDetailsForm.submit();
                 }
             }
             else {
@@ -115,7 +115,7 @@ function lastNameCheck() {
                     if the values are wrong
                     */
                     $(this).off("click");
-                    productForm.submit();
+                    personalDetailsForm.submit();
                 }
             }
         }
