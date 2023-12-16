@@ -7,8 +7,10 @@
 
 .errorHeader {
     font-size: 160px;
+    color: blueviolet;
 }
 
 .pageNotFound {
     font-size: 24px;
+    color: crimson;
 }
