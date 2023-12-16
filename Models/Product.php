@@ -69,7 +69,7 @@ class Product{
                 $this->title = $queryProductAssocRow['title'];
                 $this->description = $queryProductAssocRow['description'];
                 $this->price = $queryProductAssocRow['price'];
-                $this->productImagePath = $queryProductAssocRow["product_image_path"] ?? "";
+                $this->productImagePath = $queryProductAssocRow["product_image_path"];
                 $this->categoryId = $queryProductAssocRow['category_id'];
             }
         }
@@ -230,6 +230,9 @@ class Product{
             $stmt->close();
             $mySqliConnection->close();
         }
+        else {
+            header("Location: /?controller=error&action=error");
+        }
 
         return $uploadStatus;
     }
@@ -267,6 +270,9 @@ class Product{
             $stmt->execute();
             $stmt->close();
             $mySqliConnection->close();
+        }
+        else {
+            header("Location: /?controller=error&action=error");
         }
         return $uploadStatus;
     }
@@ -318,8 +324,8 @@ class Product{
                 $fetchAssoc["last_name"],
                 $fetchAssoc["email"],
                 $fetchAssoc["password"],
-                $fetchAssoc["description"],
-                $fetchAssoc["phone_number"]
+                $fetchAssoc["description"] ?? "",
+                $fetchAssoc["phone_number"] ?? ""
             );
             return
                 "{$user->getFirstName()} {$user->getLastName()}"

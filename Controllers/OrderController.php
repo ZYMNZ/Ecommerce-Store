@@ -8,6 +8,9 @@ class OrderController{
         if ($action == "orderConfirmed" || $action == "greeting") {
             $this->render($action);
         }
+        else {
+            throw new ErrorException();
+        }
     }
 
     function render($action, $dataToSend = []): void

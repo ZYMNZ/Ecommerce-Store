@@ -10,6 +10,9 @@ class GeneralController {
             $categories = Category::listCategories();
             $this->render($action, $categories);
         }
+        else {
+            throw new ErrorException();
+        }
     }
 
     function render($action, $dataToSend = [])

@@ -119,8 +119,8 @@ class User {
             && strlen($pLastName) > 0
             && strlen($pEmail) > 0
             && strlen($pPassword) > 0
-            && strlen($pDescription) > 0
-            && strlen($pPhoneNumber) > 0
+            && strlen($pDescription) >= 0
+            && strlen($pPhoneNumber) >= 0
         ) {
             // Initialize all the properties if all parameters were sent
             $this->userId = $pUserId;
@@ -151,8 +151,8 @@ class User {
             $this->lastName = $result["last_name"];
             $this->email = $result["email"];
             $this->password = $result["password"];
-            $this->description = strlen($result["description"]) > 0 ? $result["description"] : '';
-            $this->phoneNumber = strlen($result["phone_number"]) > 0 ? $result["phone_number"] : '';
+            $this->description = $result["description"] ?? "";
+            $this->phoneNumber = $result["phone_number"] ?? "";
         }
     }
     public static function getUserByEmailAndPassword($pEmail, $pPassword): ?User
@@ -233,7 +233,6 @@ class User {
 
     public static function updatePersonalInfo(?string $pFirstName, ?string $pLastName, ?string $pEmail, ?string $pPassword, ?string $pDescription, ?string $pPhoneNumber, ?string $pUserId): bool
     {
-        var_dump($pLastName, gettype($pLastName));
         $dBConnection = openDatabaseConnection();
         $sql = "UPDATE user SET first_name = ?, last_name = ?, email = ?, password = ?, description = ?, phone_number = ? WHERE user_id = ?";
         $stmt = $dBConnection->prepare($sql);

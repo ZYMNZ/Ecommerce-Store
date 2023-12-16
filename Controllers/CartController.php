@@ -24,6 +24,9 @@ include_once 'Models/OrderProduct.php';
             } else if ($action == "deleteCartProduct") {
                 $this->render($action);
             }
+            else {
+                throw new ErrorException();
+            }
         }
 
         function render($action, $dataToSend = []): void

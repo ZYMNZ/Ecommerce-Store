@@ -77,6 +77,9 @@ class UserController
         } else if ($action == "validateSellerRegistration") {
             $this->render($action);
         }
+        else {
+            throw new ErrorException();
+        }
     }
 
     function render($action, $data = []): void

@@ -6,7 +6,9 @@
             if($action == "login" || $action == "validation") {
                 $this->render($action);
             }
-
+            else {
+                throw new ErrorException();
+            }
         }
         function render($action, $dataToSend = []) {
             extract($dataToSend);

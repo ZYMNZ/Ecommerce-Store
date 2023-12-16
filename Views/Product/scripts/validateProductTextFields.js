@@ -175,10 +175,9 @@ async function setUpEventHandlers() {
 
 
         if (!titleIsEmpty && !priceIsEmpty && priceIsANumber && !categorySelectedIsNone && fileIsValid) {
-            /*
-            Prevent the submit from happening
-            if the values are wrong
-         */
+
+            //Submit the form if the values are right
+
             $(this).off("click");
             productForm.submit();
         }

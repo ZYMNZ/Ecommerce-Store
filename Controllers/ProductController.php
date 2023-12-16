@@ -30,6 +30,7 @@ class ProductController {
                 header('Location: ?controller=product&action=product');
             }
             $categories = Category::listCategories();
+
             $reviewsAndUsers = Review::listReviewsAndUsersByProductId($product->getProductId());
 
             $dataToSend = [
@@ -85,6 +86,9 @@ class ProductController {
                 "reviewsAndUsers" => $reviewsAndUsers
             ];
             $this->render($action, $dataToSend);
+        }
+        else {
+            throw new ErrorException();
         }
     }
 

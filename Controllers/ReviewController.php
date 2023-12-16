@@ -7,7 +7,9 @@
             if($action == "postReview") {
                 $this->render($action);
             }
-
+            else {
+                throw new ErrorException();
+            }
         }
 
         function render($action, $dataToSend = []) {

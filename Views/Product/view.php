@@ -107,6 +107,7 @@
                 ?>
 
                     <?php
+
                     foreach($dataToSend["reviewsAndUsers"] as $review) {
                         echo "<div class='review backgroundColorD9D9D9'>"
                             . "<div class='reviewPoster'>"

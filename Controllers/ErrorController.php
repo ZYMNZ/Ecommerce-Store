@@ -1,11 +1,8 @@
 <?php
-include_once 'Views/General/session.php';
-    include_once "Models/User.php";
-    class RegistrationController {
+    class ErrorController {
         function route() {
             global $action;
-
-            if($action == "registration" || $action == "register") {
+            if($action == "error") {
                 $this->render($action);
             }
             else {
@@ -15,9 +12,7 @@ include_once 'Views/General/session.php';
 
         function render($action, $dataToSend = []) {
             extract($dataToSend);
-
-            include_once "Views/Registration/$action.php";
+            include_once "Views/General/$action.php";
         }
     }
-
 ?>
