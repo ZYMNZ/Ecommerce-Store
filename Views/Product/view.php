@@ -16,12 +16,6 @@
 
             include_once "Views/General/navbar.php";
             ?>
-            <!--<div class="product">-->
-            <!--    <div class="title">--><?php //echo $dataToSend[0]->getTitle() ?><!--</div>-->
-            <!--    <div class="description">--><?php //echo $dataToSend[0]->getDescription() ?><!--</div>-->
-            <!--    <div class="price">$--><?php //echo $dataToSend[0]->getPrice()?><!--</div>-->
-            <!--    <button class="buy-button">Buy</button>-->
-            <!--</div>-->
 
 
             <section class="TopSection">
@@ -91,7 +85,7 @@
                     <label class="reviewHeader fontWeightBold">Reviews</label>
                 </div>
                 <div class="reviewsDiv">
-                    <form action="/?controller=review&action=postReview&id=<?php
+                    <form action="?controller=review&action=postReview&id=<?php
                     echo $dataToSend["product"]->getProductId();
                     ?>"
                           method="POST">
