@@ -152,8 +152,8 @@ include_once "Models/User.php";
                         $reviewRow["last_name"],
                         $reviewRow["email"],
                         $reviewRow["password"],
-                        $reviewRow["description"],
-                        $reviewRow["phone_number"]
+                        $reviewRow["description"] ?? "",
+                        $reviewRow["phone_number"] ?? ""
                     );
                     $reviewsAndUsers[] = [
                       "review" => $review,
