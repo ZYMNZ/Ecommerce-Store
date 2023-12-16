@@ -31,8 +31,6 @@ include_once "Views/General/session.php";
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Email</th>
-                    <th>Description</th>
-                    <th>Phone Number</th>
                     <th>Actions</th>
                 </tr>
                 <?php
