@@ -18,6 +18,7 @@ include_once 'Views/General/session.php';
 <?php
 include_once "Views/General/navbar.php";
 ?>
+<label style="display: flex;position: relative;left: 0;top: 0; color:red">Press On The LOGO To Go Back To HOME!</label>
 <div class="mainContentWrapper">
     <main>
         <section class="errorSection displayFlex height100Percent">
