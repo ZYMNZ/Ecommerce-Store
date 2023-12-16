@@ -15,6 +15,7 @@ include_once "Views/General/session.php";
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="Views/General/scripts/errorValidation.js" type="text/javascript"></script>
+    <script src="Views/User/scripts/editBuyer.js" type="text/javascript"></script>
     <script src=""></script>
 </head>
 <body>
@@ -30,14 +31,18 @@ include_once "Views/General/session.php";
             <form action='<?php echo "/?controller=user&action=updateBuyer&id=" . $_GET['id'] ?>' method="post">
                 <label>First Name:
                     <input type="text" name='firstName' value='<?php echo $data['user']->getFirstName(); ?>'>
+                    <label class="invalidInputLabel displayBlock displayNone" style="margin-left: 137px;" name="firstNameErrorLabel"></label>
                 </label>
                 <br>
                 <label>Last Name:
                     <input type="text" name='lastName' value='<?php echo $data['user']->getLastName(); ?>'>
+                    <label class="invalidInputLabel displayBlock displayNone" style="margin-left: 137px;" name="lastNameErrorLabel"></label>
                 </label>
                 <br>
                 <label>Email:
                     <input type="text" name='email' value='<?php echo $data['user']->getEmail(); ?>'>
+                    <label class="invalidInputLabel displayBlock displayNone" style="margin-left: 137px;" name="emailErrorLabel"></label>
+
                 </label>
                 <input type="submit" name="submit" value="Update">
             </form>

@@ -22,7 +22,7 @@ function modal(string $action, $id): void
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                <a href='<?php echo "/?controller=user&action=$newAction&id=$id" ?>'><button type="button" class="btn btn-primary" data-dismiss="modal">Yes</button></a>
+                <a href='<?php echo "?controller=user&action=$newAction&id=$id" ?>'><button type="button" class="btn btn-primary" data-dismiss="modal">Yes</button></a>
             </div>
         </div>
 

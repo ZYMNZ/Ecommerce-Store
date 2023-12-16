@@ -87,16 +87,16 @@ function lastNameCheck() {
  function setUpEventHandlers() {
     var productForm = $("#formPersonalDetails");
     $("[name='submit']").on("click", function (event) {
-            // event.preventDefault();
+            event.preventDefault();
             // Check values inside the text fields before you submit the form
             var phoneNum = $("[name='phoneNumber']");
 
             var firstName = firstNameCheck();
             var lastName = lastNameCheck();
             var phoneIsEmpty = phoneNumberIsEmpty();
-            console.log(firstName + "    FirstN");
-            console.log(lastName + "      LastN");
-            console.log(phoneIsEmpty + "     isempty");
+            // console.log(firstName + "    FirstN");
+            // console.log(lastName + "      LastN");
+            // console.log(phoneIsEmpty + "     isempty");
             if (phoneIsEmpty || phoneNum.val() === undefined){
                 if (firstName && lastName) {
                     /*
