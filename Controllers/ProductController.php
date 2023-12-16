@@ -64,6 +64,9 @@ class ProductController {
             if(isset($_POST["submit"])) {
                 $this->render($action);
             }
+            else {
+                header("Location: /?controller=general&action=error");
+            }
         }
         else if ($action == "updateSellerProduct") {
             noAccess($_SESSION['user_id'], $_SESSION['userRoles'], 'seller');
@@ -79,6 +82,9 @@ class ProductController {
             noAccess($_SESSION['user_id'], $_SESSION['userRoles'], 'seller');
             if(isset($_POST["submit"])) {
                 $this->render($action);
+            }
+            else {
+                header("Location: /?controller=general&action=error");
             }
         }
         else if ($action == "deleteSellerProduct") {
