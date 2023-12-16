@@ -30,7 +30,7 @@ function firstNameCheck() {
     var firstName = $("[name='firstName']");
     var firstNameErrorLabel = $("[name='firstNameErrorLabel']");
 
-    var regex = /^[A-Za-z]{0,50}$/;
+    var regex = /^[A-Za-z]{2,50}$/;
 
     var firstNameValid = regex.test(firstName.val());
     var check = false;
@@ -42,7 +42,7 @@ function firstNameCheck() {
     }
     else {
         addErrorInputBorder(firstName);
-        addErrorInputLabel(firstNameErrorLabel, "firstName must be a letters only and max of 50 characters");
+        addErrorInputLabel(firstNameErrorLabel, "firstName must be a letters only and at least 2, max of 50 characters");
     }
     return check;
 }
@@ -52,7 +52,7 @@ function lastNameCheck() {
     var lastName = $("[name='lastName']");
     var lastNameErrorLabel = $("[name='lastNameErrorLabel']");
 
-    var regex = /^[A-Za-z]{0,50}$/;
+    var regex = /^[A-Za-z]{2,50}$/;
     var check = false;
     var lastNameValid = regex.test(lastName.val());
     console.log(lastNameValid);
@@ -64,7 +64,7 @@ function lastNameCheck() {
     else {
 
         addErrorInputBorder(lastName);
-        addErrorInputLabel(lastNameErrorLabel, "lastName must be a letters only and max of 50 characters");
+        addErrorInputLabel(lastNameErrorLabel, "lastName must be a letters only and at least 2, max of 50 characters");
     }
     return check;
 }
