@@ -88,13 +88,19 @@ class ProductController {
             $this->render($action, $dataToSend);
         }
         else {
-            throw new ErrorException();
+            header("Location: /?controller=error&action=error");
         }
     }
 
     function render($action, $dataToSend = [])
     {
-        extract($dataToSend);
-        include_once "Views/Product/$action.php";
+        if(!file_exists("Views/Product/$action.php")) {
+            header("Location: /?controller=error&action=error");
+        }
+        else {
+            extract($dataToSend);
+            include_once "Views/Product/$action.php";
+        }
+
     }
 }

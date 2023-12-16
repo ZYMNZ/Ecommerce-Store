@@ -11,13 +11,19 @@ class GeneralController {
             $this->render($action, $categories);
         }
         else {
-            throw new ErrorException();
+            header("Location: /?controller=error&action=error");
         }
     }
 
     function render($action, $dataToSend = [])
     {
-        extract($dataToSend);
-        include_once "Views/General/$action.php";
+        if(!file_exists("Views/General/$action.php")) {
+            header("Location: /?controller=error&action=error");
+        }
+        else {
+            extract($dataToSend);
+            include_once "Views/General/$action.php";
+        }
+
     }
 }

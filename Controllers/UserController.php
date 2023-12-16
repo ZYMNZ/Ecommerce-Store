@@ -78,13 +78,18 @@ class UserController
             $this->render($action);
         }
         else {
-            throw new ErrorException();
+            header("Location: /?controller=error&action=error");
         }
     }
 
     function render($action, $data = []): void
     {
-        extract($data);
-        include_once "Views/User/$action.php";
+        if(!file_exists("Views/User/$action.php")) {
+            header("Location: /?controller=error&action=error");
+        }
+        else {
+            extract($data);
+            include_once "Views/User/$action.php";
+        }
     }
 }

@@ -10,12 +10,18 @@ class HomeController{
             $this->render($action, $categories);
         }
         else {
-            throw new ErrorException();
+            header("Location: /?controller=error&action=error");
         }
     }
     function render($action,$dataToSend=[])
     {
-        extract($dataToSend);
-        include_once "Views/Home/$action.php";
+        if(!file_exists("Views/Home/$action.php")) {
+            header("Location: /?controller=error&action=error");
+        }
+        else {
+            extract($dataToSend);
+            include_once "Views/Home/$action.php";
+        }
+
     }
 }

@@ -9,13 +9,19 @@ class OrderController{
             $this->render($action);
         }
         else {
-            throw new ErrorException();
+            header("Location: /?controller=error&action=error");
         }
     }
 
     function render($action, $dataToSend = []): void
     {
-        extract($dataToSend);
-        include_once "Views/Order/$action.php";
+        if(!file_exists("Views/Order/$action.php")) {
+            header("Location: /?controller=error&action=error");
+        }
+        else {
+            extract($dataToSend);
+            include_once "Views/Order/$action.php";
+        }
+
     }
 }

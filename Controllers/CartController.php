@@ -25,13 +25,19 @@ include_once 'Models/OrderProduct.php';
                 $this->render($action);
             }
             else {
-                throw new ErrorException();
+                header("Location: /?controller=error&action=error");
             }
         }
 
         function render($action, $dataToSend = []): void
         {
-            extract($dataToSend);
-            include_once "Views/Cart/$action.php";
+            if(!file_exists("Views/Cart/$action.php")) {
+                header("Location: /?controller=error&action=error");
+            }
+            else {
+                extract($dataToSend);
+                include_once "Views/Cart/$action.php";
+            }
+
         }
     }
