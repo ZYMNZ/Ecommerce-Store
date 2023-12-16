@@ -15,3 +15,6 @@ if (isset($_POST['submit'])) {
         header("Location: /?controller=user&action=sellerRegister");
     }
 }
+else {
+    header("Location: /?controller=general&action=error");
+}
