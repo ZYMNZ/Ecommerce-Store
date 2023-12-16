@@ -48,11 +48,8 @@ class ProductController {
             ];
             $this->render($action, $dataToSend);
         }
-        else{
-            header("Location: /?controller=general&action=error");
-        }
         //SELLER PRODUCTS
-        /*else*/ if ($action == "sellerProduct") {
+        else if ($action == "sellerProduct") {
             noAccess($_SESSION['user_id'], $_SESSION['userRoles'], 'seller');
             $products = Product::getProductsByUserId($_SESSION['user_id']);
             $this->render($action, $products);
