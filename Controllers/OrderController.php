@@ -5,7 +5,8 @@ class OrderController{
     function route(): void
     {
         global $action;
-        if ($action == "orderConfirmed" || $action == "greeting") {
+        noAccess($_SESSION["user_id"], $_SESSION["userRoles"], "buyer");
+        if (($action == "orderConfirmed" || $action == "greeting") && isset($_POST["submit"])) {
             $this->render($action);
         }
         else {
