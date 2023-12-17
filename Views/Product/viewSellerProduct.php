@@ -26,7 +26,7 @@
 
         <section class="TopSection">
             <div class="title backgroundColorD9D9D9">
-                <label><?php echo $dataToSend["product"]-> getTitle() ?></label>
+                <label><?php echo htmlentities($dataToSend["product"]-> getTitle(),ENT_QUOTES) ?></label>
             </div>
         </section>
 
@@ -69,7 +69,7 @@
         <div class="productDescriptionDiv backgroundColorD9D9D9">
             <p>
                 <?php
-                echo $dataToSend["product"]->getDescription();
+                echo htmlentities($dataToSend["product"]->getDescription(),ENT_QUOTES);
                 ?>
             </p>
         </div>
@@ -102,11 +102,11 @@
                 foreach($dataToSend["reviewsAndUsers"] as $review) {
                     echo "<div class='review backgroundColorD9D9D9'>"
                         . "<div class='reviewPoster'>"
-                        . "<label class='fontWeightBold'>" . $review["user"]->getFirstName()
-                        . " " . $review["user"]->getLastName() . "</label>"
+                        . "<label class='fontWeightBold'>" . htmlentities($review["user"]->getFirstName(),ENT_QUOTES)
+                        . " " . htmlentities($review["user"]->getLastName(),ENT_QUOTES) . "</label>"
                         . "</div>"
                         . "<div class='reviewParagraph'>"
-                        . "<label>" . $review["review"]->getReview() . "</label>"
+                        . "<label>" . htmlentities($review["review"]->getReview(),ENT_QUOTES) . "</label>"
                         . "</div>"
                         . "</div>";
                 }

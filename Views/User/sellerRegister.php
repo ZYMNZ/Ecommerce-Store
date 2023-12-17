@@ -17,7 +17,7 @@ include_once "Views/General/navbar.php";
     </header>
 </section>
 <section>
-    <form action="/?controller=user&action=validateSellerRegistration" method="post">
+    <form action="?controller=user&action=validateSellerRegistration" method="post">
         <section class="loginRegistrationSection marginAuto">
             <label style="font-size: 30px" class="hintLabel displayBlock">Please enter your current password to sign up
                 <input type="password" name="password" class="inputField width100Percent" placeholder="password" required>

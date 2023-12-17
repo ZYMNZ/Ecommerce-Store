@@ -37,33 +37,17 @@ include_once "Views/General/session.php";
                 <?php
                 foreach ($data['users'] as $user)
                 {
-//        if ($user->getDescription() === 'NULL')  $user->setDescription('None');
-//        if ($user->getPhoneNumber() === 'NULL')  $user->setPhoneNumber('None');
                     $id = $user->getUserId();
                     echo "<tr>";
                     echo "<input type='hidden' name='userId' id='userId' value='$id'>";
-                    echo "<td>" . $user->getFirstName() . "</td>";
-                    echo "<td>" . $user->getLastName() . "</td>";
-                    echo "<td>" . $user->getEmail() . "</td>";
+                    echo "<td>" . htmlentities($user->getFirstName(),ENT_QUOTES) . "</td>";
+                    echo "<td>" . htmlentities($user->getLastName(),ENT_QUOTES) . "</td>";
+                    echo "<td>" . htmlentities($user->getEmail(),ENT_QUOTES) . "</td>";
                     echo "<td><a href='/?controller=user&action=editBuyer&id=$id'><button class='actions'>Edit...</button></a></td>";
                     echo "<td><button class='actions' type='button' data-toggle='modal' data-target='#myModal'>Delete...</button></td></tr>";
                 }
                 ?>
             </table>
-
-            <!--<script>-->
-            <!--    // Use the PHP value directly in the JavaScript code-->
-            <!--    document.querySelector('button[data-toggle="modal"]').addEventListener('click', () => {-->
-            <!--        var currentId = this.closest('tr').querySelector('#userId').value;-->
-            <!--        console.log(currentId);-->
-            <!--    });-->
-            <!---->
-            <!--</script>-->
-            <?php
-            //include_once 'Views/General/modal.php';
-            //modal('deleteBuyer', $id);
-            //include_once "Views/General/footer.php";
-            //?>
         </main>
     </div>
 

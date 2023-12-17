@@ -29,11 +29,11 @@ include_once "Views/General/session.php";
             //echo ($dataToSend[2][0]->getCategoryId() === $dataToSend[1]->getCategoryId()) ? 'true01' : 'false01';
             //echo ($dataToSend[2][1]->getCategoryId() === $dataToSend[1]->getCategoryId()) ? 'true02' : 'false02';
             ?>
-            <form action="/?controller=product&action=submitProductUpdate&id=<?php echo $dataToSend[0]->getProductId(); ?>" enctype="multipart/form-data" class="textAlignCenter" id="productFormId" method="post">
-            <label>Title:<input class="form" type="text" name="title" value=<?php echo "'" . $dataToSend[0]->getTitle() . "'" ?>></label><br>
+            <form action="/?controller=product&action=submitProductUpdate&id=<?php echo htmlentities($dataToSend[0]->getProductId(),ENT_QUOTES); ?>" enctype="multipart/form-data" class="textAlignCenter" id="productFormId" method="post">
+            <label>Title:<input class="form" type="text" name="title" value=<?php echo "'" . htmlentities($dataToSend[0]->getTitle(),ENT_QUOTES) . "'" ?>></label><br>
             <label class="invalidInputLabel displayBlock displayNone" name="titleErrorLabel"></label>
-            <label>Description:<textarea name="description" rows="2" cols="50"><?php echo $dataToSend[0]->getDescription() ?></textarea></label><br>
-            <label>Price:<input class="form" type="text" name="price" value=<?php echo "'" . $dataToSend[0]->getPrice() . "'" ?>></label><br>
+            <label>Description:<textarea name="description" rows="2" cols="50"><?php echo htmlentities($dataToSend[0]->getDescription(),ENT_QUOTES) ?></textarea></label><br>
+            <label>Price:<input class="form" type="text" name="price" value=<?php echo "'" . htmlentities($dataToSend[0]->getPrice(),ENT_QUOTES) . "'" ?>></label><br>
             <label class="invalidInputLabel displayBlock displayNone" name="emptyPriceErrorLabel"></label>
             <label class="invalidInputLabel displayBlock displayNone" name="notANumberPriceErrorLabel"></label>
 
@@ -49,12 +49,6 @@ include_once "Views/General/session.php";
                     // Matches any category in the $categories variable
                     // When they are listed in the dropdown
                     foreach ($categories as $category) {
-//                echo "<p>".$categories->getCategoryId() === $dataToSend[1]->getCategoryId()."</p>";
-                        /*if ($categories->getCategoryId() === $dataToSend[1]->getCategoryId()) {
-                            echo "<option value='" . $category->getCategory() . "' selected>" . $category->getCategory() . "</option>";
-                            continue;
-                        }*/
-
                         // List all the options of categories
                         // If the category of the product to update is
                         // Equal to the category currently being put in the

@@ -36,11 +36,11 @@ class Order {
             && $pUserId > 0
             && strlen($pOrderComment) > 0
         ) {
-            $this->orderId = $pOrderId;
-            $this->userId = $pUserId;
-            $this->orderDate = $pOrderDate;
-            $this->orderComment = $pOrderComment;
-            $this->isPaid = $pIsPaid;
+            $this->orderId = htmlentities($pOrderId,ENT_QUOTES);
+            $this->userId = htmlentities($pUserId,ENT_QUOTES);
+            $this->orderDate = htmlentities($pOrderDate,ENT_QUOTES);
+            $this->orderComment = htmlentities($pOrderComment,ENT_QUOTES);
+            $this->isPaid = htmlentities($pIsPaid,ENT_QUOTES);
         } else if ($pOrderId > 0) {
             $this->getOrderById($pOrderId);
         }

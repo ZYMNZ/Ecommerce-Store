@@ -15,39 +15,39 @@ include_once "Views/General/session.php";
 </head>
 
 <body>
-    <div class="mainContentWrapper">
-        <main>
+<div class="mainContentWrapper">
+    <main>
+        <?php
+        include_once "Views/General/navbar.php";
+        ?>
+        <table>
             <?php
-            include_once "Views/General/navbar.php";
-            ?>
-            <table>
-                <?php
-                /*    foreach ($dataToSend as $product) {
-                        echo "<tr class='table-row'>";
-                        echo "<td class='table-title'>" . $product->getTitle() . "</td>";
-                        echo "<td class='table-description'>" . $product->getDescription() . "</td>";
-                        echo "<td class='table-price'>$" . $product->getPrice() . "</td>";
-                        echo "<td><a href='/?controller=product&action=view&id=" . $product->getProductId() . "' class='table-buy-button'>View</a></td>";
-                        echo "</tr>";
-                    }
-                    */?>
-                <?php
-                if (!empty($dataToSend["products"])) {
-                    foreach ($dataToSend["products"] as $product) {
-                        echo "<tr><div class='product'>";
-                        echo "<div class='title'>" . $product->getTitle() . "</div>";
-                        echo "<div class='description'>" . $product->getDescription() . "</div>";
-                        echo "<div class='price'>$" . number_format($product->getPrice(), 2, '.', ',') . "</div>";
-                        echo "<div><a href='?controller=product&action=view&id=" . $product->getProductId() . "' class='buy-button'>View</a></div>";
-                        echo "</div></tr>";
-                    }
-                } else {
-                    echo "<label class='title'>This category currently has no products</label>";
+            /*    foreach ($dataToSend as $product) {
+                    echo "<tr class='table-row'>";
+                    echo "<td class='table-title'>" . $product->getTitle() . "</td>";
+                    echo "<td class='table-description'>" . $product->getDescription() . "</td>";
+                    echo "<td class='table-price'>$" . $product->getPrice() . "</td>";
+                    echo "<td><a href='/?controller=product&action=view&id=" . $product->getProductId() . "' class='table-buy-button'>View</a></td>";
+                    echo "</tr>";
                 }
-                ?>
-            </table>
-        </main>
-    </div>
+                */?>
+            <?php
+            if (!empty($dataToSend["products"])) {
+                foreach ($dataToSend["products"] as $product) {
+                    echo "<tr><div class='product'>";
+                    echo "<div class='title'>" . htmlentities($product->getTitle(), ENT_QUOTES) . "</div>";
+                    echo "<div class='description'>" . htmlentities($product->getDescription(),ENT_QUOTES) . "</div>";
+                    echo "<div class='price'>$" . htmlentities(number_format($product->getPrice(), 2, '.', ','),ENT_QUOTES) . "</div>";
+                    echo "<div><a href='?controller=product&action=view&id=" . htmlentities($product->getProductId(), ENT_QUOTES) . "' class='buy-button'>View</a></div>";
+                    echo "</div></tr>";
+                }
+            } else {
+                echo "<label class='title'>This category currently has no products</label>";
+            }
+            ?>
+        </table>
+    </main>
+</div>
 <?php
 include_once "Views/General/footer.php";
 ?>

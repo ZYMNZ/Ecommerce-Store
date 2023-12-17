@@ -10,7 +10,7 @@ if (isset($_POST['currentPassword']) && md5($_POST['currentPassword']) === $user
         if ($_POST['newPassword'] === $_POST['confirmPassword'])
         {
             User::updatePersonalInfo(
-                $user->getFirstName(),
+                htmlentities($user->getFirstName(),ENT_QUOTES),
                 $user->getLastName(),
                 $user->getEmail(),
                 md5($_POST['newPassword']),

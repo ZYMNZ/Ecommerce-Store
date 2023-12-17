@@ -29,12 +29,12 @@ include_once "Views/General/session.php";
         <br>
         <form action="/?controller=user&action=updatePersonalDetails" method="post" id="formPersonalDetails">
             <label>&emsp;First Name:&emsp;&emsp;&emsp;
-                <input type="text" name="firstName" value='<?php echo $data['user']->getFirstName() ?>'>
+                <input type="text" name="firstName" value='<?php echo htmlentities($data['user']->getFirstName(),ENT_QUOTES) ?>'>
                 <label class="invalidInputLabel displayBlock displayNone" style="margin-left: 137px;" name="firstNameErrorLabel"></label>
             </label>
             <br>
             <label>&emsp;Last Name:&emsp;&emsp;&emsp;
-                <input type="text" name="lastName" value='<?php echo $data['user']->getLastName() ?>'>
+                <input type="text" name="lastName" value='<?php echo htmlentities($data['user']->getLastName(),ENT_QUOTES) ?>'>
                 <label class="invalidInputLabel displayBlock displayNone" style="margin-left: 137px;" name="lastNameErrorLabel"></label>
             </label>
             <?php
@@ -42,12 +42,12 @@ include_once "Views/General/session.php";
                 ?>
                 <br>
                 <label>&emsp;Description:&emsp;&emsp;&emsp;
-                    <input type="text" name="description" value='<?php echo $data['user']->getDescription() ?>'>
+                    <input type="text" name="description" value='<?php echo htmlentities($data['user']->getDescription(),ENT_QUOTES) ?>'>
 
                 </label>
                 <br>
                 <label>&emsp;Phone Number:&emsp;&emsp;&emsp;
-                    <input type="text" id="phoneNumber" name="phoneNumber" value='<?php echo $data['user']->getPhoneNumber() ?>'>
+                    <input type="text" id="phoneNumber" name="phoneNumber" value='<?php echo htmlentities($data['user']->getPhoneNumber(),ENT_QUOTES) ?>'>
                     <label class="invalidInputLabel displayBlock displayNone" style="margin-left: 137px;" name="notANumberErrorLabel"></label>
                 </label>
                 <br>

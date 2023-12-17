@@ -123,13 +123,13 @@ class User {
             && strlen($pPhoneNumber) >= 0
         ) {
             // Initialize all the properties if all parameters were sent
-            $this->userId = $pUserId;
-            $this->firstName = $pFirstName;
-            $this->lastName = $pLastName;
-            $this->email = $pEmail;
-            $this->password = $pPassword;
-            $this->description = $pDescription;
-            $this->phoneNumber = $pPhoneNumber;
+            $this->userId = htmlentities($pUserId,ENT_QUOTES);
+            $this->firstName = htmlentities($pFirstName,ENT_QUOTES);
+            $this->lastName =htmlentities( $pLastName,ENT_QUOTES);
+            $this->email = htmlentities($pEmail,ENT_QUOTES);
+            $this->password = htmlentities($pPassword,ENT_QUOTES);
+            $this->description =htmlentities( $pDescription,ENT_QUOTES);
+            $this->phoneNumber = htmlentities($pPhoneNumber,ENT_QUOTES);
         }
         else if($pUserId > 0) {
             $this->getUserById($pUserId);
@@ -146,13 +146,13 @@ class User {
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
             $result = $result->fetch_assoc();
-            $this->userId = $pUserId;
-            $this->firstName = $result["first_name"];
-            $this->lastName = $result["last_name"];
-            $this->email = $result["email"];
-            $this->password = $result["password"];
-            $this->description = $result["description"] ?? "";
-            $this->phoneNumber = $result["phone_number"] ?? "";
+            $this->userId = htmlentities($pUserId,ENT_QUOTES);
+            $this->firstName = htmlentities($result["first_name"],ENT_QUOTES);
+            $this->lastName = htmlentities($result["last_name"],ENT_QUOTES);
+            $this->email = htmlentities($result["email"],ENT_QUOTES);
+            $this->password =htmlentities( $result["password"],ENT_QUOTES);
+            $this->description = htmlentities($result["description"],ENT_QUOTES) ?? "";
+            $this->phoneNumber = htmlentities($result["phone_number"],ENT_QUOTES) ?? "";
         }
     }
     public static function getUserByEmailAndPassword($pEmail, $pPassword): ?User

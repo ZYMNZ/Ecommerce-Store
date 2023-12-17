@@ -15,13 +15,12 @@ class Category {
             $pCategoryId > 0 &&
             strlen($pCategory) > 0
         ){
-            $this->categoryId = $pCategoryId;
-            $this->category = $pCategory;
+            $this->categoryId = htmlentities($pCategoryId,ENT_QUOTES);
+            $this->category = htmlentities($pCategory,ENT_QUOTES);
         }
         else if ($pCategoryId > 0){
             $this->getById($pCategoryId);
         }
-
     }
 
     private function getById($pCategoryId) {

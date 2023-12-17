@@ -11,7 +11,7 @@ $categories = $dataToSend["categories"] ?? $dataToSend;
                 <option id="optionNone" value="None" selected disabled>Choose Category</option>
                 <?php
                 foreach ($categories as $category) {
-                    echo "<option value='" . $category->getCategory() . "'>" . $category->getCategory() . "</option>";
+                    echo "<option value='" . htmlentities($category->getCategory(),ENT_QUOTES) . "'>" . htmlentities($category->getCategory(),ENT_QUOTES) . "</option>";
                 }
                 ?>
                 <input type="hidden" name="selectedCategory" id="selectedCategory">
@@ -20,22 +20,6 @@ $categories = $dataToSend["categories"] ?? $dataToSend;
     </section>
 
 <script>
-    /*const form = document.querySelector('form');
-    const option = document.querySelector('#optionNone');
-    form.addEventListener('submit', (e)=> {
-        e.preventDefault()
-    })
-
-    if (form) {
-        console.log('yes')
-    }*/
-    // Automatically submit the form when the select value changes
-
-    //IF 'NONE' IT WON'T DO ANYTHING (STILL UNDER TEST)
-    // var selectedName = txtName.options[txtName.selectedIndex].text;
-    // var selectedName = $('#category').val();
-    // console.log(txtName);
-
 
         document.addEventListener('DOMContentLoaded', function () {
 
@@ -57,17 +41,5 @@ $categories = $dataToSend["categories"] ?? $dataToSend;
         });
     });
 
-// Work on later to prevent None from submitting
-    /*const form = document.querySelector('form');
-    const select = document.querySelector('select');
-    const optionNone = document.querySelector('#optionNone');
-    form.addEventListener('submit', (e)=> {
-        const selectedOption = select.options[select.selectedIndex];
-        console.log(selectedOption);
-        if (selectedOption !== optionNone) {
-            return;
-        }
-        e.preventDefault();
-    })*/
 
 </script>

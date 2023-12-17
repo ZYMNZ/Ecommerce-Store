@@ -39,18 +39,15 @@
                 </tr>
 
                 <?php foreach ($data['users'] as $user) :
-
-//            $user->getDSescription() === 'NULL' && $user->setDescription('None');
-//            $user->getPhoneNumber() === 'NULL' && $user->setPhoneNumber('None');
                     $id = $user->getUserId();
                     ?>
                     <tr>
                         <input type='hidden' name='userId' id='userId' value='<?php $id ?>'>
-                        <td> <?php echo $user->getFirstName() ?> </td>
-                        <td> <?php echo $user->getLastName() ?> </td>
-                        <td> <?php echo $user->getEmail() ?> </td>
-                        <td> <?php echo $user->getDescription() ?> </td>
-                        <td> <?php echo $user->getPhoneNumber() ?> </td>
+                        <td> <?php echo htmlentities($user->getFirstName(),ENT_QUOTES) ?> </td>
+                        <td> <?php echo htmlentities($user->getLastName(),ENT_QUOTES) ?> </td>
+                        <td> <?php echo htmlentities($user->getEmail(),ENT_QUOTES) ?> </td>
+                        <td> <?php echo htmlentities($user->getDescription(),ENT_QUOTES) ?> </td>
+                        <td> <?php echo htmlentities($user->getPhoneNumber(),ENT_QUOTES) ?> </td>
                         <td><a class="actions" href="/?controller=user&action=editSeller&id=<?php echo $id ?>"><button>Edit...</button></a></td>
                         <td><button class="actions" type='button' data-toggle='modal' data-target='#myModal'>Delete...</button></td>
                     </tr>
@@ -58,20 +55,6 @@
                 <?php  endforeach;  ?>
 
             </table>
-
-            <!--    <script>-->
-            <!--        // Use the PHP value directly in the JavaScript code-->
-            <!--        document.querySelector('button[data-toggle="modal"]').addEventListener('click', () => {-->
-            <!--            var currentId = this.closest('tr').querySelector('#userId').value;-->
-            <!--            console.log(currentId);-->
-            <!--        });-->
-            <!---->
-            <!--    </script>-->
-            <!--    --><?php
-            //    include_once 'Views/General/modal.php';
-            //    modal('deleteSeller', $id);
-            //    include_once "Views/General/footer.php";
-            //    ?>
         </main>
     </div>
 
