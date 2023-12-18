@@ -157,7 +157,7 @@ function checkFileSize(fileInputElement, uploadImageMaxSize)
 
 async function setUpEventHandlers() {
     var productForm = $("#productFormId");
-    $("[name='submit']").on("click", async function (event) {
+    productForm.on("submit", async function (event) {
         event.preventDefault();
         // Check values inside the text fields before you submit the form
         var titleTextField = $("[name='title']");
@@ -173,14 +173,19 @@ async function setUpEventHandlers() {
 
         var fileIsValid = await checkFileIsValid();
 
-
         if (!titleIsEmpty && !priceIsEmpty && priceIsANumber && !categorySelectedIsNone && fileIsValid) {
 
             //Submit the form if the values are right
+            // Unbind the on submit behavior of the form
+            $(this).off("submit");
 
-            $(this).off("click");
-            productForm.submit();
+            // Access the DOM form, then access its submit property (which is a submit button) then click on that submit button
+            $(this)[0].submit.click();
+
+
         }
-        }
-    );
+
+
+
+    });
 }
