@@ -24,7 +24,7 @@ function setUpEventHandlers() {
             var emailNameErrorLabel = $("[name='emailErrorLabel']");
             var email = emailCheck(email,emailNameErrorLabel);
 
-            if (email && firstName && lastName) {
+            if (!email || !firstName || !lastName) {
                 /*
                 Prevent the submit from happening
                 if the values are wrong

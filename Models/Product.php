@@ -222,12 +222,26 @@ class Product{
             $productImageName = File::getProductImageName(self::PRODUCT_IMAGE_UPLOAD_PATH, $uploadedFileExtension, self::getNextAutoIncrementId());
             $uploadStatus = File::uploadProductImage(self::PRODUCT_IMAGE_UPLOAD_PATH, $productImageName, $_FILES["productImage"]["tmp_name"]);
         }
-
-        if((strlen($pProductImagePath) == 0) || $uploadStatus["shouldUploadImage"]) {
+        else {
             $mySqliConnection = openDatabaseConnection();
             $sql = "INSERT INTO product (user_id, title, description, price, product_image_path, category_id) VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = $mySqliConnection->prepare($sql);
-            $productImagePathColumn = strlen($pProductImagePath) > 0? $productImageName : $pProductImagePath;
+            $productEmptyImagePath = "";
+            $stmt->bind_param('issdsi', $pUserId, $pTitle, $pDescription, $pPrice,$productEmptyImagePath , $pCategoryId);
+            $stmtExecSuccess = $stmt->execute();
+            $stmt->close();
+            $mySqliConnection->close();
+            return [
+                "shouldUploadImage" => true,
+                "imageIsSame" => false
+            ];
+        }
+
+        if($uploadStatus["shouldUploadImage"]) {
+            $mySqliConnection = openDatabaseConnection();
+            $sql = "INSERT INTO product (user_id, title, description, price, product_image_path, category_id) VALUES (?, ?, ?, ?, ?, ?)";
+            $stmt = $mySqliConnection->prepare($sql);
+            $productImagePathColumn = $productImageName;
             $stmt->bind_param('issdsi', $pUserId, $pTitle, $pDescription, $pPrice, $productImagePathColumn, $pCategoryId);
             $stmtExecSuccess = $stmt->execute();
 
@@ -243,7 +257,7 @@ class Product{
 
     public static function updateProduct($pUserId, $pTitle, $pDescription, $pPrice, $pProductId, $pCategoryId, $pProductImagePath = "") : array
     {
-        $uploadStatus = [];
+
         $productImageName = "";
         if(strlen($pProductImagePath) > 0)
         {
@@ -251,6 +265,23 @@ class Product{
             $productImageName = File::getProductImageName(self::PRODUCT_IMAGE_UPLOAD_PATH, $uploadedFileExtension, $pProductId);
             $uploadStatus = File::uploadProductImage(self::PRODUCT_IMAGE_UPLOAD_PATH, $productImageName, $_FILES["productImage"]["tmp_name"]);
         }
+        else {
+            // If there was no image uploaded, update the columns but not the image path
+            $mySqliConnection = openDatabaseConnection();
+            $sql = "UPDATE product SET user_id = ?, title = ?, description = ?, price = ?, category_id = ? WHERE product_id = ?";
+            $stmt = $mySqliConnection->prepare($sql);
+            $stmt->bind_param('issdii', $pUserId, $pTitle, $pDescription, $pPrice, $pCategoryId, $pProductId);
+
+            $stmt->execute();
+            $stmt->close();
+            $mySqliConnection->close();
+            var_dump("hello");
+            return [
+                "shouldUploadImage" => true,
+                "imageIsSame" => false
+            ];
+        }
+
 
         if($uploadStatus["shouldUploadImage"])
         {
@@ -262,21 +293,7 @@ class Product{
             $stmt->close();
             $mySqliConnection->close();
         }
-        else if(
-            strlen($pProductImagePath) == 0
-        )
-        {
-            // If there was no image uploaded, update the columns but not the image path
-            $mySqliConnection = openDatabaseConnection();
-            $sql = "UPDATE product SET user_id = ?, title = ?, description = ?, price = ?, category_id = ? WHERE product_id = ?";
-            $stmt = $mySqliConnection->prepare($sql);
-            $stmt->bind_param('issdii', $pUserId, $pTitle, $pDescription, $pPrice, $pProductId, $pCategoryId);
-            $stmt->execute();
-            $stmt->close();
-            $mySqliConnection->close();
-        }
         else {
-
             header("Location: /?controller=general&action=error");
         }
         return $uploadStatus;

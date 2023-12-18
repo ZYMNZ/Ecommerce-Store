@@ -8,8 +8,7 @@ $uploadStatus = Product::updateProduct($_SESSION['user_id'], $_POST['title'], $_
 /*
  * If the image that was uploaded was the same or the upload of the image was successful, you don't need to redirect the user to an error page
 */
-
-if($uploadStatus["imageIsSame"] || $uploadStatus["shouldUploadImage"] || strlen($imageToBeUploaded) == 0)
+if(strlen($imageToBeUploaded) == 0 || $uploadStatus["imageIsSame"] || $uploadStatus["shouldUploadImage"])
 {
     header("Location: /?controller=product&action=sellerProduct");
 }
