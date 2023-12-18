@@ -23,8 +23,8 @@ class OrderProduct
             $pOrderId > 0
             && $pProductId > 0
         ) {
-            $this->orderId = $pOrderId;
-            $this->productId = $pProductId;
+            $this->orderId = htmlentities($pOrderId, ENT_QUOTES);
+            $this->productId = htmlentities($pProductId, ENT_QUOTES);
         }
 
         else if ($pOrderId > 0) {
@@ -43,8 +43,8 @@ class OrderProduct
             $orders = [];
             while ($result = $result->fetch_assoc()){
                 $orderProduct = new OrderProduct();
-                $orderProduct->orderId = $result['order_id'];
-                $orderProduct->productId = $result['product_Id'];
+                $orderProduct->orderId = htmlentities($result['order_id'], ENT_QUOTES);
+                $orderProduct->productId = htmlentities($result['product_Id'], ENT_QUOTES);
                 $orders[] = $orderProduct;
             }
             return $orders;

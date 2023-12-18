@@ -28,19 +28,19 @@ include_once "Views/General/session.php";
             <h1>Admin</h1>
             <br>
             <br>
-            <form action='<?php echo "/?controller=user&action=updateBuyer&id=" . $_GET['id'] ?>' method="post" id="editBuyerForm">
+            <form action='<?php echo "/?controller=user&action=updateBuyer&id=" . htmlentities($_GET['id'], ENT_QUOTES) ?>' method="post" id="editBuyerForm">
                 <label>First Name:
-                    <input type="text" name='firstName' value='<?php echo $data['user']->getFirstName(); ?>'>
+                    <input type="text" name='firstName' value='<?php echo htmlentities($data['user']->getFirstName(), ENT_QUOTES); ?>'>
                     <label class="invalidInputLabel displayBlock displayNone" style="margin-left: 137px;" name="firstNameErrorLabel"></label>
                 </label>
                 <br>
                 <label>Last Name:
-                    <input type="text" name='lastName' value='<?php echo $data['user']->getLastName(); ?>'>
+                    <input type="text" name='lastName' value='<?php echo htmlentities($data['user']->getLastName(), ENT_QUOTES); ?>'>
                     <label class="invalidInputLabel displayBlock displayNone" style="margin-left: 137px;" name="lastNameErrorLabel"></label>
                 </label>
                 <br>
                 <label>Email:
-                    <input type="text" name='email' value='<?php echo $data['user']->getEmail(); ?>'>
+                    <input type="text" name='email' value='<?php echo htmlentities($data['user']->getEmail(), ENT_QUOTES); ?>'>
                     <label class="invalidInputLabel displayBlock displayNone" style="margin-left: 137px;" name="emailErrorLabel"></label>
 
                 </label>

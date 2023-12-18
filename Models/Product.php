@@ -41,13 +41,13 @@ class Product{
             && strlen($pProductImagePath) > 0
             && $pCategoryId > 0
         ){
-            $this->productId = $pProductId;
-            $this->userId = $pUserId;
-            $this->description = $pDescription;
-            $this->title = $pTitle;
-            $this->price = $pPrice;
-            $this->productImagePath = $pProductImagePath;
-            $this->categoryId = $pCategoryId;
+            $this->productId = htmlentities($pProductId, ENT_QUOTES);
+            $this->userId = htmlentities($pUserId, ENT_QUOTES);
+            $this->description = htmlentities($pDescription, ENT_QUOTES);
+            $this->title = htmlentities($pTitle, ENT_QUOTES);
+            $this->price = htmlentities($pPrice, ENT_QUOTES);
+            $this->productImagePath = htmlentities($pProductImagePath, ENT_QUOTES);
+            $this->categoryId = htmlentities($pCategoryId, ENT_QUOTES);
         }
         else if ($pProductId > 0){
             // initialize only if the Product id was sent
@@ -64,13 +64,13 @@ class Product{
 
                 $queryProductAssocRow = $getProductResult->fetch_assoc();
 
-                $this->productId = $queryProductAssocRow['product_id'];
-                $this->userId = $queryProductAssocRow['user_id'];
-                $this->title = $queryProductAssocRow['title'];
-                $this->description = $queryProductAssocRow['description'];
-                $this->price = $queryProductAssocRow['price'];
-                $this->productImagePath = $queryProductAssocRow["product_image_path"];
-                $this->categoryId = $queryProductAssocRow['category_id'];
+                $this->productId = htmlentities($queryProductAssocRow['product_id'], ENT_QUOTES);
+                $this->userId = htmlentities($queryProductAssocRow['user_id'], ENT_QUOTES);
+                $this->title = htmlentities($queryProductAssocRow['title'], ENT_QUOTES);
+                $this->description = htmlentities($queryProductAssocRow['description'], ENT_QUOTES);
+                $this->price = htmlentities($queryProductAssocRow['price'], ENT_QUOTES);
+                $this->productImagePath = htmlentities($queryProductAssocRow["product_image_path"], ENT_QUOTES);
+                $this->categoryId = htmlentities($queryProductAssocRow['category_id'], ENT_QUOTES);
             }
             else {
                 // If the ID is > 0 and no product rows were returned, go to the error page

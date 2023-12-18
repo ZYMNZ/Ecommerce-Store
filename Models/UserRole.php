@@ -13,9 +13,10 @@ class UserRole
 
     private function initializeProperties($pUserId, $pRoleId): void
     {
-        if ($pUserId < 0) return; else if ($pUserId > 0 && $pRoleId > 0) {
-            $this->userId = $pUserId;
-            $this->roleId = $pRoleId;
+        if ($pUserId < 0) return;
+        else if ($pUserId > 0 && $pRoleId > 0) {
+            $this->userId = htmlentities($pUserId, ENT_QUOTES);
+            $this->roleId = htmlentities($pRoleId, ENT_QUOTES);
         } else if ($pUserId > 0) {
             //TODO might not need this
             $this->getUserRoleById($pUserId);
@@ -33,8 +34,8 @@ class UserRole
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
             $result = $result->fetch_assoc();
-            $this->userId = $pUserId;
-            $this->roleId = $result['role_id'];
+            $this->userId = htmlentities($pUserId, ENT_QUOTES);
+            $this->roleId = htmlentities($result['role_id'], ENT_QUOTES);
         }
     }
 

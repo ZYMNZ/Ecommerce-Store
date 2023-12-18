@@ -35,7 +35,7 @@
             <label><?php
                 $sellerName = $dataToSend["product"]->getUserName($_GET['id']);
                 $name = explode(" ", $sellerName);
-                echo ucfirst($name[0]) ." ". ucfirst($name[1]);
+                echo htmlentities(ucfirst($name[0]), ENT_QUOTES) ." ". htmlentities(ucfirst($name[1]), ENT_QUOTES);
                 ?></label>
         </div>
 
@@ -45,7 +45,7 @@
                     $productImagePath = $dataToSend["product"]->getProductImagePath();
                     if(strlen($productImagePath) > 0)
                     {
-                        echo $productImagePath;
+                        echo htmlentities($productImagePath, ENT_QUOTES);
                     }
                     else {
                         echo "Views/images/no-photo.png";
@@ -56,7 +56,7 @@
                 <div class="productPriceDiv">
                     <label>
                         <?php
-                        echo "$" . number_format($dataToSend["product"]->getPrice(), 2, '.', ',');
+                        echo "$" . htmlentities(number_format($dataToSend["product"]->getPrice(), 2, '.', ','), ENT_QUOTES);
                         ?>
                     </label>
                 </div>
