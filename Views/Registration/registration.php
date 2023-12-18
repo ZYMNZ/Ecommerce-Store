@@ -17,7 +17,7 @@
             <?php
             include_once "Views/General/navbar.php";
             ?>
-            <form action="/?controller=registration&action=register" method="POST" id="registrationForm">
+            <form action="?controller=registration&action=register" method="POST" id="registrationForm">
                 <section class="loginRegistrationSection marginAuto">
                     <label class="hintLabel displayBlock denseHintLabel">First Name:</label>
                     <input type="text" name="firstName" class="inputField width100Percent" required> <br/>
@@ -46,7 +46,7 @@
                 <section class="signButtons marginAuto">
                     <input type="submit" name="submit" value="Sign up" class="defaultButtonStyling cursorPointer width100Percent borderNone">
                     <a href="/?controller=login&action=login">
-                        <input type="button" name="signIn" value="Sign in" href="/?controller=login&action=login" class="defaultButtonStyling cursorPointer width100Percent borderNone">
+                        <input type="button" name="signIn" value="Sign in" class="defaultButtonStyling cursorPointer width100Percent borderNone">
                     </a> <br/>
                 </section>
             </form>

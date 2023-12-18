@@ -87,7 +87,7 @@ function lastNameCheck() {
  function setUpEventHandlers() {
     var personalDetailsForm = $("#formPersonalDetails");
     $("[name='submit']").on("click", function (event) {
-            event.preventDefault();
+            // event.preventDefault();
             // Check values inside the text fields before you submit the form
             var phoneNum = $("[name='phoneNumber']");
 
@@ -98,24 +98,23 @@ function lastNameCheck() {
             // console.log(lastName + "      LastN");
             // console.log(phoneIsEmpty + "     isempty");
             if (phoneIsEmpty || phoneNum.val() === undefined){
-                if (firstName && lastName) {
+                if (!firstName || !lastName) {
                     /*
                     Prevent the submit from happening
                     if the values are wrong
                     */
-                    $(this).off("click");
-                    personalDetailsForm.submit();
+                    event.preventDefault();
                 }
             }
             else {
                 var phoneNumber = phoneNumberCheck();
-                if (phoneNumber && firstName && lastName) {
+                console.log(phoneNumber);
+                if (!phoneNumber || !firstName || !lastName) {
                     /*
                     Prevent the submit from happening
                     if the values are wrong
                     */
-                    $(this).off("click");
-                    personalDetailsForm.submit();
+                    event.preventDefault();
                 }
             }
         }

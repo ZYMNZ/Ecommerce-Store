@@ -29,12 +29,12 @@
                 if(count($dataToSend) > 0) {
                     foreach ($dataToSend as $product) {
                         echo "<tr><div class='product'>";
-                        echo "<div class='title'>" . $product->getTitle() . "</div>";
-                        echo "<div class='description'>" . $product->getDescription() . "</div>";
-                        echo "<div class='price'>$" . number_format($product->getPrice(), 2, '.', ',') . "</div>";
-                        echo "<div><a href='/?controller=product&action=viewSellerProduct&id=" . $product->getProductId() . "' class='buy-button'>View</a></div>";
-                        echo "<button><a href='/?controller=product&action=updateSellerProduct&id=" . $product->getProductId() . "' >Update</a></button>";
-                        echo "<button><a href='/?controller=product&action=deleteSellerProduct&id=" . $product->getProductId() . "' >Delete</a></button>";
+                        echo "<div class='title'>" . htmlentities($product->getTitle(), ENT_QUOTES) . "</div>";
+                        echo "<div class='description'>" . htmlentities($product->getDescription(), ENT_QUOTES) . "</div>";
+                        echo "<div class='price'>$" . htmlentities(number_format($product->getPrice(), 2, '.', ','), ENT_QUOTES) . "</div>";
+                        echo "<div><a href='/?controller=product&action=viewSellerProduct&id=" . htmlentities($product->getProductId(), ENT_QUOTES) . "' class='buy-button'>View</a></div>";
+                        echo "<button><a href='/?controller=product&action=updateSellerProduct&id=" . htmlentities($product->getProductId(), ENT_QUOTES) . "' >Update</a></button>";
+                        echo "<button><a href='/?controller=product&action=deleteSellerProduct&id=" . htmlentities($product->getProductId(), ENT_QUOTES) . "' >Delete</a></button>";
                         echo "</div></tr>";
                     }
                 }

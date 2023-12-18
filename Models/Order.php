@@ -56,11 +56,11 @@ class Order {
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
             $result = $result->fetch_assoc();
-            $this->orderId = $pOrderId;
-            $this->userId = $result['user_id'];
-            $this->orderDate = $this->convertDate($result['order_date']);
-            $this->orderComment = $result['order_comment'];
-            $this->isPaid = $result['isPaid'];
+            $this->orderId = htmlentities($pOrderId, ENT_QUOTES);
+            $this->userId = htmlentities($result['user_id'], ENT_QUOTES);
+            $this->orderDate = htmlentities($this->convertDate($result['order_date']), ENT_QUOTES);
+            $this->orderComment = htmlentities($result['order_comment'], ENT_QUOTES);
+            $this->isPaid = htmlentities($result['isPaid'], ENT_QUOTES);
         }
     }
 

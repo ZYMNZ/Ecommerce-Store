@@ -20,7 +20,7 @@
 
             <section class="TopSection">
                 <div class="title backgroundColorD9D9D9">
-                    <label><?php echo $dataToSend["product"]-> getTitle() ?></label>
+                    <label><?php echo htmlentities($dataToSend["product"]->getTitle(), ENT_QUOTES); ?></label>
                 </div>
             </section>
 
@@ -29,7 +29,7 @@
                 <label><?php
                     $sellerName = $dataToSend["product"]->getUserName($_GET['id']);
                     $name = explode(" ", $sellerName);
-                    echo ucfirst($name[0]) ." ". ucfirst($name[1]);
+                    echo htmlentities(ucfirst($name[0]), ENT_QUOTES) ." ". htmlentities(ucfirst($name[1]), ENT_QUOTES);
                     ?></label>
             </div>
 
@@ -39,7 +39,7 @@
                     $productImagePath = $dataToSend["product"]->getProductImagePath();
                     if(strlen($productImagePath) > 0)
                     {
-                        echo $productImagePath;
+                        echo htmlentities($productImagePath, ENT_QUOTES);
                     }
                     else {
                         echo "Views/images/no-photo.png";
@@ -50,7 +50,7 @@
                     <div class="productPriceDiv">
                         <label>
                             <?php
-                            echo "$" . number_format($dataToSend["product"]->getPrice(), 2, '.', ',');
+                            echo "$" . htmlentities(number_format($dataToSend["product"]->getPrice(), 2, '.', ','), ENT_QUOTES);
                             ?>
                         </label>
                     </div>
@@ -59,7 +59,7 @@
                         echo "<h3>Must be logged in to purchase</h3>";
                     } else {
                         ?>
-                        <a href='<?php echo "?controller=cart&action=addToCart&id=" . $dataToSend["product"]-> getProductId() ?>' class="buyButtonAnchor backgroundColorD9D9D9">
+                        <a href='<?php echo "?controller=cart&action=addToCart&id=" . htmlentities($dataToSend["product"]->getProductId(), ENT_QUOTES) ?>' class="buyButtonAnchor backgroundColorD9D9D9">
                             Add to Cart
                         </a>
                         <?php
@@ -71,7 +71,7 @@
             <div class="productDescriptionDiv backgroundColorD9D9D9">
                 <p>
                     <?php
-                    echo $dataToSend["product"]->getDescription();
+                    echo htmlentities($dataToSend["product"]->getDescription(), ENT_QUOTES);
                     ?>
                 </p>
             </div>
@@ -86,7 +86,7 @@
                 </div>
                 <div class="reviewsDiv">
                     <form action="?controller=review&action=postReview&id=<?php
-                    echo $dataToSend["product"]->getProductId();
+                    echo htmlentities($dataToSend["product"]->getProductId(), ENT_QUOTES);
                     ?>"
                           method="POST">
                         <div class="postReviewDiv">
@@ -105,11 +105,11 @@
                     foreach($dataToSend["reviewsAndUsers"] as $review) {
                         echo "<div class='review backgroundColorD9D9D9'>"
                             . "<div class='reviewPoster'>"
-                            . "<label class='fontWeightBold'>" . $review["user"]->getFirstName()
-                            . " " . $review["user"]->getLastName() . "</label>"
+                            . "<label class='fontWeightBold'>" . htmlentities($review["user"]->getFirstName(), ENT_QUOTES)
+                            . " " . htmlentities($review["user"]->getLastName(), ENT_QUOTES) . "</label>"
                             . "</div>"
                             . "<div class='reviewParagraph'>"
-                            . "<label>" . $review["review"]->getReview() . "</label>"
+                            . "<label>" . htmlentities($review["review"]->getReview(), ENT_QUOTES) . "</label>"
                             . "</div>"
                             . "</div>";
                     }

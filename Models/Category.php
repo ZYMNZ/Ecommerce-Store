@@ -25,15 +25,15 @@ class Category {
 
     private function getById($pCategoryId) {
         $mySqlConnection = openDatabaseConnection();
-        $sql = "SELECT * FROM product WHERE category_id = ?";
+        $sql = "SELECT * FROM category WHERE category_id = ?";
         $stmt = $mySqlConnection->prepare($sql);
         $stmt->bind_param("i",$pCategoryId);
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
-            $this->categoryId = $row['category_id'];
-            $this->category = $row['category'];
+            $this->categoryId = htmlentities($row['category_id'], ENT_QUOTES);
+            $this->category = htmlentities($row['category'], ENT_QUOTES);
         }
     }
 

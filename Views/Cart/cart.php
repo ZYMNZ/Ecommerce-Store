@@ -42,14 +42,14 @@ include_once "Views/General/session.php";
 
                     <div class="cartItemBlock">
                         <div class="firstHalfCartItemBlock displayInlineBlock">
-                            <label class="fontWeightBold displayBlock categoryLabel"><?php echo $data['category'] ?></label>
-                            <label class="productTitle" name="productTitle"> <?php echo $data['title'] ?></label>
+                            <label class="fontWeightBold displayBlock categoryLabel"><?php echo htmlentities($data['category'], ENT_QUOTES) ?></label>
+                            <label class="productTitle" name="productTitle"> <?php echo htmlentities($data['title'], ENT_QUOTES) ?></label>
                         </div>
 
                         <div class="secondHalfCartItemBlock displayInlineBlock">
                             <div class="expandButtonContainer displayInlineFlex width100Percent justifyContentEnd">
                                 <div class="cartItemExpandButton cursorPointer textAlignCenter displayInlineBlock">
-                                    <a class="deleteButton" href="?controller=cart&action=deleteCartProduct&id=<?php echo $data['productId'] ?>"><button class="deleteButton">Delete</button></a>
+                                    <a class="deleteButton" href="?controller=cart&action=deleteCartProduct&id=<?php echo htmlentities($data['productId'], ENT_QUOTES); ?>"><button class="deleteButton">Delete</button></a>
 
                                 </div>
                             </div>

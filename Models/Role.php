@@ -26,8 +26,8 @@ class Role
             $pRoleId > 0
             && strlen($pRoleName) > 0
         ) {
-            $this->roleId = $pRoleId;
-            $this->roleName = $pRoleName;
+            $this->roleId = htmlentities($pRoleId, ENT_QUOTES);
+            $this->roleName = htmlentities($pRoleName, ENT_QUOTES);
         } else if ($pRoleId > 0) {
             $this->getRoleById($pRoleId);
         }
@@ -43,8 +43,8 @@ class Role
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
             $result = $result->fetch_assoc();
-            $this->roleId = $pRoleId;
-            $this->roleName = $result['role_name'];
+            $this->roleId = htmlentities($pRoleId, ENT_QUOTES);
+            $this->roleName = htmlentities($result['role_name'], ENT_QUOTES);
         }
     }
     public static function getRoleByName($pRoleName): ?Role

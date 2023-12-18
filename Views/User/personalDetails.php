@@ -28,15 +28,11 @@ include_once "Views/General/session.php";
             <table>
                 <?php
                 $user = $data['user'];
-                $user->getDescription() === 'NULL' && $user->setDescription('None');
-
-
-                $user->getPhoneNumber() === 'NULL' && $user->setPhoneNumber('None');
-                echo "<tr><td>First Name:</td><td>&emsp;&emsp;" . $user->getFirstName() . "</td><td>";
-                echo "<tr><td>Last Name:</td><td>&emsp;&emsp;" . $user->getLastName() . "</td><td>";
+                echo "<tr><td>First Name:</td><td>&emsp;&emsp;" . htmlentities($user->getFirstName(), ENT_QUOTES) . "</td><td>";
+                echo "<tr><td>Last Name:</td><td>&emsp;&emsp;" . htmlentities($user->getLastName(), ENT_QUOTES) . "</td><td>";
                 if (in_array('seller', $_SESSION['userRoles'], true)) {
-                    echo "<tr><td>Description:</td><td>&emsp;&emsp;" . $user->getDescription() . "</td><td>";
-                    echo "<tr><td>Phone Number:</td><td>&emsp;&emsp;" . $user->getPhoneNumber() . "</td><td>";
+                    echo "<tr><td>Description:</td><td>&emsp;&emsp;" . htmlentities($user->getDescription(), ENT_QUOTES) . "</td><td>";
+                    echo "<tr><td>Phone Number:</td><td>&emsp;&emsp;" . htmlentities($user->getPhoneNumber(), ENT_QUOTES) . "</td><td>";
                 }
                 echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href='/?controller=user&action=editPersonalDetails'><button>Edit...</button></a>";
                 echo "<tr><td>Password:</td><td>&emsp;&emsp;********</td><td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href='/?controller=user&action=changePassword'><button>Change...</button></a>";

@@ -26,7 +26,7 @@ include_once "Models/User.php";
             $pProductId,
             $pUserId,
             $pReview
-        ) {
+        ) : void {
             if($pReviewId < 0) {
                 // If the review id is -1
                 // Then the other parameters are empty and we don't initialize
@@ -37,10 +37,10 @@ include_once "Models/User.php";
                 && $pUserId > 0
                 && strlen($pReview) > 0
             ) {
-                $this->reviewId = $pReviewId;
-                $this->productId = $pProductId;
-                $this->userId = $pUserId;
-                $this->review = $pReview;
+                $this->reviewId = htmlentities($pReviewId, ENT_QUOTES);
+                $this->productId = htmlentities($pProductId, ENT_QUOTES);
+                $this->userId = htmlentities($pUserId, ENT_QUOTES);
+                $this->review = htmlentities($pReview, ENT_QUOTES);
             }
             else if($pReviewId > 0) {
                 $mySqliConnection = openDatabaseConnection();
@@ -53,10 +53,10 @@ include_once "Models/User.php";
                 if($getReviewByIdSqliResult->num_rows > 0) {
                     $queriedReviewAssocRow = $getReviewByIdSqliResult->fetch_assoc();
 
-                    $this->reviewId = $pReviewId;
-                    $this->productId = $queriedReviewAssocRow["product_id"];
-                    $this->userId = $queriedReviewAssocRow["user_id"];
-                    $this->review = $queriedReviewAssocRow["review"];
+                    $this->reviewId = htmlentities($pReviewId, ENT_QUOTES);
+                    $this->productId = htmlentities($queriedReviewAssocRow["product_id"], ENT_QUOTES);
+                    $this->userId = htmlentities($queriedReviewAssocRow["user_id"], ENT_QUOTES);
+                    $this->review = htmlentities($queriedReviewAssocRow["review"], ENT_QUOTES);
                 }
             }
         }
