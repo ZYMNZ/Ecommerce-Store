@@ -8,7 +8,7 @@ $(document).ready(
 function setUpEventHandler() {
     var editSellerForm = $('#editSellerForm');
     $("[name='submit']").on("click",function(event){
-        event.preventDefault();
+        // event.preventDefault();
 
 
         var firstName = $("[name='firstName']");
@@ -27,25 +27,20 @@ function setUpEventHandler() {
         var phoneIsEmpty = phoneNumberIsEmpty(phoneNum);
 
         if (phoneIsEmpty || phoneNum.val() === undefined){
-            if (firstName && lastName) {
+            if (!firstName || !lastName) {
                 /*
                 Prevent the submit from happening
                 if the values are wrong
                 */
-                $(this).off("click");
-                editSellerForm.submit();
+                event.preventDefault();
             }
         }
         else {
             var errorNumberLabel = $("[name='numberErrorLabel']")
             var phoneNumber = phoneNumberCheck(phoneNum,errorNumberLabel);
-            if (phoneNumber && firstName && lastName) {
-                /*
-                Prevent the submit from happening
-                if the values are wrong
-                */
-                $(this).off("click");
-                editSellerForm.submit();
+            if (!phoneNumber || !firstName || !lastName) {
+
+                event.preventDefault();
             }
         }
     })

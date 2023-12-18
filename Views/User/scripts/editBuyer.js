@@ -8,7 +8,7 @@ $(document).ready(
 
 
 function setUpEventHandlers() {
-    var editBuyerForm = $("#editBuyerForm");
+    // var editBuyerForm = $("#editBuyerForm");
     $("[name='submit']").on("click", function (event) {
 
             // Check values inside the text fields before you submit the form
@@ -24,17 +24,10 @@ function setUpEventHandlers() {
             var emailNameErrorLabel = $("[name='emailErrorLabel']");
             var email = emailCheck(email,emailNameErrorLabel);
 
-            if (email && firstName && lastName) {
-                /*
-                Prevent the submit from happening
-                if the values are wrong
-                */
-                $(this).off("click");
-                editBuyerForm.submit();
-            }
-            else {
+            if (!email || !firstName || !lastName) {
                 event.preventDefault();
             }
+
         }
     );
 }
