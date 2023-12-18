@@ -25,7 +25,7 @@ class Category {
 
     private function getById($pCategoryId) {
         $mySqlConnection = openDatabaseConnection();
-        $sql = "SELECT * FROM product WHERE category_id = ?";
+        $sql = "SELECT * FROM category WHERE category_id = ?";
         $stmt = $mySqlConnection->prepare($sql);
         $stmt->bind_param("i",$pCategoryId);
         $stmt->execute();

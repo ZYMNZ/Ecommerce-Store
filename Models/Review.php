@@ -26,7 +26,7 @@ include_once "Models/User.php";
             $pProductId,
             $pUserId,
             $pReview
-        ) {
+        ) : void {
             if($pReviewId < 0) {
                 // If the review id is -1
                 // Then the other parameters are empty and we don't initialize

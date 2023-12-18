@@ -17,7 +17,7 @@
             <?php
             include_once "Views/General/navbar.php";
             ?>
-            <form action="/?controller=registration&action=register" method="POST" id="registrationForm">
+            <form action="?controller=registration&action=register" method="POST" id="registrationForm">
                 <section class="loginRegistrationSection marginAuto">
                     <label class="hintLabel displayBlock denseHintLabel">First Name:</label>
                     <input type="text" name="firstName" class="inputField width100Percent" required> <br/>
