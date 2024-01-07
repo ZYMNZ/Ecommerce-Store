@@ -1,3 +1,4 @@
+NOTE: TO BE UPDATED
 # Ecom_Project
 
 ## Freelance web app
