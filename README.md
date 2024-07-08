@@ -1,6 +1,6 @@
-# Ecom_Project
+# Ecom_Project 🌟
 
-# Freelance web app
+# Freelance Web App 🚀
 
 Welcome to the Freelance Web App repository! This project is a comprehensive web application designed to connect freelancers with clients looking for various services. 
 
@@ -11,18 +11,18 @@ Welcome to the Freelance Web App repository! This project is a comprehensive web
 - [Technologies Used](#technologies-used)
 - [Contributors](#contributors)
 
-## Features
+## Features ✨
 
 - **User Authentication**: Secure login and registration for freelancers and clients.
 - **Profile Management**: Both freelancers and clients can create and manage their profiles.
 - **Job Listings**: Clients can post job listings and freelancers can browse and apply for jobs.
 - **Reviews and Ratings**: Clients can rate freelancers after the job is completed.
 
-## Pictures/Videos
+## Pictures/Videos 📷🎥
 
 To be updated
 
-## Usage
+## Usage 🚦
 
 1. **Register**: Create an account as either a freelancer or a client.
 2. **Create Profile**: Fill out your profile information.
@@ -30,14 +30,14 @@ To be updated
 4. **Apply for Jobs**: Freelancers can browse and apply for job listings.
 5. **Reviews**: Leave reviews after job completion.
 
-## Technologies Used
+## Technologies Used 💻
 
 - **Frontend**: HTML, CSS, JS
 - **Backend**: PHP
 - **Database**: MongoDB
 
-## Contributors
+## Contributors 🌟
 
 - Yaman Alhamamy
-- Logn luo
+- Logn Luo
 - Arsh Singh
