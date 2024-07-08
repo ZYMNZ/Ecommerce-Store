@@ -7,9 +7,9 @@ Welcome to the Freelance Web App repository! This project is a comprehensive web
 ## Table of Contents
 
 - [Features](#features)
-- [Pictures/Videos](#pictures/videos)
+- [Pictures/Videos](#picturesvideos)
 - [Technologies Used](#technologies-used)
-- [Contributing](#contributors)
+- [Contributors](#contributors)
 
 ## Features
 
