@@ -1,7 +1,7 @@
 # Ecom_Project
 
 # Freelance web app
--
+
 Welcome to the Freelance Web App repository! This project is a comprehensive web application designed to connect freelancers with clients looking for various services. 
 
 ## Table of Contents
